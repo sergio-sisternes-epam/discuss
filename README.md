@@ -21,3 +21,7 @@ atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main --target r
 Mount path = compile/query root: `references/atlas`
 
 See `SKILL.md`.
+
+## License
+
+Apache-2.0. See `LICENSE`.
