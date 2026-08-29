@@ -11,7 +11,7 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** in this repo. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. Git root there **is** the OKF root (`SCHEMA.json`). Mount after that flatten is on `main`.
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store’s git root **is** the OKF root (`SCHEMA.json` at the store root, not nested `atlas/SCHEMA.json`). It is checked in here as the `references/atlas` git submodule (see `.gitmodules`). Compile and query at `references/atlas`.
 
 ```text
 atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main --target references/atlas
