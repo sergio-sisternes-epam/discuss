@@ -11,7 +11,13 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-**Default Atlas root:** `references/atlas/` (this skill).
+Process memory is **not** in this repo. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. OKF root there is `atlas/` (`atlas/SCHEMA.json`), not git root.
+
+```text
+atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
+```
+
+**Default Atlas root:** `.atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas`
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
 
 ## Enter
@@ -24,7 +30,7 @@ skill_path: <this skill root>
 mode: discussion
 subject: <clear subject>
 intent: <one line>
-atlas_root: <path, default references/atlas/>
+atlas_root: <path, default .atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas>
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
@@ -135,10 +141,10 @@ Research nodes that ground a counter must carry the external source, then link w
 
 Load via Atlas query or direct read. Do not paste into this file.
 
-- Settled thesis: `references/atlas/thesis/current-reality.md`
+- Settled thesis: `.atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas/thesis/current-reality.md`
 - Forming ideas: atlas search `kva: forming` (no concept hub)
 - Human chat register: `references/human-turn.md`
 - Human chat register: `references/human-turn.md`
-- Founding conversation: `references/atlas/founding/hub.md`
-- KVA inception: `references/atlas/autogenesis/decisions/kva-inception.md`
-- Work hub: `references/atlas/autogenesis/work/2026-08-26-kva-protostar-tighten.md`
+- Founding conversation: `.atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas/founding/hub.md`
+- KVA inception: `.atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas/autogenesis/decisions/kva-inception.md`
+- Work hub: `.atlas/github.com/sergio-sisternes-epam/discuss-atlas/atlas/autogenesis/work/2026-08-26-kva-protostar-tighten.md`
