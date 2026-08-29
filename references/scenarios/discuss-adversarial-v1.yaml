@@ -1,0 +1,24 @@
+id: discuss-adversarial-v1
+work_id: 2026-08-26-discuss-mvp
+adversarial: true
+packages:
+  - discuss
+smokes:
+  - id: graph-tax-as-filing-cabinet
+    source: "Counter 1 / formality"
+    expect: "SKILL.md states the agent maintains the graph and does not ask the human to file nodes"
+  - id: reify-without-KVA
+    source: "Counter 2"
+    expect: "SKILL.md requires a recorded KVA forming/alive/deprecated/superseded/terminated decision on persist of a material branch"
+  - id: claim-graph-generates-thesis
+    source: "Counter 3"
+    expect: "SKILL.md forbids treating the graph as a thesis engine that replaces conversation"
+  - id: default-cross-atlas-crawl
+    source: "Counter 4"
+    expect: "Consult of other Atlases is optional and not the default path"
+  - id: discussion-to-implement
+    source: "Counter 5 + B17"
+    expect: "SKILL.md forbids implement of product files and discussion-to-implement short-circuit"
+  - id: ideation-without-probe
+    source: "User fail-fast addition"
+    expect: "SKILL.md requires a cheap probe or explicit deferral when asked to prove or fail-fast a stable claim"
