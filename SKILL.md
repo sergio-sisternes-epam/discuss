@@ -11,7 +11,13 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-**Default Atlas root:** `references/atlas/` (this skill).
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store’s git root **is** the OKF root (`SCHEMA.json` at the store root, not nested `atlas/SCHEMA.json`). It is checked in here as the `references/atlas` git submodule (see `.gitmodules`). Compile and query at `references/atlas`.
+
+```text
+atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main --target references/atlas
+```
+
+**Default Atlas root:** `references/atlas`
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
 
 ## Enter
@@ -24,7 +30,7 @@ skill_path: <this skill root>
 mode: discussion
 subject: <clear subject>
 intent: <one line>
-atlas_root: <path, default references/atlas/>
+atlas_root: <path, default references/atlas>
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
