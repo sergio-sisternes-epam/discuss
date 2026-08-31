@@ -12,6 +12,8 @@ Informal name: **walk-back**. Formal `path_id`: **consolidate**.
 
 The user asks to consolidate, walk back the graph, draw a picture of the pieces, or list gaps and contradictions. Also when Autogenesis discussion explicitly requests a picture.
 
+When they ask for a constellation or a checkpoint, load path **constellation** instead. That path uses this contract.
+
 Not the default live loop. Not a substitute for `from-conversation` (ingest) or `lint` (discipline).
 
 ## Enter
