@@ -7,7 +7,7 @@ description: How discuss speaks to a human. Loaded by path speak on every live t
 
 The Atlas is invisible to the human. The chat is the shared picture. Filing the graph is not the same as showing it.
 
-Load this file through path `speak`. Do not reply to a human until both are loaded.
+Load this file through path `speak`. Do not reply to a human until `references/paths/speak.md` and this file are both loaded.
 
 ## Register
 
