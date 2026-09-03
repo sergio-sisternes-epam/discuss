@@ -28,14 +28,13 @@ view_page: <slug>/constellation-YYYY-MM-DD-<slug>.md
 ```
 
 Load `references/paths/consolidate.md` and follow its page contract and stance vocabulary.
-Load path **speak** before the human reply.
 
 ## Delta from consolidate
 
 - Filename prefix is `constellation-` not `consolidate-`.
 - Frontmatter may include `synonym: checkpoint`.
-- Body must have three blocks: standing, set aside, still open.
-- Write the human reply first. Do not replace it with a file path.
+- Body groups the consolidate sections under three top-level blocks: **standing** (confirmed + restated), **set aside** (refuted + deferred + absorbed), **still open** (expanded + gaps + contradictions). Do not drop the consolidate section names; nest them under those blocks.
+- Speak first. Do not replace the reply with a file path.
 
 Walk-back remains the informal name for a general consolidate view. Constellation is the official join.
 
