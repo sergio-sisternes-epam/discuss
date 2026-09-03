@@ -34,6 +34,7 @@ atlas_root: <path, default references/atlas>
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
+speak_loaded: yes
 ```
 
 - `discussion_root` is the origin. It does not move.
