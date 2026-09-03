@@ -25,6 +25,7 @@ path: constellation
 path_module: references/paths/constellation.md
 discussion_root: <existing hub>
 view_page: <slug>/constellation-YYYY-MM-DD-<slug>.md
+prior_view: <optional earlier consolidate/constellation page>
 ```
 
 Load `references/paths/consolidate.md` and follow its page contract and stance vocabulary.
