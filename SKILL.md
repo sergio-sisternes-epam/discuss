@@ -1,10 +1,10 @@
 ---
 name: discuss
-description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, picture of the pieces, gaps and contradictions. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
+description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
 metadata:
-  version: "0.3.5"
+  version: "0.3.7"
   status: mvp
-  work_id: 2026-08-29-discuss-human-narration
+  work_id: 2026-08-31-discuss-constellation-path
 ---
 
 # Discuss
@@ -34,12 +34,14 @@ atlas_root: <path, default references/atlas>
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
+speak_loaded: yes
 ```
 
 - `discussion_root` is the origin. It does not move.
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
 - If subject or objective is missing, ask. If root is missing, create a hub page and set both root and current_branch to it.
+- Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
 Then load Atlas via the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
 
@@ -47,17 +49,19 @@ Then load Atlas via the multi-harness substrate contract (query before write; re
 
 | path_id | When | Module |
 |---------|------|--------|
+| **speak** | Always-on prefix. Load before any human-facing reply | `references/paths/speak.md` |
 | **from-conversation** | Turn a live or past conversation into graph fabric | `references/paths/from-conversation.md` |
 | **sprout** | Park a surviving pending as a protostar linked to its origin | `references/paths/sprout.md` |
 | **terminate** | KVA-terminate a wrong frame; write exit-reason; link living thesis | `references/paths/terminate.md` |
 | **lint** | Check fabric discipline. L1 hubs; L2–L6 KVA contract | `references/paths/lint.md` |
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back | `references/paths/consolidate.md` |
+| **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint | `references/paths/constellation.md` |
 
-Default live loop is this SKILL body. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture the pieces / gaps and contradictions → read **consolidate** first.
+Default live loop is this SKILL body after **speak**. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
 
 ## Human narration (required)
 
-Load `references/human-turn.md` with the live loop. The human usually cannot see the Atlas. Chat is the shared picture.
+Load path **speak**, which loads `references/human-turn.md`. The human usually cannot see the Atlas. Chat is the shared picture.
 
 - Write in **plain British English**, in **reasonably elaborated sentences** (not telegraphic packets, not essays).
 - Assume the user knows discuss terms unless they ask. Jargon is allowed; unexplained jumps in the *graph* are not.
@@ -120,7 +124,7 @@ Authoritative edges live in frontmatter `relates_to` as path plus kind:
 - absorbs — folded into another idea named on the view
 - feeds — this view is input to a later consolidate view
 
-A page with `consolidation: true` is a partial dated snapshot (`consolidate-YYYY-MM-DD-slug.md`). It is not an L1 hub. KVA on an idea is not changed by a view stance.
+A page with `consolidation: true` is a partial dated snapshot (`consolidate-YYYY-MM-DD-slug.md` or `constellation-YYYY-MM-DD-slug.md`). It is not an L1 hub. KVA on an idea is not changed by a view stance.
 
 Research nodes that ground a counter must carry the external source, then link with backed_by or refuted_by.
 
@@ -143,7 +147,6 @@ Load via Atlas query or direct read. Do not paste into this file.
 
 - Settled thesis: `references/atlas/thesis/current-reality.md`
 - Forming ideas: atlas search `kva: forming` (no concept hub)
-- Human chat register: `references/human-turn.md`
 - Human chat register: `references/human-turn.md`
 - Founding conversation: `references/atlas/founding/hub.md`
 - KVA inception: `references/atlas/autogenesis/decisions/kva-inception.md`
