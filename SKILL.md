@@ -40,7 +40,7 @@ current_branch: <atlas-relative path of the node we are on>
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
 - If subject or objective is missing, ask. If root is missing, create a hub page and set both root and current_branch to it.
-- Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. Receipt must include `speak_loaded: yes`.
+- Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
 Then load Atlas via the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
 
