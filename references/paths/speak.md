@@ -26,10 +26,9 @@ Missing load ⇒ `incomplete: missing speak`. The activation card must include `
 
 ## Procedure
 
-1. `read_file` `references/paths/speak.md`.
-2. `read_file` `references/human-turn.md`.
-3. Shape the human reply using that file. Filing the Atlas is separate work.
-4. Do not replace the reply with an activation card or a path table.
+1. Load `references/human-turn.md`.
+2. Shape the human reply using that file. Filing the Atlas is separate work.
+3. Do not replace the reply with an activation card or a path table.
 
 ## Non-goals
 
