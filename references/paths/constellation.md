@@ -33,7 +33,7 @@ Load `references/paths/consolidate.md` and follow its page contract and stance v
 
 - Filename prefix is `constellation-` not `consolidate-`.
 - Frontmatter may include `synonym: checkpoint`.
-- Body groups the consolidate sections under three top-level blocks: **standing** (confirmed + restated), **set aside** (refuted + deferred + absorbed), **still open** (expanded + gaps + contradictions). Do not drop the consolidate section names; nest them under those blocks.
+- Body keeps the consolidate **section headings** (picture, confirmed, refuted, expanded, deferred, gaps, contradictions). Wrap those sections under three top-level blocks: **standing**, **set aside**, **still open**. Stance kinds such as `restates` and `absorbs` stay on `relates_to` edges; they are not extra headings. Place restated items under confirmed/standing and absorbed items under deferred or refuted as the view decides.
 - Speak first. Do not replace the reply with a file path.
 
 Walk-back remains the informal name for a general consolidate view. Constellation is the official join.

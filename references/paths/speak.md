@@ -19,6 +19,7 @@ Discuss card plus:
 ```text
 path: speak
 path_module: references/paths/speak.md
+speak_loaded: yes
 ```
 
 Missing load ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
