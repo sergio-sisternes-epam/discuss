@@ -183,6 +183,7 @@ jobs:
           fi
       - name: Install, freeze, audit, mount, compile, and lint
         env:
+          ATLAS_PAT: ${{ secrets.APM_READ_TOKEN }}
           GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
           SKILL_BASE: ${{ matrix.skill_base }}
           TARGET: ${{ matrix.target }}
