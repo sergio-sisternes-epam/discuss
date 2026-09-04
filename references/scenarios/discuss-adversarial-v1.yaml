@@ -22,3 +22,9 @@ smokes:
   - id: ideation-without-probe
     source: "User fail-fast addition"
     expect: "SKILL.md requires a cheap probe or explicit deferral when asked to prove or fail-fast a stable claim"
+  - id: deprecated-store-target
+    source: "Atlas v0.8.13 mount migration"
+    expect: "SKILL.md mounts discuss-atlas without a custom target and resolves the root dynamically"
+  - id: package-install-implies-store
+    source: "APM consumer boundary"
+    expect: "README and SKILL distinguish APM package installation from the separate discuss-atlas mount"

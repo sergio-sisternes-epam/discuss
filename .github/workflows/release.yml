@@ -1,0 +1,97 @@
+name: Release Discuss
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+
+jobs:
+  candidate:
+    name: Verify release candidate
+    runs-on: ubuntu-latest
+    outputs:
+      is_prerelease: ${{ steps.verify.outputs.is_prerelease }}
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+      - name: Verify immutable exact-main tag
+        id: verify
+        env:
+          REF_CREATED: ${{ github.event.created }}
+          TAG: ${{ github.ref_name }}
+          TAG_REF: ${{ github.ref }}
+        run: |
+          set -euo pipefail
+          if [ "$REF_CREATED" != true ]; then
+            echo "::error title=Immutable release tag::Release tags must be newly created, never updated."
+            exit 1
+          fi
+          if [ "$(git cat-file -t "$TAG_REF")" != tag ]; then
+            echo "::error title=Annotated tag required::Release tags must be annotated."
+            exit 1
+          fi
+          git fetch --no-tags origin main:refs/remotes/origin/main
+          tag_commit="$(git rev-parse "${TAG_REF}^{commit}")"
+          main_commit="$(git rev-parse refs/remotes/origin/main)"
+          report="$RUNNER_TEMP/release-readiness.txt"
+          python3 scripts/release_readiness.py \
+            --tag "$TAG" \
+            --commit "$tag_commit" |
+            tee "$report"
+          if [ "$tag_commit" != "$main_commit" ]; then
+            echo "::error title=Invalid release tag::Release tags must reference the exact current main commit."
+            exit 1
+          fi
+          prerelease="$(awk '$1 == "is_prerelease:" { print $2 }' "$report")"
+          if [ "$prerelease" != true ] && [ "$prerelease" != false ]; then
+            echo "::error title=Invalid release metadata::Could not classify the release tag."
+            exit 1
+          fi
+          echo "is_prerelease=$prerelease" >> "$GITHUB_OUTPUT"
+          {
+            echo "tag=$TAG"
+            echo "candidate_revision=$tag_commit"
+            echo "main_revision=$main_commit"
+            echo "is_prerelease=$prerelease"
+            echo "release_validation_decision=ready for private validation"
+          } >> "$GITHUB_STEP_SUMMARY"
+
+  validation:
+    needs: candidate
+    uses: ./.github/workflows/ci.yml
+    secrets: inherit
+
+  release:
+    name: Create source release
+    needs:
+      - candidate
+      - validation
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
+        with:
+          fetch-depth: 0
+      - name: Create GitHub release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          IS_PRERELEASE: ${{ needs.candidate.outputs.is_prerelease }}
+          TAG: ${{ github.ref_name }}
+        run: |
+          set -euo pipefail
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "::error title=Immutable release::A GitHub Release already exists for $TAG."
+            exit 1
+          fi
+          args=(release create "$TAG" --verify-tag --generate-notes --title "$TAG")
+          if [ "$IS_PRERELEASE" = true ]; then
+            args+=(--prerelease)
+          else
+            args+=(--latest)
+          fi
+          gh "${args[@]}"
