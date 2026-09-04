@@ -11,13 +11,14 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store’s git root **is** the OKF root (`SCHEMA.json` at the store root, not nested `atlas/SCHEMA.json`). It is checked in here as the `references/atlas` git submodule (see `.gitmodules`). Compile and query at `references/atlas`.
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately.
 
 ```text
-atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main --target references/atlas
+atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
+atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 ```
 
-**Default Atlas root:** `references/atlas`
+Before Enter, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
 
 ## Enter
@@ -30,7 +31,9 @@ skill_path: <this skill root>
 mode: discussion
 subject: <clear subject>
 intent: <one line>
-atlas_root: <path, default references/atlas>
+atlas_id: github.com/sergio-sisternes-epam/discuss-atlas
+ref: main
+atlas_root: <set from atlas resolve>
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
@@ -40,10 +43,10 @@ speak_loaded: yes
 - `discussion_root` is the origin. It does not move.
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
-- If subject or objective is missing, ask. If root is missing, create a hub page and set both root and current_branch to it.
+- If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it.
 - Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
-Then load Atlas via the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
+Use the resolved Atlas root through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
 
 ## Path registry (load before execute)
 
@@ -145,9 +148,9 @@ Research nodes that ground a counter must carry the external source, then link w
 
 Load via Atlas query or direct read. Do not paste into this file.
 
-- Settled thesis: `references/atlas/thesis/current-reality.md`
+- Settled thesis: `thesis/current-reality.md`
 - Forming ideas: atlas search `kva: forming` (no concept hub)
 - Human chat register: `references/human-turn.md`
-- Founding conversation: `references/atlas/founding/hub.md`
-- KVA inception: `references/atlas/autogenesis/decisions/kva-inception.md`
-- Work hub: `references/atlas/autogenesis/work/2026-08-26-kva-protostar-tighten.md`
+- Founding conversation: `founding/hub.md`
+- KVA inception: `autogenesis/decisions/kva-inception.md`
+- Work hub: `autogenesis/work/2026-08-26-kva-protostar-tighten.md`
