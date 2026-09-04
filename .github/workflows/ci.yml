@@ -67,7 +67,8 @@ jobs:
     needs: metadata
     if: >-
       github.event_name != 'pull_request' &&
-      (github.ref == 'refs/heads/main' || github.ref_type == 'tag')
+      (github.ref == 'refs/heads/main' ||
+       (github.event_name == 'push' && github.ref_type == 'tag'))
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -147,7 +148,8 @@ jobs:
     needs: source
     if: >-
       github.event_name != 'pull_request' &&
-      (github.ref == 'refs/heads/main' || github.ref_type == 'tag')
+      (github.ref == 'refs/heads/main' ||
+       (github.event_name == 'push' && github.ref_type == 'tag'))
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
