@@ -24,6 +24,13 @@ class SourceContractTests(unittest.TestCase):
         self.assertIn("refs/release-tags/", helper)
         self.assertIn("--github-output \"$GITHUB_OUTPUT\"", release)
         self.assertNotIn("git cat-file -t \"$TAG_REF\"", release)
+        self.assertLess(
+            release.index("Invalid release tag report"),
+            release.index("python3 scripts/release_readiness.py"),
+        )
+        for variable in ("tag_object", "tag_commit", "main_commit"):
+            self.assertIn(f'[ "${{#{variable}}}" -ne 40 ]', release)
+            self.assertIn(f'[[ "${variable}" == *[!0-9a-f]* ]]', release)
         self.assertIn(
             "candidate_revision: ${{ needs.candidate.outputs.candidate_revision }}",
             release,

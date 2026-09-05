@@ -40,6 +40,16 @@ jobs:
           tag_object="$(awk -F= '$1 == "tag_object" { print $2 }' "$tag_report")"
           tag_commit="$(awk -F= '$1 == "candidate_revision" { print $2 }' "$tag_report")"
           main_commit="$(awk -F= '$1 == "main_revision" { print $2 }' "$tag_report")"
+          if [ "$tag_ref" != "refs/release-tags/$TAG" ] ||
+            [ "${#tag_object}" -ne 40 ] ||
+            [[ "$tag_object" == *[!0-9a-f]* ]] ||
+            [ "${#tag_commit}" -ne 40 ] ||
+            [[ "$tag_commit" == *[!0-9a-f]* ]] ||
+            [ "${#main_commit}" -ne 40 ] ||
+            [[ "$main_commit" == *[!0-9a-f]* ]]; then
+            echo "::error title=Invalid release tag report::Authoritative tag verification returned incomplete or malformed data."
+            exit 1
+          fi
           python3 scripts/release_readiness.py \
             --tag "$TAG" \
             --commit "$tag_commit" |
