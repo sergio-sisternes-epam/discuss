@@ -23,7 +23,7 @@ smokes:
     source: "User fail-fast addition"
     expect: "SKILL.md requires a cheap probe or explicit deferral when asked to prove or fail-fast a stable claim"
   - id: deprecated-store-target
-    source: "Atlas v0.8.14 mount contract"
+    source: "Atlas v0.8.15 mount contract"
     expect: "SKILL.md mounts discuss-atlas without a custom target and resolves the root dynamically"
   - id: package-install-implies-store
     source: "APM consumer boundary"

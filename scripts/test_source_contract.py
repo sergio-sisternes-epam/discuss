@@ -18,7 +18,7 @@ class SourceContractTests(unittest.TestCase):
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
         dependencies = re.findall(r"^\s+-\s+(\S+)\s*$", manifest, re.MULTILINE)
         self.assertEqual(
-            dependencies, ["sergio-sisternes-epam/atlas#v0.8.14"]
+            dependencies, ["sergio-sisternes-epam/atlas#v0.8.15"]
         )
 
     def test_mount_contract_has_no_deprecated_operational_path(self) -> None:
