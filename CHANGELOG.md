@@ -7,6 +7,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Changed
+
+- Updated the direct Atlas dependency from `v0.8.13` to `v0.8.14`.
+
 ## [0.3.7] - 2026-09-04
 
 ### Added
