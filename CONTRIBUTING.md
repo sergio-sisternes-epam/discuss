@@ -62,14 +62,20 @@ Prereleases use `vX.Y.Z-<identifier>`.
 4. After separate approval, create and push the matching annotated tag against
    that exact commit.
 5. The tag workflow reruns all gates, verifies the tag is newly created and
-   points to current `main`, classifies stable versus prerelease, and creates
-   the GitHub Release.
+   fetches its authoritative annotated object into `refs/release-tags/`, peels
+   it to the exact current `main` commit, runs every release gate against that
+   commit, classifies stable versus prerelease, and creates the GitHub Release.
 
 Never move, overwrite, or delete a pushed release tag. If validation fails
 before release creation because of a source, workflow, or metadata defect,
 fix `main`, increment the patch version, repeat readiness, and create a new
 tag. If only a provider outage or corrected permission blocked release
 creation, rerun the failed workflow for the unchanged tag.
+
+The immutable annotated `v0.3.7` tag is a failed release attempt: its workflow
+failed before release creation because checkout replaced the local tag-object
+ref with its peeled commit. Preserve that remote tag and do not create a
+`v0.3.7` GitHub Release; recovery continues with `v0.3.8`.
 
 ## Repository protection
 

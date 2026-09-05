@@ -7,9 +7,19 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.8] - 2026-09-05
+
 ### Changed
 
 - Updated the direct Atlas dependency from `v0.8.13` to `v0.8.15`.
+
+### Fixed
+
+- Fetch release tag objects from the remote into an isolated
+  `refs/release-tags/` namespace and run release validation against the peeled
+  exact-main commit.
+- Preserve `v0.3.7` as an immutable failed release attempt after its workflow
+  stopped before creating a GitHub Release.
 
 ## [0.3.7] - 2026-09-04
 
@@ -35,5 +45,6 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Required the human-facing speak path and `speak_loaded` activation receipt.
 - Clarified that the discussion store git root is the OKF root.
 
-[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.7...HEAD
-[0.3.7]: https://github.com/sergio-sisternes-epam/discuss/releases/tag/v0.3.7
+[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.8...HEAD
+[0.3.8]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.7...v0.3.8
+[0.3.7]: https://github.com/sergio-sisternes-epam/discuss/tree/v0.3.7

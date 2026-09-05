@@ -5,7 +5,7 @@ Private APM package: `sergio-sisternes-epam/discuss`
 Grok-native layout: `SKILL.md` and `apm.yml` at the repository root.
 
 ```bash
-apm install sergio-sisternes-epam/discuss#v0.3.7 --target agent-skills
+apm install sergio-sisternes-epam/discuss#v0.3.8 --target agent-skills
 ```
 
 Supported validation targets are `agent-skills`, `copilot`, and `claude`.
