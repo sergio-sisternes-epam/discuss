@@ -13,6 +13,7 @@ jobs:
     name: Verify release candidate
     runs-on: ubuntu-latest
     outputs:
+      candidate_revision: ${{ steps.verify.outputs.candidate_revision }}
       is_prerelease: ${{ steps.verify.outputs.is_prerelease }}
     steps:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
@@ -23,30 +24,37 @@ jobs:
         env:
           REF_CREATED: ${{ github.event.created }}
           TAG: ${{ github.ref_name }}
-          TAG_REF: ${{ github.ref }}
         run: |
           set -euo pipefail
           if [ "$REF_CREATED" != true ]; then
             echo "::error title=Immutable release tag::Release tags must be newly created, never updated."
             exit 1
           fi
-          if [ "$(git cat-file -t "$TAG_REF")" != tag ]; then
-            echo "::error title=Annotated tag required::Release tags must be annotated."
+          tag_report="$RUNNER_TEMP/release-tag.txt"
+          readiness_report="$RUNNER_TEMP/release-readiness.txt"
+          python3 scripts/release_tag.py \
+            --tag "$TAG" \
+            --github-output "$GITHUB_OUTPUT" |
+            tee "$tag_report"
+          tag_ref="$(awk -F= '$1 == "tag_ref" { print $2 }' "$tag_report")"
+          tag_object="$(awk -F= '$1 == "tag_object" { print $2 }' "$tag_report")"
+          tag_commit="$(awk -F= '$1 == "candidate_revision" { print $2 }' "$tag_report")"
+          main_commit="$(awk -F= '$1 == "main_revision" { print $2 }' "$tag_report")"
+          if [ "$tag_ref" != "refs/release-tags/$TAG" ] ||
+            [ "${#tag_object}" -ne 40 ] ||
+            [[ "$tag_object" == *[!0-9a-f]* ]] ||
+            [ "${#tag_commit}" -ne 40 ] ||
+            [[ "$tag_commit" == *[!0-9a-f]* ]] ||
+            [ "${#main_commit}" -ne 40 ] ||
+            [[ "$main_commit" == *[!0-9a-f]* ]]; then
+            echo "::error title=Invalid release tag report::Authoritative tag verification returned incomplete or malformed data."
             exit 1
           fi
-          git fetch --no-tags origin main:refs/remotes/origin/main
-          tag_commit="$(git rev-parse "${TAG_REF}^{commit}")"
-          main_commit="$(git rev-parse refs/remotes/origin/main)"
-          report="$RUNNER_TEMP/release-readiness.txt"
           python3 scripts/release_readiness.py \
             --tag "$TAG" \
             --commit "$tag_commit" |
-            tee "$report"
-          if [ "$tag_commit" != "$main_commit" ]; then
-            echo "::error title=Invalid release tag::Release tags must reference the exact current main commit."
-            exit 1
-          fi
-          prerelease="$(awk '$1 == "is_prerelease:" { print $2 }' "$report")"
+            tee "$readiness_report"
+          prerelease="$(awk '$1 == "is_prerelease:" { print $2 }' "$readiness_report")"
           if [ "$prerelease" != true ] && [ "$prerelease" != false ]; then
             echo "::error title=Invalid release metadata::Could not classify the release tag."
             exit 1
@@ -54,6 +62,8 @@ jobs:
           echo "is_prerelease=$prerelease" >> "$GITHUB_OUTPUT"
           {
             echo "tag=$TAG"
+            echo "authoritative_tag_ref=$tag_ref"
+            echo "annotated_tag_object=$tag_object"
             echo "candidate_revision=$tag_commit"
             echo "main_revision=$main_commit"
             echo "is_prerelease=$prerelease"
@@ -63,6 +73,8 @@ jobs:
   validation:
     needs: candidate
     uses: ./.github/workflows/ci.yml
+    with:
+      candidate_revision: ${{ needs.candidate.outputs.candidate_revision }}
     secrets: inherit
 
   release:
@@ -77,6 +89,7 @@ jobs:
       - uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
         with:
           fetch-depth: 0
+          ref: ${{ needs.candidate.outputs.candidate_revision }}
       - name: Create GitHub release
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

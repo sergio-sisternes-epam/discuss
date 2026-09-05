@@ -14,7 +14,7 @@ class ReleaseReadinessTests(unittest.TestCase):
     def write_package(
         self,
         root: Path,
-        version: str = "0.3.7",
+        version: str = "0.3.8",
         skill_version: str | None = None,
         readme_version: str | None = None,
         changelog_versions: tuple[str, ...] | None = None,
@@ -44,7 +44,7 @@ class ReleaseReadinessTests(unittest.TestCase):
             root = Path(directory)
             self.write_package(root)
             version, errors = release_readiness.validate_versions(root)
-        self.assertEqual(version, "0.3.7")
+        self.assertEqual(version, "0.3.8")
         self.assertEqual(errors, [])
         self.assertFalse(release_readiness.is_prerelease(version))
 
@@ -67,7 +67,7 @@ class ReleaseReadinessTests(unittest.TestCase):
     def test_mismatched_surface_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            self.write_package(root, readme_version="0.3.8")
+            self.write_package(root, readme_version="0.3.9")
             _, errors = release_readiness.validate_versions(root)
         self.assertTrue(any("README.md" in error for error in errors))
 
@@ -75,15 +75,15 @@ class ReleaseReadinessTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
             self.write_package(
-                root, changelog_versions=("0.3.7", "0.3.7")
+                root, changelog_versions=("0.3.8", "0.3.8")
             )
             _, errors = release_readiness.validate_versions(root)
         self.assertTrue(any("found 2" in error for error in errors))
 
     def test_wrong_tag_is_rejected(self) -> None:
         self.assertEqual(
-            release_readiness.validate_tag("v0.3.8", "0.3.7"),
-            ["release tag v0.3.8 != v0.3.7"],
+            release_readiness.validate_tag("v0.3.7", "0.3.8"),
+            ["release tag v0.3.7 != v0.3.8"],
         )
 
     @patch.object(release_readiness, "current_commit", return_value="a" * 40)

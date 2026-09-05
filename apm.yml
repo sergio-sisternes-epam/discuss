@@ -1,5 +1,5 @@
 name: discuss
-version: 0.3.7
+version: 0.3.8
 description: Run a durable discussion about a clear subject as an agent-maintained Atlas graph. Persist, prune, and test forming ideas. Not for implement.
 author: Sergio Sisternes
 license: Apache-2.0

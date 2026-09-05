@@ -14,6 +14,41 @@ STORE_COMMIT = "6318b0add9596187b716954c93f2409d5a190fde"
 
 
 class SourceContractTests(unittest.TestCase):
+    def test_release_validation_uses_peeled_remote_tag_commit(self) -> None:
+        release = (ROOT / ".github/workflows/release.yml").read_text(
+            encoding="utf-8"
+        )
+        ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+        helper = (ROOT / "scripts/release_tag.py").read_text(encoding="utf-8")
+
+        self.assertIn("refs/release-tags/", helper)
+        self.assertIn("--github-output \"$GITHUB_OUTPUT\"", release)
+        self.assertNotIn("git cat-file -t \"$TAG_REF\"", release)
+        self.assertLess(
+            release.index("Invalid release tag report"),
+            release.index("python3 scripts/release_readiness.py"),
+        )
+        for variable in ("tag_object", "tag_commit", "main_commit"):
+            self.assertIn(f'[ "${{#{variable}}}" -ne 40 ]', release)
+            self.assertIn(f'[[ "${variable}" == *[!0-9a-f]* ]]', release)
+        self.assertIn(
+            "candidate_revision: ${{ needs.candidate.outputs.candidate_revision }}",
+            release,
+        )
+        self.assertLess(
+            ci.index("Validate reusable candidate revision"),
+            ci.index("uses: actions/checkout@"),
+        )
+        self.assertIn('[[ "$CANDIDATE_REVISION" == *[!0-9a-f]* ]]', ci)
+        self.assertEqual(
+            ci.count("ref: ${{ inputs.candidate_revision || github.sha }}"), 4
+        )
+        readiness = ci[ci.index("  readiness:") :]
+        self.assertLess(
+            readiness.index("if: needs.metadata.result == 'success'"),
+            readiness.index("ref: ${{ inputs.candidate_revision || github.sha }}"),
+        )
+
     def test_manifest_uses_one_exact_atlas_dependency(self) -> None:
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
         dependencies = re.findall(r"^\s+-\s+(\S+)\s*$", manifest, re.MULTILINE)
