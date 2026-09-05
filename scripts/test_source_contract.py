@@ -43,6 +43,11 @@ class SourceContractTests(unittest.TestCase):
         self.assertEqual(
             ci.count("ref: ${{ inputs.candidate_revision || github.sha }}"), 4
         )
+        readiness = ci[ci.index("  readiness:") :]
+        self.assertLess(
+            readiness.index("if: needs.metadata.result == 'success'"),
+            readiness.index("ref: ${{ inputs.candidate_revision || github.sha }}"),
+        )
 
     def test_manifest_uses_one_exact_atlas_dependency(self) -> None:
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
