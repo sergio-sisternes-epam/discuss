@@ -17,7 +17,7 @@ permissions:
   contents: read
 
 env:
-  APM_VERSION: "0.29.0"
+  APM_VERSION: "0.30.0"
   ATLAS_ID: github.com/sergio-sisternes-epam/discuss-atlas
   STORE_PATH: .atlas/github.com/sergio-sisternes-epam/discuss-atlas
 
@@ -106,6 +106,10 @@ jobs:
             echo "::error title=Missing APM credential::Configure APM_READ_TOKEN with Contents: read access to Atlas, OKF, and discuss-atlas. Fork changes must be reproduced on a trusted internal branch."
             exit 1
           fi
+      - name: Register APM marketplace
+        env:
+          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
+        run: apm marketplace add sergio-sisternes-epam/apm-marketplace --name sergio-sisternes-epam
       - name: Audit committed APM state
         env:
           GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
@@ -116,7 +120,7 @@ jobs:
         run: |
           set -euo pipefail
           before="$(sha256sum apm.lock.yaml | cut -d ' ' -f 1)"
-          apm install --frozen --target agent-skills --no-policy
+          apm install --target agent-skills --no-policy
           after="$(sha256sum apm.lock.yaml | cut -d ' ' -f 1)"
           test "$before" = "$after"
       - name: Identify pinned store revision
@@ -200,6 +204,10 @@ jobs:
             echo "::error title=Missing APM credential::Configure APM_READ_TOKEN with Contents: read access to Atlas, OKF, and discuss-atlas. Fork changes must be reproduced on a trusted internal branch."
             exit 1
           fi
+      - name: Register APM marketplace
+        env:
+          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
+        run: apm marketplace add sergio-sisternes-epam/apm-marketplace --name sergio-sisternes-epam
       - name: Install, freeze, audit, mount, compile, and lint
         env:
           ATLAS_PAT: ${{ secrets.APM_READ_TOKEN }}

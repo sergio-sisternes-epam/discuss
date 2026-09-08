@@ -1,9 +1,10 @@
 name: discuss
-version: 0.3.8
+version: 0.3.9
 description: Run a durable discussion about a clear subject as an agent-maintained Atlas graph. Persist, prune, and test forming ideas. Not for implement.
 author: Sergio Sisternes
 license: Apache-2.0
 type: skill
 dependencies:
   apm:
-    - sergio-sisternes-epam/atlas#v0.8.15
+    - name: atlas
+      marketplace: sergio-sisternes-epam

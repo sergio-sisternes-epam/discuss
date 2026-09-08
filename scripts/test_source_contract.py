@@ -43,6 +43,14 @@ class SourceContractTests(unittest.TestCase):
         self.assertEqual(
             ci.count("ref: ${{ inputs.candidate_revision || github.sha }}"), 4
         )
+        self.assertIn('APM_VERSION: "0.30.0"', ci)
+        self.assertEqual(
+            ci.count(
+                "apm marketplace add sergio-sisternes-epam/apm-marketplace "
+                "--name sergio-sisternes-epam"
+            ),
+            2,
+        )
         readiness = ci[ci.index("  readiness:") :]
         self.assertLess(
             readiness.index("if: needs.metadata.result == 'success'"),
@@ -51,10 +59,11 @@ class SourceContractTests(unittest.TestCase):
 
     def test_manifest_uses_one_exact_atlas_dependency(self) -> None:
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
-        dependencies = re.findall(r"^\s+-\s+(\S+)\s*$", manifest, re.MULTILINE)
-        self.assertEqual(
-            dependencies, ["sergio-sisternes-epam/atlas#v0.8.15"]
+        self.assertRegex(
+            manifest,
+            r"(?m)^  apm:\n    - name: atlas\n      marketplace: sergio-sisternes-epam\s*$",
         )
+        self.assertNotIn("sergio-sisternes-epam/atlas", manifest)
 
     def test_mount_contract_has_no_deprecated_operational_path(self) -> None:
         for relative in ("SKILL.md", "README.md", ".gitmodules", "atlas-mesh.json"):
