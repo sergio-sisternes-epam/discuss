@@ -1,13 +1,12 @@
 lockfile_version: '1'
-generated_at: '2026-09-05T17:55:45.714921+00:00'
-apm_version: 0.29.0
+apm_version: 0.30.0
 dependencies:
 - repo_url: sergio-sisternes-epam/atlas
   name: atlas
   host: github.com
-  resolved_commit: 4d4796ba66f3de284fbf1df33f5d24a7f5da1980
-  resolved_ref: v0.8.15
-  version: 0.8.15
+  resolved_commit: a1074e5dfd8cc8236132e7615063628407e35b6a
+  resolved_ref: a1074e5dfd8cc8236132e7615063628407e35b6a
+  version: 0.9.1
   package_type: hybrid
   deployed_files:
   - .agents/skills/atlas
@@ -38,6 +37,7 @@ dependencies:
   - .agents/skills/atlas/.github/workflows/release.yml
   - .agents/skills/atlas/.gitignore
   - .agents/skills/atlas/.gitmodules
+  - .agents/skills/atlas/CHANGELOG.md
   - .agents/skills/atlas/CONTRIBUTING.md
   - .agents/skills/atlas/LICENSE
   - .agents/skills/atlas/NOTICE
@@ -145,14 +145,13 @@ dependencies:
   - .agents/skills/atlas/scripts/requirements-ci.txt
   - .agents/skills/atlas/scripts/requirements.txt
   - .agents/skills/atlas/scripts/run_tests.py
+  - .agents/skills/atlas/scripts/test_activation_cards.py
   - .agents/skills/atlas/scripts/test_ci_activation.py
   - .agents/skills/atlas/scripts/test_gitops_auth.py
   - .agents/skills/atlas/scripts/test_mount_safety.py
   - .agents/skills/atlas/scripts/test_release_readiness.py
   - .agents/skills/atlas/scripts/test_schema_governance.py
   - .agents/skills/atlas/scripts/test_validation_warnings.py
-  - .agents/skills/code-review
-  - .agents/skills/code-review/SKILL.md
   - .agents/skills/panel-review
   - .agents/skills/panel-review/SKILL.md
   - .agents/skills/panel-review/assets/panelist-receipt.schema.json
@@ -188,18 +187,19 @@ dependencies:
     .agents/skills/atlas/.agents/skills/panel-review/references/lenses/skill-agent-contract.md: sha256:1a73d5a35dee6cf8e5609e5eab07a51303be4c417a1f4460aaac26662c9f6568
     .agents/skills/atlas/.agents/skills/panel-review/references/roster.md: sha256:0fb836e13e9b7aa8ed10dd86a7ad535464942246d97272ee702ab808d401fe7c
     .agents/skills/atlas/.agents/skills/panel-review/references/synthesizer.md: sha256:30adbbbdd1105ae321a6e4b044c417d9cd75f130618c5b1011a67685d534724d
-    .agents/skills/atlas/.github/workflows/atlas-compile.yml: sha256:fd5c7ce86249fe0918b61bd04e782b8d02f3b489369985295bb173486b16348d
+    .agents/skills/atlas/.github/workflows/atlas-compile.yml: sha256:c438bb406792d003bb32be3b4a0ca516088bb8bb3fcc167e43730a08e274328d
     .agents/skills/atlas/.github/workflows/ci.yml: sha256:e178731609021458c41e2c736171c69cf282e744988fa7c040a746ea7f1ccf6a
     .agents/skills/atlas/.github/workflows/release.yml: sha256:ec74b76301e6cba2ec939b33c77ad5d77fe4551aad213a1a18a74c3928a384bf
     .agents/skills/atlas/.gitignore: sha256:7f863749fd828706da67b20e6febe10108e6463a1fcffefdcdb1bd29bf6a832e
     .agents/skills/atlas/.gitmodules: sha256:aebdd22b009c5def982b4d6614bf76406dc03a0638611f75c6168daf164d4fac
-    .agents/skills/atlas/CONTRIBUTING.md: sha256:f5bf798d99ecfdc33f611e2826791b247aa6400be7c7ca497ccb9e8799726828
+    .agents/skills/atlas/CHANGELOG.md: sha256:c53d1b89a75820c9e4f5143405a0204b921e002289e56167e0ac7af0b72c8e0c
+    .agents/skills/atlas/CONTRIBUTING.md: sha256:3f7d437cdd4e5277e29d16b67b4deea3f05e8d88febf01d1f196e1a79a81cf3a
     .agents/skills/atlas/LICENSE: sha256:cfc7749b96f63bd31c3c42b5c471bf756814053e847c10f3eb003417bc523d30
     .agents/skills/atlas/NOTICE: sha256:10affb7a4e5172df90955d395ee260a2ea8126c00f06ee25bb50dc212cee2297
-    .agents/skills/atlas/README.md: sha256:78f1ed49470b1873772b13de8d0167d3b1781fd3f575c3496ec3f532a56e1041
-    .agents/skills/atlas/SKILL.md: sha256:9a02ed9e7d18c00ce45357ea9b5102ad40ad93271b6cdc3f2fa20a3a85d2f051
+    .agents/skills/atlas/README.md: sha256:f4e9a8e703e3ef9fb13f4604e83ac38010bfce4109f3693b6d866d091d8f645e
+    .agents/skills/atlas/SKILL.md: sha256:cecac3fa9945a98a946db6e1faf1b146c55c7941d5d6da94c9c38af11965b1fa
     .agents/skills/atlas/apm.lock.yaml: sha256:dbd72e552051b5238ed9a0443a716c073094d514487775117913ec179debf2b7
-    .agents/skills/atlas/apm.yml: sha256:ab95b099a58985788b3843015f86b357edcb3bd3c0d03364e450557fad3f8f5c
+    .agents/skills/atlas/apm.yml: sha256:b7fe3a7a4e5f3ed8e770e06d3288f760e61c3b0737c93e06482d163e56bb815e
     .agents/skills/atlas/atlas-mesh.json: sha256:878b67991137af7d4589a7791394a004b7ba8f9f999e7b8cd456c12394e874e9
     .agents/skills/atlas/contributor/code-review/evals.json: sha256:d7dfe3d3d0336f8bebf74c9666c95dd90434dd481feaaa221e8deb07293157c9
     .agents/skills/atlas/contributor/code-review/test_contract.py: sha256:0ebf1d243a181ea618ab7314a05a61662eb868e20d0e1ecd2d64e6ebcb32ca2b
@@ -235,20 +235,20 @@ dependencies:
     .agents/skills/atlas/fixtures/search-nav-atlas/work/index.md: sha256:ae7c1193097931d3da1dace643d0c9a0ac30b1abd748fa754fcfbcd5e1d79ea8
     .agents/skills/atlas/references/README.md: sha256:df9a9bdb3984c98d3e6e29a8c33272797c1880a024b91e432c70ec4333b30bdc
     .agents/skills/atlas/references/SCHEMA.contract.json: sha256:2eb944e8b36f8e5f432a490546c100008bc8cdf930baaba46ca215e6e8f57f39
-    .agents/skills/atlas/references/ci/github-actions.caller.yml: sha256:0f48da4ed74b90079c4844446c0b8c00d8baf7f3f5f311576b9c62a9b2a9bc3e
-    .agents/skills/atlas/references/ci/github-actions.compile.yml: sha256:d3cfda2ef24ae029ef410996ef3dcd9fa47b678bf78bfa5bb0e2a95a9f9bacbe
+    .agents/skills/atlas/references/ci/github-actions.caller.yml: sha256:f1d30b97286e71597c8e6c84591b4753d5be73adc36d3df4aea95977dcb9ef6e
+    .agents/skills/atlas/references/ci/github-actions.compile.yml: sha256:298b97edf073d8c5486bacf51f820034db55b0ab0394d0c22b401a0ed888169f
     .agents/skills/atlas/references/paths/ci.md: sha256:0c4bc0dc4e043db815dd28d0530264c1ea6ad632781bbf6f955890156be9599e
-    .agents/skills/atlas/references/paths/init.md: sha256:278c352f4eb2aaececb1103b99554a4f2d9b6037b9f24f5a6ca2734684c61f19
-    .agents/skills/atlas/references/paths/landscape.md: sha256:c36e9435b62c08c22ab82444bdb503c4989be55fd11e440e1f2ce2b66924a510
+    .agents/skills/atlas/references/paths/init.md: sha256:354fcc7d67acf62d51a032704822cb369f81cb8ea1bcfaccae1ccdfa72be4f25
+    .agents/skills/atlas/references/paths/landscape.md: sha256:cf31dbb9991b18f25ad2a9a3b52e6c527e784449e64a9e6c25b13947c910d488
     .agents/skills/atlas/references/paths/migrate.md: sha256:c9d4cace660ee2c168ba873464690e2eb9c5242eb4376eb39c0ae030565fd1cd
-    .agents/skills/atlas/references/paths/mount.md: sha256:138d0711682ff75c3da21e71a17cc2638dc6d1186b5ac54bf4ae29254cdf047c
+    .agents/skills/atlas/references/paths/mount.md: sha256:9c719ef1206b37912c2ac9db25e7e0e6ce0e9c8b6a8288516c22008a39c8f29c
     .agents/skills/atlas/references/paths/query.md: sha256:1684ec390b21ed8548a18bf91fdaf739a13a468cf61ab631fdf09d60fc58a3d1
-    .agents/skills/atlas/references/paths/remember.md: sha256:87782b29848d0cd132e71bf6e7e964f48248240a1372b0af93ea5c99df225398
+    .agents/skills/atlas/references/paths/remember.md: sha256:bd9b77c75d10f39c523b2596d30042b04b93636169274898ca615a66163f14a2
     .agents/skills/atlas/references/paths/schema.md: sha256:18bc594f5cb3e0233bf497e4ea2c466fe9e569b72849d1bd2a067ec4d71de4a7
-    .agents/skills/atlas/references/paths/work.md: sha256:727b809ef84754287d8245542ef57595750620c9e852aa85e1df9343cfdfa55b
+    .agents/skills/atlas/references/paths/work.md: sha256:97eb1eb4eb6c869f7a6b0dcb2bc19e2c8d4d61a9cbf49671c3556474a249630f
     .agents/skills/atlas/references/recipes/gated-memory-building.md: sha256:60b9c97018236bfb6a8971c65e0cce8cea8d3e582949318715b32c72e6fee4c2
     .agents/skills/atlas/references/recipes/terminate-wrong-path.md: sha256:aad87322604f75d40066956bab844ae0ce9427ca8323bc9ac368ecdbe76f80b6
-    .agents/skills/atlas/references/scenarios/atlas-agentic-integration-adversarial-v1.yaml: sha256:7c494f19ace9115e1c6cd77008a9afa289307b6d933d5b1c74c504a33226ab4e
+    .agents/skills/atlas/references/scenarios/atlas-agentic-integration-adversarial-v1.yaml: sha256:c55d56198250629cd5ac8f21caf35fb8aef38b56684ed485a02a06aafc87b548
     .agents/skills/atlas/references/scenarios/ci-activation-adversarial-v1.yaml: sha256:4d0776530e2c3910c007e009d23314b5012745a0fb0804523bb3901c5bb1fbbc
     .agents/skills/atlas/references/scenarios/code-review-panel-delegation-v1.yaml: sha256:6bc12e5bf920adb63a274a375cf32851136e555ca7fd8c15f2f3b16248db7638
     .agents/skills/atlas/references/scenarios/compile-focus-lenses-adversarial-v1.yaml: sha256:fdcad7e07203ab7e4d75eb77e48d2a75f84c95d77008e0de5318eb1b3414ad43
@@ -258,9 +258,9 @@ dependencies:
     .agents/skills/atlas/references/scenarios/landscape-adversarial-v1.yaml: sha256:2fbee28d3347f52acaa6239c3f4ea412beb11d3ffd7ddb679c68d4c60abaebdc
     .agents/skills/atlas/references/scenarios/panel-review-adversarial-v1.yaml: sha256:ba11b21da7da162946f3135d59090dc5533b6f71534e9d693903a4cb6ffa9113
     .agents/skills/atlas/references/scenarios/schema-governance-adversarial-v1.yaml: sha256:c520464d6b758e7a0df36ec23f9672287d26dc5258140287e8d35d876e9a308b
-    .agents/skills/atlas/references/scenarios/search-nav-signals-adversarial-v1.yaml: sha256:1933d6218e169c210b9494b14aaecd087bb5cfb132116c3a0f7b671b4dc96018
+    .agents/skills/atlas/references/scenarios/search-nav-signals-adversarial-v1.yaml: sha256:a76f5e1554113f2219f164a6f83d1017919c53ee6cde55f77989dda9aaedd3c4
     .agents/skills/atlas/references/scenarios/storage-mesh-mvp-adversarial-v1.yaml: sha256:ad19c0d0ac9858c19e7f63c18d4328b09f021a15d4bae9ff5f5d6cb10972a752
-    .agents/skills/atlas/references/scenarios/storage-mesh-mvp-adversarial-v2.yaml: sha256:2ff24df3dcd028d919294a2e4967022242b93f5141bd15a53056be8d3d98cd8a
+    .agents/skills/atlas/references/scenarios/storage-mesh-mvp-adversarial-v2.yaml: sha256:516bb6ed2eed5a5beea7932529c72441198079cbe43570a1b41f801b684f4416
     .agents/skills/atlas/references/templates/decision.md: sha256:210fd5822373398446f6c97e7414cdfaf1b98ae4a0b1c1147f479dc9e485c71d
     .agents/skills/atlas/references/templates/document.md: sha256:2a6c27da60df2b12c9f39e94f06257d5708ed019df4474992bf76012c3e14100
     .agents/skills/atlas/references/templates/experience.md: sha256:10a9fb474d2a98bc3b3126a080584c89833d48707f7c32bdb861f25cc19d9b2e
@@ -269,7 +269,7 @@ dependencies:
     .agents/skills/atlas/references/templates/recipe.md: sha256:42e81fe44468ed94d2cda4ce99a253ec5a17c29fe70ced3a450135e67fefdd8c
     .agents/skills/atlas/references/templates/work.md: sha256:08b887dc2bad6baa2dcd50f11235f99419eca06658433c07cc0b99179ab5516f
     .agents/skills/atlas/scripts/atlas.py: sha256:c7909ffcadbcf7ba09f1ceafd7bbd9c170e5f911a7629a697cdff835124f689e
-    .agents/skills/atlas/scripts/atlas_cli/__init__.py: sha256:b4b36f721c1852dcbac39ac997a3aa1357e1935e9c96a3ebebb7e24b073a0c87
+    .agents/skills/atlas/scripts/atlas_cli/__init__.py: sha256:ed066df4ec46ccfb5a45af3cfcb9727102473753b9e770628075b75e4904051f
     .agents/skills/atlas/scripts/atlas_cli/__main__.py: sha256:bbcd327f6aceff0ebf32ec8e7e8d92112efdbbf17ab50522c05c0c7b12a91854
     .agents/skills/atlas/scripts/atlas_cli/cli.py: sha256:03354bfb6f0fbcb637537aada0fd4256a374175f4095a9b8d29d4530e38f5371
     .agents/skills/atlas/scripts/atlas_cli/commands/__init__.py: sha256:ece7a95cd9e523f10dd5dffa8f3db6b7a6a57e1f3a0a4f1469069e5e2ac8f7ef
@@ -277,7 +277,7 @@ dependencies:
     .agents/skills/atlas/scripts/atlas_cli/commands/idcmd.py: sha256:0529a418354afa653e5030cd36a5c807e38916187dbdc84f113da9527e4d7850
     .agents/skills/atlas/scripts/atlas_cli/commands/init.py: sha256:1561c660bbf0bf7d3eb3000134906765d5de4e957ca74234889f69492e47a801
     .agents/skills/atlas/scripts/atlas_cli/commands/migrate.py: sha256:cdb5fdc758d9e00e6295ebb85af4f338db5301ac98b2ad1aabf234d8bfe8d0dd
-    .agents/skills/atlas/scripts/atlas_cli/commands/mount.py: sha256:3f93e488b033cfc658739a80e073427ac3b7f4d9d7185bf72310fc991753c3b7
+    .agents/skills/atlas/scripts/atlas_cli/commands/mount.py: sha256:a5fe00306d21ecae5361e59d5b833d91da1def888f74b079f2a41cc3c858e4a7
     .agents/skills/atlas/scripts/atlas_cli/commands/promote.py: sha256:f583ed8fc226bc364bee40d78ed29ddb395caf0225212ca63bb671d84004c52f
     .agents/skills/atlas/scripts/atlas_cli/commands/resolve.py: sha256:380c6b3cd49a8c7b7085dd73d0203876cb0f0e00fc8c532c858bb3bb96a14bd5
     .agents/skills/atlas/scripts/atlas_cli/commands/schema_cmd.py: sha256:5f26639780c2f8e56191a13cddaf3cde407f45dfb1ec26116a0931db6fa99773
@@ -287,7 +287,7 @@ dependencies:
     .agents/skills/atlas/scripts/atlas_cli/core/auth.py: sha256:4334bf80484fdea2b26003ef4c28ab8a4895d2c9e2db3eafc7b5c94f43ef517b
     .agents/skills/atlas/scripts/atlas_cli/core/authstore.py: sha256:9d7330cea4247873e5ad225c8e5c2ba1ffced421fc012734bef5f4912f2692e9
     .agents/skills/atlas/scripts/atlas_cli/core/frontmatter.py: sha256:0b89093c763a23fbdd10f74c7569b3ebd6789811cb3833023174e731d0f759a3
-    .agents/skills/atlas/scripts/atlas_cli/core/gitops.py: sha256:3dc9dc4b4b386b449f20272b4c7d22984d6dce5e542d90bc631fbd9f19640c65
+    .agents/skills/atlas/scripts/atlas_cli/core/gitops.py: sha256:7540b8d6afced916077fedb9e49805c63f51e8e6d927a60b8abccc9f772d6e28
     .agents/skills/atlas/scripts/atlas_cli/core/identity.py: sha256:54823e2a5753499bc29431a2c313d0cf43d6f683a9ac84512c1b215385bcba6e
     .agents/skills/atlas/scripts/atlas_cli/core/mesh.py: sha256:d651d8d636729e1a858cb166a833997a2bdbd962ae3e88677e028422e69e382f
     .agents/skills/atlas/scripts/atlas_cli/core/meshfile.py: sha256:e7f36c6bd174ddee961d8005184a34a61a54c48aedb108fc165afe15f6c12c1c
@@ -300,13 +300,13 @@ dependencies:
     .agents/skills/atlas/scripts/requirements-ci.txt: sha256:7a24ecb881e2a16f591c0220614de0a75f4fead7e10a9f48bd7aede6d0a0bc66
     .agents/skills/atlas/scripts/requirements.txt: sha256:38b955b44d338dc9f31b2beb7d83c80da4c156495a9bf043d9c6b314d3f3462e
     .agents/skills/atlas/scripts/run_tests.py: sha256:1d7c458d8c47f48d7565da3960a853f9d3a21783b45360b682b147c05bdece55
+    .agents/skills/atlas/scripts/test_activation_cards.py: sha256:a89078662a56caafe9e97a080d604e29f3d88e729cfdec554ee7dd5e76e75ded
     .agents/skills/atlas/scripts/test_ci_activation.py: sha256:36d27120c417702370d1f7ec1d7244d4d2cc0def8ef0b4749408f573e3bae816
-    .agents/skills/atlas/scripts/test_gitops_auth.py: sha256:16c7c675a0f2804f7d44271b87241cc099d6b206585e7bda3150cde50eecbe7c
-    .agents/skills/atlas/scripts/test_mount_safety.py: sha256:dce4d9e396fbc31b255ea015706105d3a450a271db6c051136830098d2e7604b
+    .agents/skills/atlas/scripts/test_gitops_auth.py: sha256:a1dcab2835fe181f33d5d737b9a9ce09c9cb5b34851950daeae6d47e30b2ee7e
+    .agents/skills/atlas/scripts/test_mount_safety.py: sha256:4da008850c0e47db1b47766e9db94293f9f233babcc1882f4b97cdfca463f9c3
     .agents/skills/atlas/scripts/test_release_readiness.py: sha256:3bf5382a7c7d330e87b6ed537d34da4622729f4c0ff4bda63b455f7bf4295c6d
     .agents/skills/atlas/scripts/test_schema_governance.py: sha256:3d1c3bc331d0b33616563493228546558445ab02b509c2a347a8af047a5acb3b
     .agents/skills/atlas/scripts/test_validation_warnings.py: sha256:b10df768431d18fd8be1a73254b0dcbc99e6dde5e793cdaed47b3778d395fc1d
-    .agents/skills/code-review/SKILL.md: sha256:af47ccb7c9ae43be2b122db50c58e59e7afdfa3f1e532f0198f36e29729f8091
     .agents/skills/panel-review/SKILL.md: sha256:d2b08df910575ef5a67d7f0a9d817e46305a9c1dc8f19e1b3bef9040099d2cd7
     .agents/skills/panel-review/assets/panelist-receipt.schema.json: sha256:2488ef6954c5e3297cb7094081a08098c8efc045d7ad9dda58c105e06d3e410b
     .agents/skills/panel-review/assets/recommendation-template.md: sha256:b9fa0be14756c5da6ac374c24bf80dbdb5e8484b00ba44cb49209d3ecf2fb80a
@@ -318,13 +318,15 @@ dependencies:
     .agents/skills/panel-review/references/lenses/skill-agent-contract.md: sha256:1a73d5a35dee6cf8e5609e5eab07a51303be4c417a1f4460aaac26662c9f6568
     .agents/skills/panel-review/references/roster.md: sha256:0fb836e13e9b7aa8ed10dd86a7ad535464942246d97272ee702ab808d401fe7c
     .agents/skills/panel-review/references/synthesizer.md: sha256:30adbbbdd1105ae321a6e4b044c417d9cd75f130618c5b1011a67685d534724d
-  content_hash: sha256:d5fe736b9a5887d7c45553b916ff87358a34fec6aa0d3e9e8f69fa8b31c03102
+  content_hash: sha256:f5f70b6a0bbb8bc5a6117bad0d3dceb02f433eb61d2941e2e7a37e2836b37504
+  discovered_via: sergio-sisternes-epam
+  marketplace_plugin_name: atlas
   declared_license: Apache-2.0
 - repo_url: sergio-sisternes-epam/okf
   name: okf
   host: github.com
-  resolved_commit: 9088a99a613d9ccc53ec2a15341714139291633f
-  resolved_ref: 9088a99a613d9ccc53ec2a15341714139291633f
+  resolved_commit: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
+  resolved_ref: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
   version: 0.2.1
   depth: 2
   resolved_by: sergio-sisternes-epam/atlas
@@ -352,7 +354,9 @@ dependencies:
     .agents/skills/okf/references/modules/okf-authority.md: sha256:8580ad41475361a7bd70a504240e7dd28837560332ac6df2ccb11a032cbddb3d
     .agents/skills/okf/references/modules/okf-export.md: sha256:8fd59fedb96c7969aa522c3a93fef18fe9e931eccb0f18b2e6273184fce86919
     .agents/skills/okf/references/modules/okf-import.md: sha256:29ceeed39b62914db2920a5970a06b5a93ca6c387873101cc1c28d205de004ce
-  content_hash: sha256:dd88f1e3e532bb5d06238e0a359f1c1b3cd71aa17337ef1cc393e1e28dc067ee
+  content_hash: sha256:48d5e79752e6a448975da0fef2981938f7c6149810e30aca805a77cf123a10d8
+  discovered_via: sergio-sisternes-epam
+  marketplace_plugin_name: okf
   declared_license: Apache-2.0
 deployments:
 - kind: project-relative
@@ -570,7 +574,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:fd5c7ce86249fe0918b61bd04e782b8d02f3b489369985295bb173486b16348d
+  content_hash: sha256:c438bb406792d003bb32be3b4a0ca516088bb8bb3fcc167e43730a08e274328d
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/.github/workflows/ci.yml
@@ -609,13 +613,22 @@ deployments:
   content_hash: sha256:aebdd22b009c5def982b4d6614bf76406dc03a0638611f75c6168daf164d4fac
 - kind: project-relative
   target: agent-skills
+  value: .agents/skills/atlas/CHANGELOG.md
+  runtime: null
+  scope: project
+  owners:
+  - sergio-sisternes-epam/atlas
+  active_owner: sergio-sisternes-epam/atlas
+  content_hash: sha256:c53d1b89a75820c9e4f5143405a0204b921e002289e56167e0ac7af0b72c8e0c
+- kind: project-relative
+  target: agent-skills
   value: .agents/skills/atlas/CONTRIBUTING.md
   runtime: null
   scope: project
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:f5bf798d99ecfdc33f611e2826791b247aa6400be7c7ca497ccb9e8799726828
+  content_hash: sha256:3f7d437cdd4e5277e29d16b67b4deea3f05e8d88febf01d1f196e1a79a81cf3a
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/LICENSE
@@ -642,7 +655,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:78f1ed49470b1873772b13de8d0167d3b1781fd3f575c3496ec3f532a56e1041
+  content_hash: sha256:f4e9a8e703e3ef9fb13f4604e83ac38010bfce4109f3693b6d866d091d8f645e
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/SKILL.md
@@ -651,7 +664,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:9a02ed9e7d18c00ce45357ea9b5102ad40ad93271b6cdc3f2fa20a3a85d2f051
+  content_hash: sha256:cecac3fa9945a98a946db6e1faf1b146c55c7941d5d6da94c9c38af11965b1fa
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/apm.lock.yaml
@@ -669,7 +682,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:ab95b099a58985788b3843015f86b357edcb3bd3c0d03364e450557fad3f8f5c
+  content_hash: sha256:b7fe3a7a4e5f3ed8e770e06d3288f760e61c3b0737c93e06482d163e56bb815e
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/atlas-mesh.json
@@ -993,7 +1006,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:0f48da4ed74b90079c4844446c0b8c00d8baf7f3f5f311576b9c62a9b2a9bc3e
+  content_hash: sha256:f1d30b97286e71597c8e6c84591b4753d5be73adc36d3df4aea95977dcb9ef6e
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/ci/github-actions.compile.yml
@@ -1002,7 +1015,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:d3cfda2ef24ae029ef410996ef3dcd9fa47b678bf78bfa5bb0e2a95a9f9bacbe
+  content_hash: sha256:298b97edf073d8c5486bacf51f820034db55b0ab0394d0c22b401a0ed888169f
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/paths/ci.md
@@ -1020,7 +1033,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:278c352f4eb2aaececb1103b99554a4f2d9b6037b9f24f5a6ca2734684c61f19
+  content_hash: sha256:354fcc7d67acf62d51a032704822cb369f81cb8ea1bcfaccae1ccdfa72be4f25
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/paths/landscape.md
@@ -1029,7 +1042,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:c36e9435b62c08c22ab82444bdb503c4989be55fd11e440e1f2ce2b66924a510
+  content_hash: sha256:cf31dbb9991b18f25ad2a9a3b52e6c527e784449e64a9e6c25b13947c910d488
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/paths/migrate.md
@@ -1047,7 +1060,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:138d0711682ff75c3da21e71a17cc2638dc6d1186b5ac54bf4ae29254cdf047c
+  content_hash: sha256:9c719ef1206b37912c2ac9db25e7e0e6ce0e9c8b6a8288516c22008a39c8f29c
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/paths/query.md
@@ -1065,7 +1078,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:87782b29848d0cd132e71bf6e7e964f48248240a1372b0af93ea5c99df225398
+  content_hash: sha256:bd9b77c75d10f39c523b2596d30042b04b93636169274898ca615a66163f14a2
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/paths/schema.md
@@ -1083,7 +1096,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:727b809ef84754287d8245542ef57595750620c9e852aa85e1df9343cfdfa55b
+  content_hash: sha256:97eb1eb4eb6c869f7a6b0dcb2bc19e2c8d4d61a9cbf49671c3556474a249630f
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/recipes/gated-memory-building.md
@@ -1110,7 +1123,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:7c494f19ace9115e1c6cd77008a9afa289307b6d933d5b1c74c504a33226ab4e
+  content_hash: sha256:c55d56198250629cd5ac8f21caf35fb8aef38b56684ed485a02a06aafc87b548
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/scenarios/ci-activation-adversarial-v1.yaml
@@ -1200,7 +1213,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:1933d6218e169c210b9494b14aaecd087bb5cfb132116c3a0f7b671b4dc96018
+  content_hash: sha256:a76f5e1554113f2219f164a6f83d1017919c53ee6cde55f77989dda9aaedd3c4
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/scenarios/storage-mesh-mvp-adversarial-v1.yaml
@@ -1218,7 +1231,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:2ff24df3dcd028d919294a2e4967022242b93f5141bd15a53056be8d3d98cd8a
+  content_hash: sha256:516bb6ed2eed5a5beea7932529c72441198079cbe43570a1b41f801b684f4416
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/references/templates/decision.md
@@ -1299,7 +1312,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:b4b36f721c1852dcbac39ac997a3aa1357e1935e9c96a3ebebb7e24b073a0c87
+  content_hash: sha256:ed066df4ec46ccfb5a45af3cfcb9727102473753b9e770628075b75e4904051f
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/scripts/atlas_cli/__main__.py
@@ -1371,7 +1384,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:3f93e488b033cfc658739a80e073427ac3b7f4d9d7185bf72310fc991753c3b7
+  content_hash: sha256:a5fe00306d21ecae5361e59d5b833d91da1def888f74b079f2a41cc3c858e4a7
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/scripts/atlas_cli/commands/promote.py
@@ -1461,7 +1474,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:3dc9dc4b4b386b449f20272b4c7d22984d6dce5e542d90bc631fbd9f19640c65
+  content_hash: sha256:7540b8d6afced916077fedb9e49805c63f51e8e6d927a60b8abccc9f772d6e28
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/scripts/atlas_cli/core/identity.py
@@ -1572,6 +1585,15 @@ deployments:
   content_hash: sha256:1d7c458d8c47f48d7565da3960a853f9d3a21783b45360b682b147c05bdece55
 - kind: project-relative
   target: agent-skills
+  value: .agents/skills/atlas/scripts/test_activation_cards.py
+  runtime: null
+  scope: project
+  owners:
+  - sergio-sisternes-epam/atlas
+  active_owner: sergio-sisternes-epam/atlas
+  content_hash: sha256:a89078662a56caafe9e97a080d604e29f3d88e729cfdec554ee7dd5e76e75ded
+- kind: project-relative
+  target: agent-skills
   value: .agents/skills/atlas/scripts/test_ci_activation.py
   runtime: null
   scope: project
@@ -1587,7 +1609,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:16c7c675a0f2804f7d44271b87241cc099d6b206585e7bda3150cde50eecbe7c
+  content_hash: sha256:a1dcab2835fe181f33d5d737b9a9ce09c9cb5b34851950daeae6d47e30b2ee7e
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/scripts/test_mount_safety.py
@@ -1596,7 +1618,7 @@ deployments:
   owners:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:dce4d9e396fbc31b255ea015706105d3a450a271db6c051136830098d2e7604b
+  content_hash: sha256:4da008850c0e47db1b47766e9db94293f9f233babcc1882f4b97cdfca463f9c3
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/atlas/scripts/test_release_readiness.py
@@ -1624,24 +1646,6 @@ deployments:
   - sergio-sisternes-epam/atlas
   active_owner: sergio-sisternes-epam/atlas
   content_hash: sha256:b10df768431d18fd8be1a73254b0dcbc99e6dde5e793cdaed47b3778d395fc1d
-- kind: project-relative
-  target: agent-skills
-  value: .agents/skills/code-review
-  runtime: null
-  scope: project
-  owners:
-  - sergio-sisternes-epam/atlas
-  active_owner: sergio-sisternes-epam/atlas
-  content_hash: null
-- kind: project-relative
-  target: agent-skills
-  value: .agents/skills/code-review/SKILL.md
-  runtime: null
-  scope: project
-  owners:
-  - sergio-sisternes-epam/atlas
-  active_owner: sergio-sisternes-epam/atlas
-  content_hash: sha256:af47ccb7c9ae43be2b122db50c58e59e7afdfa3f1e532f0198f36e29729f8091
 - kind: project-relative
   target: agent-skills
   value: .agents/skills/okf

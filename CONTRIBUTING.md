@@ -2,19 +2,26 @@
 
 ## Local setup
 
-Use APM CLI 0.29.0. Private dependency resolution needs a GitHub credential
+Use APM CLI 0.30.0. Atlas resolves through marketplace
+`sergio-sisternes-epam` (`atlas@sergio-sisternes-epam`). Register that
+marketplace by name before install; do not use alias `me` or default
+`apm-marketplace`. Private git resolution still needs a GitHub credential
 with Contents: read access to `sergio-sisternes-epam/atlas`,
 `sergio-sisternes-epam/okf`, and
 `sergio-sisternes-epam/discuss-atlas`.
 
 ```bash
 export GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM=<token>
+apm marketplace add sergio-sisternes-epam/apm-marketplace --name sergio-sisternes-epam
 git submodule update --init --recursive
-apm install --frozen --target agent-skills --no-policy
+apm install --target agent-skills --no-policy
 ```
 
 Never commit credentials, `apm_modules/`, or generated `.agents/` dependency
-copies.
+copies. APM 0.30.0 lockfiles record resolved git coordinates for marketplace
+plugins, so `apm install --frozen` looks for
+`_marketplace/sergio-sisternes-epam/atlas` and fails. Replay the committed
+lock with a normal install and confirm `apm.lock.yaml` is unchanged.
 
 GitHub pull-request events never receive the private dependency credential.
 Pull requests run metadata, source-file, and contract checks only. Run the
