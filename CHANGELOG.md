@@ -14,7 +14,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Resolved Atlas through marketplace `sergio-sisternes-epam` as
   `name: atlas` / `marketplace: sergio-sisternes-epam` (install identifier
   `atlas@sergio-sisternes-epam`) instead of git shorthand
-  `sergio-sisternes-epam/atlas#v0.8.15`, locking catalog Atlas `v0.9.0`.
+  `sergio-sisternes-epam/atlas#v0.8.15`, locking catalog Atlas `v0.9.1`
+  (`a1074e5`) and transitive OKF `v0.2.1` (`5246f7b`).
 - Required APM CLI `0.30.0` in local setup and CI (`microsoft/apm-action`).
 
 ## [0.3.8] - 2026-09-05

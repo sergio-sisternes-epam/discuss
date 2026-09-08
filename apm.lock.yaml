@@ -4,9 +4,9 @@ dependencies:
 - repo_url: sergio-sisternes-epam/atlas
   name: atlas
   host: github.com
-  resolved_commit: 2b6659e5440886c7abbd9ad10686fa3a0100813b
-  resolved_ref: 2b6659e5440886c7abbd9ad10686fa3a0100813b
-  version: 0.9.0
+  resolved_commit: a1074e5dfd8cc8236132e7615063628407e35b6a
+  resolved_ref: a1074e5dfd8cc8236132e7615063628407e35b6a
+  version: 0.9.1
   package_type: hybrid
   deployed_files:
   - .agents/skills/atlas
@@ -318,15 +318,15 @@ dependencies:
     .agents/skills/panel-review/references/lenses/skill-agent-contract.md: sha256:1a73d5a35dee6cf8e5609e5eab07a51303be4c417a1f4460aaac26662c9f6568
     .agents/skills/panel-review/references/roster.md: sha256:0fb836e13e9b7aa8ed10dd86a7ad535464942246d97272ee702ab808d401fe7c
     .agents/skills/panel-review/references/synthesizer.md: sha256:30adbbbdd1105ae321a6e4b044c417d9cd75f130618c5b1011a67685d534724d
-  content_hash: sha256:82a66b5d2b629c4ba0930426f3268f689bdd15578687ebbd9e39cd85afdfe400
+  content_hash: sha256:f5f70b6a0bbb8bc5a6117bad0d3dceb02f433eb61d2941e2e7a37e2836b37504
   discovered_via: sergio-sisternes-epam
   marketplace_plugin_name: atlas
   declared_license: Apache-2.0
 - repo_url: sergio-sisternes-epam/okf
   name: okf
   host: github.com
-  resolved_commit: 9088a99a613d9ccc53ec2a15341714139291633f
-  resolved_ref: 9088a99a613d9ccc53ec2a15341714139291633f
+  resolved_commit: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
+  resolved_ref: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
   version: 0.2.1
   depth: 2
   resolved_by: sergio-sisternes-epam/atlas
@@ -354,7 +354,9 @@ dependencies:
     .agents/skills/okf/references/modules/okf-authority.md: sha256:8580ad41475361a7bd70a504240e7dd28837560332ac6df2ccb11a032cbddb3d
     .agents/skills/okf/references/modules/okf-export.md: sha256:8fd59fedb96c7969aa522c3a93fef18fe9e931eccb0f18b2e6273184fce86919
     .agents/skills/okf/references/modules/okf-import.md: sha256:29ceeed39b62914db2920a5970a06b5a93ca6c387873101cc1c28d205de004ce
-  content_hash: sha256:dd88f1e3e532bb5d06238e0a359f1c1b3cd71aa17337ef1cc393e1e28dc067ee
+  content_hash: sha256:48d5e79752e6a448975da0fef2981938f7c6149810e30aca805a77cf123a10d8
+  discovered_via: sergio-sisternes-epam
+  marketplace_plugin_name: okf
   declared_license: Apache-2.0
 deployments:
 - kind: project-relative
