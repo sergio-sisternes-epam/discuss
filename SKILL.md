@@ -2,7 +2,7 @@
 name: discuss
 description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
 metadata:
-  version: "0.3.9"
+  version: "0.3.10"
   status: mvp
   work_id: 2026-08-31-discuss-constellation-path
 ---

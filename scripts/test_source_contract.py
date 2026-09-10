@@ -46,8 +46,8 @@ class SourceContractTests(unittest.TestCase):
         self.assertIn('APM_VERSION: "0.30.0"', ci)
         self.assertEqual(
             ci.count(
-                "apm marketplace add sergio-sisternes-epam/apm-marketplace "
-                "--name sergio-sisternes-epam"
+                "apm marketplace add sergio-sisternes-epam/atlas-marketplace "
+                "--name atlas"
             ),
             2,
         )
@@ -61,7 +61,7 @@ class SourceContractTests(unittest.TestCase):
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
         self.assertRegex(
             manifest,
-            r"(?m)^  apm:\n    - name: atlas\n      marketplace: sergio-sisternes-epam\s*$",
+            r"(?m)^  apm:\n    - name: atlas\n      marketplace: atlas\s*$",
         )
         self.assertNotIn("sergio-sisternes-epam/atlas", manifest)
 

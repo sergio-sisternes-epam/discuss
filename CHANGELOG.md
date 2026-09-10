@@ -7,6 +7,16 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.3.10] - 2026-09-10
+
+### Changed
+
+- Resolved Atlas through marketplace `atlas` as `name: atlas` /
+  `marketplace: atlas` (install identifier `atlas@atlas`) instead of
+  marketplace `sergio-sisternes-epam`. Consumers register with
+  `apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas`.
+  Catalog Atlas is `v0.11.2` (`579e809`).
+
 ## [0.3.9] - 2026-09-08
 
 ### Changed
@@ -56,7 +66,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Required the human-facing speak path and `speak_loaded` activation receipt.
 - Clarified that the discussion store git root is the OKF root.
 
-[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.9...HEAD
+[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.10...HEAD
+[0.3.10]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.9...v0.3.10
 [0.3.9]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.8...v0.3.9
 [0.3.8]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.7...v0.3.8
 [0.3.7]: https://github.com/sergio-sisternes-epam/discuss/tree/v0.3.7
