@@ -19,9 +19,11 @@ apm install --target agent-skills --no-policy
 
 Never commit credentials, `apm_modules/`, or generated `.agents/` dependency
 copies. APM 0.30.0 lockfiles record resolved git coordinates for marketplace
-plugins, so `apm install --frozen` looks for
-`_marketplace/atlas/atlas` and fails. Replay the committed
+plugins, so `apm install --frozen` and `apm audit --ci` look for
+`_marketplace/atlas/atlas` and fail. Replay the committed
 lock with a normal install and confirm `apm.lock.yaml` is unchanged.
+Source and consumer CI use `apm audit --no-policy --no-fail-fast` plus that
+replay, not `--ci` / `--frozen`.
 
 GitHub pull-request events never receive the private dependency credential.
 Pull requests run metadata, source-file, and contract checks only. Run the
@@ -35,7 +37,7 @@ tag after it has been proven to reference that exact main commit.
 ```bash
 python3 -m unittest discover -s scripts -p 'test_*.py'
 python3 scripts/release_readiness.py --commit "$(git rev-parse HEAD)"
-apm audit --ci --no-policy --no-fail-fast
+apm audit --no-policy --no-fail-fast
 ```
 
 Resolve the store root and run both graph gates:
@@ -48,8 +50,8 @@ python3 scripts/lint.py --root "$atlas_root"
 
 Install the checked-out package into disposable consumers for
 `agent-skills`, `copilot`, and `claude`. Each consumer must pass a second
-frozen install without changing its lockfile and then pass
-`apm audit --ci --no-policy --no-fail-fast`.
+normal install without changing its lockfile and then pass
+`apm audit --no-policy --no-fail-fast`.
 
 When `dependencies.apm` changes, run
 `apm install --target agent-skills --no-policy` to regenerate

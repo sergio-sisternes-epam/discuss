@@ -16,6 +16,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   marketplace `sergio-sisternes-epam`. Consumers register with
   `apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas`.
   Catalog Atlas is `v0.11.2` (`579e809`).
+- Source and consumer CI replay marketplace deps with a normal install
+  and `apm audit --no-policy --no-fail-fast`. APM 0.30.0 still records
+  git coordinates for marketplace plugins, so `--frozen` / `audit --ci`
+  cannot pass against `_marketplace/atlas/atlas`.
 
 ## [0.3.9] - 2026-09-08
 
