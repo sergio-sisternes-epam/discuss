@@ -13,6 +13,12 @@ git submodule update --init --recursive
 apm install --target agent-skills --no-policy
 ```
 
+Optional tagged install for contributor checks (not the public README path):
+
+```bash
+apm install sergio-sisternes-epam/discuss#v0.3.10 --target agent-skills
+```
+
 Never commit credentials, `apm_modules/`, or generated `.agents/` dependency
 copies. APM 0.30.0 lockfiles record resolved git coordinates for marketplace
 plugins, so `apm install --frozen` and `apm audit --ci` look for
@@ -58,8 +64,8 @@ commits before committing it.
 Discuss uses semantic versioning and immutable annotated `vX.Y.Z` tags.
 Prereleases use `vX.Y.Z-<identifier>`.
 
-1. Update `apm.yml`, `SKILL.md`, the README install command, and
-   `CHANGELOG.md` together.
+1. Update `apm.yml`, `SKILL.md`, the CONTRIBUTING tagged install
+   command, and `CHANGELOG.md` together.
 2. Merge through the normal review process after all required CI checks pass.
 3. Run **Discuss CI** manually against the exact `main` commit intended for
    release. Its final job must report `pre_tag_decision=ready to tag`.

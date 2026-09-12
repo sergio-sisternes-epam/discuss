@@ -1,58 +1,61 @@
 # discuss
 
-Public APM package: `discuss@atlas`
+Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps in your thinking with this companion skill that explores the graph for you, finds where they are, and proposes solutions.
 
-Grok-native layout: `SKILL.md` and `apm.yml` at the repository root.
+## Why / what this is not
+
+The graph is a high-fidelity record and navigation aid. New ideas come from
+the human–AI conversation. The Atlas persists that work, amortises
+discarded-session cost, and accelerates human connections.
+
+This package is not for implementation. It does not replace conversation with a
+thesis engine, and it does not author process memory automatically.
+
+## Install
+
+`--name atlas` is required so the package resolves as `discuss@atlas`.
 
 ```bash
 apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
 apm install discuss@atlas
 ```
 
-Direct git tag install:
+## Use
 
-```bash
-apm install sergio-sisternes-epam/discuss#v0.3.10 --target agent-skills
+```text
+I need to discuss with you the following idea: <clear subject>. Objective: <one line>.
 ```
 
-Supported validation targets are `agent-skills`, `copilot`, and `claude`.
-Public github.com installs do not need a consumer PAT.
+See `SKILL.md` for the runtime contract.
 
-## Discussion store
+## Modules
 
-Process memory is **not** authored in this skill package. Its canonical store is:
+| Module | What it does |
+| --- | --- |
+| From conversation | Turn a live or past conversation into graph fabric. |
+| Sprout | Park a surviving pending as a protostar linked to its origin. |
+| Terminate | Close a wrong frame with an exit reason and a living thesis. |
+| Lint | Check fabric discipline against the KVA contract. |
+| Consolidate | Write a partial dated view of the pieces (walk-back). |
+| Constellation | Join what stands into one official picture (checkpoint). |
 
-https://github.com/sergio-sisternes-epam/discuss-atlas
+## Related
 
-That store is All Rights Reserved knowledge, not a secret private GitHub
-dependency.
-
-The store's git root is the OKF root (`SCHEMA.json` is at the store root).
-In a source checkout, initialise the pinned mount:
-
-```bash
-git submodule update --init --recursive
-```
-
-APM does not materialise git submodules. In a consumer repository, use the
-Atlas skill to mount the store without a custom target, then resolve
-the root:
+- [atlas](https://github.com/sergio-sisternes-epam/atlas) — knowledge substrate this skill depends on.
+- [autogenesis](https://github.com/sergio-sisternes-epam/autogenesis) — design process; durable discussion lives here.
+- [discuss-atlas](https://github.com/sergio-sisternes-epam/discuss-atlas) — companion discussion store. All Rights Reserved knowledge, not a GitHub dependency of this package.
 
 ```bash
 atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
 atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 ```
 
-The default mount is
-`.atlas/github.com/sergio-sisternes-epam/discuss-atlas`. Always use the path
-returned by `atlas resolve` as the compile/query root.
-
-See `SKILL.md`.
-
 ## Contributing
 
-See `CONTRIBUTING.md` for validation, release, and failed-tag
-procedures.
+See [CONTRIBUTING.md](CONTRIBUTING.md).
+
+Do not file public issues for vulnerabilities; report them through a private
+GitHub security advisory.
 
 ## License
 

@@ -33,7 +33,7 @@ SURFACES = (
     VersionSurface("skill", "SKILL.md", rf"^\s*version:\s*[\"']?({SEMVER})[\"']?\s*$"),
     VersionSurface(
         "install command",
-        "README.md",
+        "CONTRIBUTING.md",
         rf"^apm install sergio-sisternes-epam/discuss#v({SEMVER})"
         rf"\s+--target\s+agent-skills\s*$",
     ),

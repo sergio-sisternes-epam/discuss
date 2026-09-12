@@ -16,11 +16,11 @@ class ReleaseReadinessTests(unittest.TestCase):
         root: Path,
         version: str = "0.3.8",
         skill_version: str | None = None,
-        readme_version: str | None = None,
+        install_version: str | None = None,
         changelog_versions: tuple[str, ...] | None = None,
     ) -> None:
         skill_version = skill_version or version
-        readme_version = readme_version or version
+        install_version = install_version or version
         changelog_versions = changelog_versions or (version,)
         (root / "apm.yml").write_text(
             f"name: discuss\nversion: {version}\n", encoding="utf-8"
@@ -29,9 +29,9 @@ class ReleaseReadinessTests(unittest.TestCase):
             f"---\nname: discuss\nmetadata:\n  version: \"{skill_version}\"\n---\n",
             encoding="utf-8",
         )
-        (root / "README.md").write_text(
+        (root / "CONTRIBUTING.md").write_text(
             "apm install sergio-sisternes-epam/discuss"
-            f"#v{readme_version} --target agent-skills\n",
+            f"#v{install_version} --target agent-skills\n",
             encoding="utf-8",
         )
         sections = "\n".join(
@@ -67,9 +67,9 @@ class ReleaseReadinessTests(unittest.TestCase):
     def test_mismatched_surface_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
             root = Path(directory)
-            self.write_package(root, readme_version="0.3.9")
+            self.write_package(root, install_version="0.3.9")
             _, errors = release_readiness.validate_versions(root)
-        self.assertTrue(any("README.md" in error for error in errors))
+        self.assertTrue(any("CONTRIBUTING.md" in error for error in errors))
 
     def test_duplicate_changelog_entry_is_rejected(self) -> None:
         with tempfile.TemporaryDirectory() as directory:
