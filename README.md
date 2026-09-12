@@ -53,4 +53,6 @@ procedures.
 
 ## License
 
+Copyright 2026 Sergio Sisternes.
+
 Apache-2.0. See `LICENSE`.
