@@ -5,13 +5,9 @@
 Use APM CLI 0.30.0. Atlas resolves through marketplace
 `atlas` (`atlas@atlas`). Register that
 marketplace by name before install; do not use alias `me` or default
-`atlas-marketplace`. Private git resolution still needs a GitHub credential
-with Contents: read access to `sergio-sisternes-epam/atlas`,
-`sergio-sisternes-epam/okf`, and
-`sergio-sisternes-epam/discuss-atlas`.
+`atlas-marketplace`. Public github.com installs do not need a consumer PAT.
 
 ```bash
-export GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM=<token>
 apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
 git submodule update --init --recursive
 apm install --target agent-skills --no-policy
