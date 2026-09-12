@@ -9,6 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added GitHub issue and pull request templates.
 - Added the 2026 Sergio Sisternes copyright notice to the README license
   section.
 
