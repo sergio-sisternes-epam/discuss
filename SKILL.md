@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
+description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. Also when the user asks how to get started with Discuss, what Discuss modules do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
 metadata:
   version: "0.3.10"
   status: mvp
@@ -44,6 +44,7 @@ speak_loaded: yes
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
 - If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it.
+- **Exception — help and getting-started.** Those modules explain. They do not ask for a discussion subject or objective, do not create a hub, and do not use this live-loop card as proof of a running discussion. Load **speak**, then the matching module card in `references/paths/help.md` or `references/paths/getting-started.md`.
 - Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
 Use the resolved Atlas root through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
@@ -52,6 +53,8 @@ Use the resolved Atlas root through the multi-harness substrate contract (query 
 
 | path_id | When | Module |
 |---------|------|--------|
+| **getting-started** | First-use orientation. Purpose, prerequisites, first journey | `references/paths/getting-started.md` |
+| **help** | Explain modules without executing them. List or named topic | `references/paths/help.md` |
 | **speak** | Always-on prefix. Load before any human-facing reply | `references/paths/speak.md` |
 | **from-conversation** | Turn a live or past conversation into graph fabric | `references/paths/from-conversation.md` |
 | **sprout** | Park a surviving pending as a protostar linked to its origin | `references/paths/sprout.md` |
@@ -60,7 +63,7 @@ Use the resolved Atlas root through the multi-harness substrate contract (query 
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back | `references/paths/consolidate.md` |
 | **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint | `references/paths/constellation.md` |
 
-Default live loop is this SKILL body after **speak**. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
+Default live loop is this SKILL body after **speak**. New to Discuss / how it works → read **getting-started** first. What Discuss can do / list modules / explain a named module → read **help** first (no clarification required to list). Help explains; it does not run the named module. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
 
 ## Human narration (required)
 
@@ -143,6 +146,8 @@ Research nodes that ground a counter must carry the external source, then link w
 - Auto-pruning without a recorded KVA decision.
 - Wiring discuss into Autogenesis automatically (separate wire path).
 - A sixth `kva` value named expand. Alive nodes grow; forming children carry the unfinished work.
+- Auto-mounting `discuss-atlas` to answer help or getting-started.
+- Executing a module because the user asked how it works.
 
 ## Progressive disclosure
 

@@ -32,6 +32,8 @@ See `SKILL.md` for the runtime contract.
 
 | Module | What it does |
 | --- | --- |
+| Getting started | First-use orientation: purpose, prerequisites, and a useful first journey. |
+| Help | Explain Discuss modules without running them. |
 | From conversation | Turn a live or past conversation into graph fabric. |
 | Sprout | Park a surviving pending as a protostar linked to its origin. |
 | Terminate | Close a wrong frame with an exit reason and a living thesis. |

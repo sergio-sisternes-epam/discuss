@@ -28,3 +28,12 @@ smokes:
   - id: package-install-implies-store
     source: "APM consumer boundary"
     expect: "README and SKILL distinguish APM package installation from the separate discuss-atlas mount"
+  - id: help-executes-named-module
+    source: "Atlas help-pilot H3 / explain-do-not-execute"
+    expect: "help explains terminate, sprout, and from-conversation without mutating the graph or mounting Atlas"
+  - id: help-requires-clarification-to-list
+    source: "Atlas help-pilot no-target list"
+    expect: "no-target help lists every installed module from the bundled registry without asking which to list"
+  - id: unqualified-help-hijack
+    source: "Atlas help-pilot trigger evaluation"
+    expect: "SKILL description refuses unqualified help outside Discuss context"

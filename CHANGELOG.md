@@ -9,6 +9,15 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Added
 
+- Added **getting-started** and **help** modules. Getting-started covers
+  first-use purpose, prerequisites, companion-store setup (explained, not
+  executed), speak / human narration, and the shortest useful first
+  journey. Help lists every installed module with no clarification, or
+  explains one named module from bundled package references. Help never
+  mutates the discussion graph, mounts Atlas, or runs terminate / sprout /
+  from-conversation. Optional read-only query of `discuss-atlas` only when
+  that store is already resolvable; otherwise limited help plus the reason.
+  Activation cards carry user intent and `atlas_used`.
 - Added GitHub issue and pull request templates.
 - Added the 2026 Sergio Sisternes copyright notice to the README license
   section.
