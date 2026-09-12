@@ -1,15 +1,15 @@
 # discuss
 
-Run a discussion as a durable, agent-maintained Atlas graph.
+Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps your thinking has with this companion skill that explore the graph for you, think where they are and propose solutions.
 
 ## Why / what this is not
 
 The graph is a high-fidelity record and navigation aid. New ideas come from
-the human–AI conversation. The graph persists that work, amortises
+the human–AI conversation. The Atlas persists that work, amortises
 discarded-session cost, and accelerates human connections.
 
 This package is not for implement. It does not replace conversation with a
-thesis engine, and it does not author process memory.
+thesis engine, and it does not author process memory automatically.
 
 ## Install
 
@@ -23,19 +23,21 @@ apm install discuss@atlas
 ## Use
 
 ```text
-Use discuss. Subject: <clear subject>. Objective: <one line>. Persist the graph; do not implement.
+I need to discuss with you the following idea: <clear subject>. Objective: <one line>.
 ```
 
 See `SKILL.md` for the runtime contract.
 
 ## Modules
 
-- **From conversation** — Turn a live or past conversation into graph fabric.
-- **Sprout** — Park a surviving pending as a protostar linked to its origin.
-- **Terminate** — Close a wrong frame with an exit reason and a living thesis.
-- **Lint** — Check fabric discipline against the KVA contract.
-- **Consolidate** — Write a partial dated view of the pieces (walk-back).
-- **Constellation** — Join what stands into one official picture (checkpoint).
+| Module | What it does |
+| --- | --- |
+| From conversation | Turn a live or past conversation into graph fabric. |
+| Sprout | Park a surviving pending as a protostar linked to its origin. |
+| Terminate | Close a wrong frame with an exit reason and a living thesis. |
+| Lint | Check fabric discipline against the KVA contract. |
+| Consolidate | Write a partial dated view of the pieces (walk-back). |
+| Constellation | Join what stands into one official picture (checkpoint). |
 
 ## Related
 
