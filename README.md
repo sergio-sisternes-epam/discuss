@@ -13,15 +13,11 @@ thesis engine, and it does not author process memory.
 
 ## Install
 
+`--name atlas` is required so the package resolves as `discuss@atlas`.
+
 ```bash
 apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
 apm install discuss@atlas
-```
-
-Optional git-tag install:
-
-```bash
-apm install sergio-sisternes-epam/discuss#v0.3.10 --target agent-skills
 ```
 
 ## Use
