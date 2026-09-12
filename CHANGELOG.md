@@ -7,6 +7,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+### Added
+
+- Added the 2026 Sergio Sisternes copyright notice to the README license
+  section.
+
 ## [0.3.10] - 2026-09-10
 
 ### Changed
