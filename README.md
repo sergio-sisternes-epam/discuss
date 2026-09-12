@@ -1,6 +1,6 @@
 # discuss
 
-Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps your thinking has with this companion skill that explore the graph for you, think where they are and propose solutions.
+Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps in your thinking with this companion skill that explores the graph for you, finds where they are, and proposes solutions.
 
 ## Why / what this is not
 
@@ -8,7 +8,7 @@ The graph is a high-fidelity record and navigation aid. New ideas come from
 the human–AI conversation. The Atlas persists that work, amortises
 discarded-session cost, and accelerates human connections.
 
-This package is not for implement. It does not replace conversation with a
+This package is not for implementation. It does not replace conversation with a
 thesis engine, and it does not author process memory automatically.
 
 ## Install
