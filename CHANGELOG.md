@@ -15,6 +15,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Restructured the root README to the family outline (why, install, use,
+  modules, related, contributing, license). Extra depth stays in
+  `SKILL.md` and `CONTRIBUTING.md`.
 - Consumer install docs now describe the public marketplace path
   (`discuss@atlas`) on github.com. Direct git tag install remains.
   Public github.com consumers do not need a PAT. The discussion store is
