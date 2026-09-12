@@ -1,28 +1,31 @@
 # discuss
 
-Private APM package: `sergio-sisternes-epam/discuss`
+Public APM package: `discuss@atlas`
 
 Grok-native layout: `SKILL.md` and `apm.yml` at the repository root.
+
+```bash
+apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
+apm install discuss@atlas
+```
+
+Direct git tag install:
 
 ```bash
 apm install sergio-sisternes-epam/discuss#v0.3.10 --target agent-skills
 ```
 
 Supported validation targets are `agent-skills`, `copilot`, and `claude`.
-Private installs need a GitHub credential with Contents: read access to
-`discuss`, `atlas`, and `okf`; in CI, expose it as
-`GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM`.
-
-Same-repository pull requests run source, store, and consumer private gates
-with that credential. Fork pull requests never receive it and must first be
-reproduced on a trusted branch. The exact-main ready-to-tag gate still runs
-on `main` and from an exact-main release tag.
+Public github.com installs do not need a consumer PAT.
 
 ## Discussion store
 
 Process memory is **not** authored in this skill package. Its canonical store is:
 
 https://github.com/sergio-sisternes-epam/discuss-atlas
+
+That store is All Rights Reserved knowledge, not a secret private GitHub
+dependency.
 
 The store's git root is the OKF root (`SCHEMA.json` is at the store root).
 In a source checkout, initialise the pinned mount:
@@ -32,7 +35,7 @@ git submodule update --init --recursive
 ```
 
 APM does not materialise git submodules. In a consumer repository, use the
-Atlas skill to mount the private store without a custom target, then resolve
+Atlas skill to mount the store without a custom target, then resolve
 the root:
 
 ```bash
@@ -48,7 +51,7 @@ See `SKILL.md`.
 
 ## Contributing
 
-See `CONTRIBUTING.md` for validation, release, private-token, and failed-tag
+See `CONTRIBUTING.md` for validation, release, and failed-tag
 procedures.
 
 ## License

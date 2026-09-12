@@ -15,6 +15,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Consumer install docs now describe the public marketplace path
+  (`discuss@atlas`) on github.com. Direct git tag install remains.
+  Public github.com consumers do not need a PAT. The discussion store is
+  All Rights Reserved knowledge, not a private GitHub dependency in
+  consumer docs.
 - Same-repository pull requests now run source, store, and consumer private
   gates. Fork pull requests still never receive `APM_READ_TOKEN` and must be
   reproduced on a trusted internal branch. Release readiness records
