@@ -13,6 +13,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the 2026 Sergio Sisternes copyright notice to the README license
   section.
 
+### Changed
+
+- Same-repository pull requests now run source, store, and consumer private
+  gates. Fork pull requests still never receive `APM_READ_TOKEN` and must be
+  reproduced on a trusted internal branch. Release readiness records
+  `pr-validated` when those gates succeed.
+
 ## [0.3.10] - 2026-09-10
 
 ### Changed

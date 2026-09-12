@@ -57,6 +57,48 @@ class SourceContractTests(unittest.TestCase):
             readiness.index("ref: ${{ inputs.candidate_revision || github.sha }}"),
         )
 
+    def test_trusted_branch_pr_private_gates(self) -> None:
+        ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
+        trusted_if = """    if: >-
+      (github.event_name == 'pull_request' &&
+       github.event.pull_request.head.repo.full_name == github.repository) ||
+      (github.event_name != 'pull_request' &&
+       (github.ref == 'refs/heads/main' ||
+        (github.event_name == 'push' && github.ref_type == 'tag')))"""
+        source = ci[ci.index("  source:") : ci.index("  consumer:")]
+        consumer = ci[ci.index("  consumer:") : ci.index("  readiness:")]
+        boundary = ci[
+            ci.index("  pull-request-boundary:") : ci.index("  source:")
+        ]
+        readiness = ci[ci.index("  readiness:") :]
+        metadata = ci[ci.index("  metadata:") : ci.index("  pull-request-boundary:")]
+
+        self.assertEqual(ci.count(trusted_if), 2)
+        self.assertIn(trusted_if, source)
+        self.assertIn(trusted_if, consumer)
+        self.assertIn("secrets.APM_READ_TOKEN", source)
+        self.assertIn("secrets.APM_READ_TOKEN", consumer)
+        self.assertNotIn("secrets.APM_READ_TOKEN", metadata)
+        self.assertNotIn("secrets.APM_READ_TOKEN", boundary)
+        self.assertIn(
+            'echo "::error title=Trusted branch required::',
+            boundary,
+        )
+        self.assertNotIn("Private validation deferred", boundary)
+        self.assertRegex(readiness, r"(?m)^    if: always\(\)$")
+        self.assertNotIn(
+            "if: always() && github.event_name != 'pull_request'",
+            ci,
+        )
+        self.assertLess(
+            readiness.index("release_readiness_decision=blocked"),
+            readiness.index("release_readiness_decision=pr-validated"),
+        )
+        self.assertLess(
+            readiness.index('if [ "$EVENT_NAME" = pull_request ]; then'),
+            readiness.index('if [ "$REF_TYPE" = tag ]; then'),
+        )
+
     def test_manifest_uses_one_exact_atlas_dependency(self) -> None:
         manifest = (ROOT / "apm.yml").read_text(encoding="utf-8")
         self.assertRegex(

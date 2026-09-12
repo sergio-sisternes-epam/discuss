@@ -13,10 +13,10 @@ Private installs need a GitHub credential with Contents: read access to
 `discuss`, `atlas`, and `okf`; in CI, expose it as
 `GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM`.
 
-Pull-request workflows never receive this credential. Private dependency and
-store validation runs locally on the reviewed head and remotely only from
-trusted `main` or an exact-main release tag. Fork changes must first be
-reproduced on a trusted branch.
+Same-repository pull requests run source, store, and consumer private gates
+with that credential. Fork pull requests never receive it and must first be
+reproduced on a trusted branch. The exact-main ready-to-tag gate still runs
+on `main` and from an exact-main release tag.
 
 ## Discussion store
 
