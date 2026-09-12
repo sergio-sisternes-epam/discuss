@@ -25,11 +25,10 @@ lock with a normal install and confirm `apm.lock.yaml` is unchanged.
 Source and consumer CI use `apm audit --no-policy --no-fail-fast` plus that
 replay, not `--ci` / `--frozen`.
 
-GitHub pull-request events never receive the private dependency credential.
-Pull requests run metadata, source-file, and contract checks only. Run the
-private checks in this section locally against the exact reviewed head. Fork
-changes must first be reproduced on a trusted internal branch. The full remote
-private gate runs only from reviewed code on current `main` and from a release
+Same-repository GitHub pull requests run the source, store, and consumer
+private gates with `APM_READ_TOKEN`. Fork pull requests never receive that
+credential; reproduce fork changes on a trusted internal branch first. The
+exact-main ready-to-tag gate still runs on current `main` and from a release
 tag after it has been proven to reference that exact main commit.
 
 ## Validate a change
