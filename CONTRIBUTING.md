@@ -86,6 +86,18 @@ failed before release creation because checkout replaced the local tag-object
 ref with its peeled commit. Preserve that remote tag and do not create a
 `v0.3.7` GitHub Release; recovery continues with `v0.3.8`.
 
+## Issues and pull requests
+
+Use the GitHub issue templates in `.github/ISSUE_TEMPLATE/` for bugs and
+feature requests. Do not file public issues for vulnerabilities; report them
+through a private GitHub security advisory.
+
+External substantive work needs a linked issue first. Maintainer-authored
+small docs or maintenance may skip that wait. Open pull requests with
+`.github/PULL_REQUEST_TEMPLATE.md`. Confirm human scope approval before agent
+implementation, except for maintainer-authored small docs or maintenance. The
+GitHub author owns the change, including any agent-generated diffs.
+
 ## Repository protection
 
 After CI is present on `main`, require its metadata, source/store, and three
