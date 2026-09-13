@@ -118,8 +118,16 @@ class HelpContractTests(unittest.TestCase):
 
     def test_live_loop_does_not_create_hub_for_help(self) -> None:
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
-        self.assertIn("Exception — help and getting-started.", skill)
-        self.assertIn("do not create a hub", skill)
+        gate = skill.index("## Explain-only gate")
+        enter = skill.index("## Enter")
+        mount_if_missing = skill.index("mount if missing")
+        create_hub = skill.index("create a hub page")
+        self.assertLess(gate, enter)
+        self.assertLess(gate, mount_if_missing)
+        self.assertLess(gate, create_hub)
+        self.assertIn("Do not activate Atlas path **mount**.", skill)
+        self.assertIn("Do not create a hub or set `discussion_root`.", skill)
+        self.assertIn("This bullet is live discussion only", skill)
         self.assertIn(
             "zero implement authority, no product writes outside this Atlas, "
             "no discussion-to-implement short-circuit.",

@@ -18,12 +18,25 @@ atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
 atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 ```
 
-Before Enter, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
+
+## Explain-only gate (overrides live-loop init)
+
+If the user asked how to get started with Discuss, what Discuss modules do, or how a named Discuss module works, load **speak**, then `references/paths/help.md` or `references/paths/getting-started.md`. Those modules **override** every live-loop initialisation rule in this file:
+
+- Do not activate Atlas path **mount**. Do not mount-if-missing.
+- Do not emit the live-loop Enter card below.
+- Do not ask for a discussion subject or objective.
+- Do not create a hub or set `discussion_root`.
+- Optional Atlas enrichment is read-only resolve of an already-registered checkout only.
+
+Stop after explaining. Mount-if-missing, hub creation, and the live-loop card apply only to live discussion work that passed this gate.
 
 ## Enter
 
-Emit before discuss work:
+For live discussion work only. Before this card, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
+
+Emit before live discuss work:
 
 ```text
 skill: discuss
@@ -43,8 +56,7 @@ speak_loaded: yes
 - `discussion_root` is the origin. It does not move.
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
-- If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it.
-- **Exception — help and getting-started.** Those modules explain. They do not ask for a discussion subject or objective, do not create a hub, and do not use this live-loop card as proof of a running discussion. Load **speak**, then the matching module card in `references/paths/help.md` or `references/paths/getting-started.md`.
+- If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it. This bullet is live discussion only; the explain-only gate above forbids it for help and getting-started.
 - Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
 Use the resolved Atlas root through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
