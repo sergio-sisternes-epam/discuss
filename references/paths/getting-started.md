@@ -50,6 +50,7 @@ Field contract (same as path **help**):
 - `intent` is the learning goal.
 - `atlas_id` / `atlas_root` name the retrieval context, not proof it was used.
 - `atlas_status`: `not-queried` | `baseline-only` | `consulted` | `unavailable`.
+  If `unavailable`, add short `atlas_reason`.
 - `atlas_used` lists only store IDs whose evidence actually contributed.
 - `help_status`: `complete` or `limited`.
 - Final cards contain no `pending` placeholders.
@@ -128,8 +129,17 @@ If this file does not answer the actual question, follow path **help**’s
 read-only retrieval rule against
 `github.com/sergio-sisternes-epam/discuss-atlas`. Attempt resolve only when
 already registered. Never mount, init, remember, compile, or write to answer
-getting-started. If retrieval fails, limited help plus the known reason.
-Baseline above remains usable.
+getting-started. Baseline above remains usable.
+
+Refresh the card **before** the explanation. Do not leave the Enter
+`baseline-only` / `help_status: complete` card in place after enrichment.
+
+- Successful resolve and contributing evidence: `atlas_status: consulted`,
+  real `atlas_root`, `atlas_used` listing those store IDs,
+  `help_status: complete` or `limited`.
+- Resolve fails or no checkout exists: `atlas_status: unavailable`,
+  `atlas_root: none`, `atlas_used: []`, `help_status: limited`, and
+  `atlas_reason` with the known cause. Limited help plus that reason.
 
 ## Next modules
 

@@ -125,6 +125,9 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("apm install discuss@atlas", text)
         self.assertIn("This path must not run", text)
         self.assertIn("Point the user at path **help**", text)
+        self.assertIn("Refresh the card **before** the explanation.", text)
+        self.assertIn("atlas_reason", text)
+        self.assertIn("help_status: limited", text)
 
     def test_live_loop_does_not_create_hub_for_help(self) -> None:
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")

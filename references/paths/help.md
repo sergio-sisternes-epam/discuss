@@ -176,7 +176,7 @@ If references are absent, unreadable, irrelevant, or only partial:
    - `atlas_status: consulted` only after a successful resolve; then set
      `atlas_root` to the real resolved path.
    - `atlas_status: unavailable` when resolve fails or no checkout exists;
-     keep `atlas_root: none`. Never fabricate a path.
+     keep `atlas_root: none` and add `atlas_reason`. Never fabricate a path.
 
 Suggested limited-help wording when retrieval fails:
 
