@@ -24,7 +24,7 @@ atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 
 If the user asked how to get started with Discuss, said they are new to Discuss, asked how Discuss works, or asked how to start a durable discussion graph, load **speak**, then enter path **getting-started** (`references/paths/getting-started.md`). Do not enter path **help**.
 
-If the user asked Discuss help with no target (`help`, list modules, what Discuss modules do, what can Discuss do?), a known named module, or an unknown name (`help frobnicate`), load **speak**, then enter path **help** (`references/paths/help.md`). Do not enter path **getting-started**. Path **help** then loads the selected module source when explaining a named topic; that is not live-loop init.
+If the user asked Discuss help with no target (`help`, list modules, what Discuss modules do, what can Discuss do?), asked to explain a named module (`explain terminate`, `what does sprout need?`, `help terminate`), or asked about an unknown name (`help frobnicate`), load **speak**, then enter path **help** (`references/paths/help.md`). Do not enter path **getting-started**. Path **help** then loads the selected module source when explaining a named topic; that is not live-loop init. Direct module commands (`terminate this branch`, `sprout this pending`, `lint this graph`) stay on their own paths and must not enter this gate.
 
 Those modules **override** every live-loop initialisation rule in this file:
 

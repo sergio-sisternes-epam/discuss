@@ -159,6 +159,10 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("Do not enter path **getting-started**.", skill)
         self.assertIn("loads the selected module source", skill)
         self.assertIn("what can Discuss do?", skill)
+        self.assertIn("explain terminate", skill)
+        self.assertIn("what does sprout need?", skill)
+        self.assertIn("Direct module commands", skill)
+        self.assertIn("must not enter this gate", skill)
         self.assertNotIn(
             "`references/paths/help.md` or `references/paths/getting-started.md`",
             skill,
