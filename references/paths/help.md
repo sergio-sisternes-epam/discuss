@@ -106,7 +106,7 @@ module file just to list.
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back |
 | **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint |
 
-Aliases for lookup only: walk-back → **consolidate**; checkpoint → **constellation**.
+Aliases for lookup only: walk-back, walk back, picture of the pieces, gaps and contradictions → **consolidate**; checkpoint, join what stands → **constellation**.
 
 After the list, say the user can ask for any one module by name. Do not
 ask which to list.

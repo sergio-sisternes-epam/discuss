@@ -100,6 +100,10 @@ class HelpContractTests(unittest.TestCase):
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
         self.assertIn("say it is unknown and list the valid module names", help_text)
         self.assertIn("Do not require a clarifying question just to list", help_text)
+        self.assertIn("walk back", help_text)
+        self.assertIn("picture of the pieces", help_text)
+        self.assertIn("gaps and contradictions", help_text)
+        self.assertIn("join what stands", help_text)
         self.assertIn("Unqualified “help” outside Discuss context must not activate", help_text)
 
     def test_activation_cards_are_fenced_text(self) -> None:
