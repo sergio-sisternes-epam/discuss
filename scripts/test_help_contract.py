@@ -108,6 +108,8 @@ class HelpContractTests(unittest.TestCase):
             for card in cards:
                 self.assertIn("intent:", card, relative)
                 self.assertIn("atlas_used:", card, relative)
+                self.assertIn("atlas_status:", card, relative)
+                self.assertIn("help_status:", card, relative)
                 self.assertIn("speak_loaded: yes", card, relative)
                 self.assertNotIn("help_status: pending", card, relative)
 
@@ -153,6 +155,7 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("asked how Discuss works", skill)
         self.assertIn("`references/paths/getting-started.md` only", skill)
         self.assertIn("`references/paths/help.md` only", skill)
+        self.assertIn("what can Discuss do?", skill)
         self.assertNotIn(
             "`references/paths/help.md` or `references/paths/getting-started.md`",
             skill,
@@ -170,7 +173,9 @@ class HelpContractTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertNotIn("kva: keep | expand | terminate", from_conv)
+        self.assertNotIn("KVA `terminate`", from_conv)
         self.assertIn("kva: forming | alive", from_conv)
+        self.assertIn("kva: terminated", from_conv)
 
     def test_changelog_records_unreleased_modules(self) -> None:
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

@@ -49,7 +49,7 @@ source: this-conversation | <atlas path> | <transcript>
 - Do not copy a transcript verbatim. Distill claims.
 - Do not create nodes for every utterance. Create nodes for engaged ideas, counters, refinements, residuals, and conclusions.
 - Side frames that were parked (example: “make it a top-level skill” before the graph model settled) stay `reality: alternative`.
-- Counters that were answered are not deleted. KVA `terminate` means “no longer a live blocker”, not “erase”.
+- Counters that were answered are not deleted. Path **terminate** sets `kva: terminated` and means “no longer a live blocker”, not “erase”.
 
 ## Non-goals
 
