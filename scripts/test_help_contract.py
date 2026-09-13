@@ -154,6 +154,8 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("unknown names such as help frobnicate", desc)
         self.assertIn("I am new to Discuss", desc)
         self.assertIn("how does Discuss work", desc)
+        self.assertIn("how do I start a durable discussion graph", desc)
+        self.assertIn("how to start a durable discussion graph", skill)
         self.assertIn("said they are new to Discuss", skill)
         self.assertIn("asked how Discuss works", skill)
         self.assertIn("enter path **getting-started**", skill)
