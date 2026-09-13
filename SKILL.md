@@ -11,7 +11,7 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately. Do not run `atlas mount` or `atlas resolve` for help or getting-started.
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately. Do not run `atlas mount` for help or getting-started. Optional read-only `atlas resolve` of an already-registered checkout is allowed only when bundled references are insufficient.
 
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
 

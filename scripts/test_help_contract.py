@@ -144,6 +144,15 @@ class HelpContractTests(unittest.TestCase):
         self.assertLess(gate, mount_cmd)
         self.assertLess(enter, mount_cmd)
         self.assertIn("Live discussion only (not help or getting-started):", skill)
+        self.assertIn("Do not run `atlas mount` for help or getting-started.", skill)
+        self.assertNotIn(
+            "Do not run `atlas mount` or `atlas resolve` for help or getting-started.",
+            skill,
+        )
+        self.assertIn(
+            "Optional read-only `atlas resolve` of an already-registered checkout",
+            skill,
+        )
         self.assertIn("Do not activate Atlas path **mount**.", skill)
         self.assertIn("Do not create a hub or set `discussion_root`.", skill)
         self.assertIn("This bullet is live discussion only", skill)
