@@ -16,7 +16,7 @@ apm install --target agent-skills --no-policy
 Optional tagged install for contributor checks (not the public README path):
 
 ```bash
-apm install sergio-sisternes-epam/discuss#v0.3.10 --target agent-skills
+apm install sergio-sisternes-epam/discuss#v0.4.0 --target agent-skills
 ```
 
 Never commit credentials, `apm_modules/`, or generated `.agents/` dependency

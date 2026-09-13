@@ -19,6 +19,8 @@ REGISTRY_IDS = (
 )
 PATH_ID_RE = re.compile(r"\|\s*\*\*([a-z0-9-]+)\*\*\s*\|")
 TEXT_FENCE_RE = re.compile(r"```text\n(.*?)```", re.S)
+VERSION_RE = re.compile(r"^version:\s*(\S+)\s*$", re.M)
+SECTION_RE = re.compile(r"^## \[([^\]]+)\][^\n]*\n", re.M)
 
 
 def _ids(text: str) -> list[str]:
@@ -27,6 +29,24 @@ def _ids(text: str) -> list[str]:
 
 def _flat(text: str) -> str:
     return re.sub(r"\s+", " ", text)
+
+
+def _current_version() -> str:
+    match = VERSION_RE.search((ROOT / "apm.yml").read_text(encoding="utf-8"))
+    if match is None:
+        raise AssertionError("apm.yml: missing version")
+    return match.group(1)
+
+
+def _changelog_section(changelog: str, title: str) -> str:
+    headings = list(SECTION_RE.finditer(changelog))
+    for index, heading in enumerate(headings):
+        if heading.group(1) == title:
+            end = headings[index + 1].start() if index + 1 < len(headings) else len(
+                changelog
+            )
+            return changelog[heading.end() : end]
+    raise AssertionError(f"CHANGELOG.md: missing section [{title}]")
 
 
 class HelpContractTests(unittest.TestCase):
@@ -94,9 +114,12 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("`atlas search`", help_text)
         self.assertNotIn("path **query**", help_text)
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        unreleased = changelog.split("## [0.3.10]", 1)[0]
-        self.assertIn("v0.12.0", unreleased)
-        self.assertIn("40e11c65", unreleased)
+        unreleased = _changelog_section(changelog, "Unreleased")
+        current = _changelog_section(changelog, _current_version())
+        self.assertNotIn("v0.12.0", unreleased)
+        self.assertNotIn("40e11c65", unreleased)
+        self.assertIn("v0.12.0", current)
+        self.assertIn("40e11c65", current)
 
     def test_unknown_target_lists_valid_choices(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
@@ -252,10 +275,13 @@ class HelpContractTests(unittest.TestCase):
 
     def test_changelog_records_unreleased_modules(self) -> None:
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
-        unreleased = changelog.split("## [0.3.10]", 1)[0]
-        self.assertIn("getting-started", unreleased)
-        self.assertIn("help", unreleased)
-        self.assertNotIn("activation path", unreleased.lower())
+        unreleased = _changelog_section(changelog, "Unreleased")
+        current = _changelog_section(changelog, _current_version())
+        self.assertNotIn("getting-started", unreleased)
+        self.assertNotIn("**help**", unreleased)
+        self.assertIn("getting-started", current)
+        self.assertIn("help", current)
+        self.assertNotIn("activation path", current.lower())
 
 
 if __name__ == "__main__":

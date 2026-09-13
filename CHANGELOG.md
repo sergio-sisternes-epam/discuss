@@ -7,6 +7,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-09-13
+
 ### Added
 
 - Added **getting-started** and **help** modules. Getting-started covers
@@ -112,7 +114,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Required the human-facing speak path and `speak_loaded` activation receipt.
 - Clarified that the discussion store git root is the OKF root.
 
-[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.10...HEAD
+[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.4.0...HEAD
+[0.4.0]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.10...v0.4.0
 [0.3.10]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.9...v0.3.10
 [0.3.9]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.8...v0.3.9
 [0.3.8]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.7...v0.3.8
