@@ -192,7 +192,8 @@ Suggested limited-help wording when retrieval fails:
 > sources.
 
 If nothing is supported, omit the partial explanation. A successful search
-with no eligible hit is a knowledge gap (`consulted`), not unavailability.
+with no eligible hit is a knowledge gap, not unavailability: keep
+`atlas_status: consulted`, `atlas_used: []`, and `help_status: limited`.
 Never mount, authenticate, install, repair, or publish just to answer help.
 
 ## Non-goals

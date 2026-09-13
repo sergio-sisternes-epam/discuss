@@ -88,6 +88,8 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("atlas_status", help_text)
         self.assertIn("read-only query times out, is denied, or", help_text)
         self.assertIn("successful no-hit search", help_text)
+        self.assertIn("`help_status: limited`", help_text)
+        self.assertIn("no eligible hit is a knowledge gap", help_text)
         self.assertIn("add `atlas_reason`", help_text)
         self.assertIn("`atlas search`", help_text)
         self.assertNotIn("path **query**", help_text)
