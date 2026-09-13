@@ -65,6 +65,7 @@ atlas_root: none
 atlas_status: baseline-only
 atlas_used: []
 help_status: complete
+speak_loaded: yes
 ```
 
 Do not emit `path: terminate` (or sprout, or from-conversation) for an

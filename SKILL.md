@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, how to get started with Discuss, what Discuss modules do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
+description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, I am new to Discuss, how does Discuss work, how to get started with Discuss, what Discuss modules do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
 metadata:
   version: "0.3.10"
   status: mvp
@@ -22,7 +22,7 @@ atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 
 ## Explain-only gate (overrides live-loop init)
 
-If the user asked how to get started with Discuss, or asked Discuss help with no target (`help`, list modules, what Discuss modules do), a known named module, or an unknown name (`help frobnicate`), load **speak**, then `references/paths/help.md` or `references/paths/getting-started.md`. Those modules **override** every live-loop initialisation rule in this file:
+If the user asked how to get started with Discuss, said they are new to Discuss, asked how Discuss works, asked how to start a durable discussion graph, or asked Discuss help with no target (`help`, list modules, what Discuss modules do), a known named module, or an unknown name (`help frobnicate`), load **speak**, then `references/paths/help.md` or `references/paths/getting-started.md`. Those modules **override** every live-loop initialisation rule in this file:
 
 - Do not activate Atlas path **mount**. Do not mount-if-missing.
 - Do not emit the live-loop Enter card below.

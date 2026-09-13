@@ -18,6 +18,7 @@ REGISTRY_IDS = (
     "constellation",
 )
 PATH_ID_RE = re.compile(r"\|\s*\*\*([a-z0-9-]+)\*\*\s*\|")
+TEXT_FENCE_RE = re.compile(r"```text\n(.*?)```", re.S)
 
 
 def _ids(text: str) -> list[str]:
@@ -98,10 +99,17 @@ class HelpContractTests(unittest.TestCase):
             "references/paths/getting-started.md",
         ):
             text = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertIn("```text", text, relative)
-            self.assertIn("intent:", text, relative)
-            self.assertIn("atlas_used:", text, relative)
-            self.assertIn("speak_loaded: yes", text, relative)
+            cards = [
+                card
+                for card in TEXT_FENCE_RE.findall(text)
+                if "path:" in card and "intent:" in card
+            ]
+            self.assertTrue(cards, relative)
+            for card in cards:
+                self.assertIn("intent:", card, relative)
+                self.assertIn("atlas_used:", card, relative)
+                self.assertIn("speak_loaded: yes", card, relative)
+                self.assertNotIn("help_status: pending", card, relative)
 
     def test_getting_started_covers_first_journey(self) -> None:
         text = (ROOT / "references/paths/getting-started.md").read_text(
@@ -139,6 +147,10 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("help <module>", desc)
         self.assertIn("In Discuss context also trigger on help", desc)
         self.assertIn("unknown names such as help frobnicate", desc)
+        self.assertIn("I am new to Discuss", desc)
+        self.assertIn("how does Discuss work", desc)
+        self.assertIn("said they are new to Discuss", skill)
+        self.assertIn("asked how Discuss works", skill)
 
     def test_named_help_card_is_complete_on_baseline(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
