@@ -61,29 +61,11 @@ jobs:
             apm audit --file "$file" --no-policy
           done < <(git ls-files -z)
 
-  pull-request-boundary:
-    name: Private validation boundary
-    needs: metadata
-    if: github.event_name == 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Record private validation requirement
-        env:
-          BASE_REPOSITORY: ${{ github.repository }}
-          HEAD_REPOSITORY: ${{ github.event.pull_request.head.repo.full_name }}
-        run: |
-          if [ "$HEAD_REPOSITORY" != "$BASE_REPOSITORY" ]; then
-            echo "::error title=Trusted branch required::Private dependency validation never exposes credentials to fork pull requests. Reproduce this commit on a trusted internal branch."
-            exit 1
-          fi
-          echo "::notice title=Trusted branch private validation::Same-repository pull requests run source, store, and consumer private gates with the repository credential. Fork pull requests never receive that credential."
-
   source:
     name: Source and store integrity
     needs: metadata
     if: >-
-      (github.event_name == 'pull_request' &&
-       github.event.pull_request.head.repo.full_name == github.repository) ||
+      github.event_name == 'pull_request' ||
       (github.event_name != 'pull_request' &&
        (github.ref == 'refs/heads/main' ||
         (github.event_name == 'push' && github.ref_type == 'tag')))
@@ -100,29 +82,15 @@ jobs:
         with:
           apm-version: ${{ env.APM_VERSION }}
           setup-only: true
-      - name: Require private dependency credential
-        env:
-          APM_READ_TOKEN: ${{ secrets.APM_READ_TOKEN }}
-        run: |
-          if [ -z "$APM_READ_TOKEN" ]; then
-            echo "::error title=Missing APM credential::Configure APM_READ_TOKEN with Contents: read access to Atlas, OKF, and discuss-atlas. Fork changes must be reproduced on a trusted internal branch."
-            exit 1
-          fi
       - name: Register APM marketplace
-        env:
-          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
         run: apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
       - name: Audit committed APM state
-        env:
-          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
         run: |
           # APM 0.30.0 lockfiles record git coordinates for marketplace
           # plugins. `apm audit --ci` expects `_marketplace/atlas/atlas` and
           # fails ref-consistency. Content scan + drift replay still run.
           apm audit --no-policy --no-fail-fast
       - name: Restore frozen dependency graph
-        env:
-          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
         run: |
           set -euo pipefail
           before="$(sha256sum apm.lock.yaml | cut -d ' ' -f 1)"
@@ -142,7 +110,6 @@ jobs:
           repository: sergio-sisternes-epam/discuss-atlas
           ref: ${{ steps.store.outputs.sha }}
           path: ${{ env.STORE_PATH }}
-          token: ${{ secrets.APM_READ_TOKEN }}
           persist-credentials: false
       - name: Install Atlas runtime requirements
         run: python3 -m pip install -r .agents/skills/atlas/scripts/requirements-ci.txt
@@ -174,8 +141,7 @@ jobs:
     name: Consumer install (${{ matrix.name }})
     needs: source
     if: >-
-      (github.event_name == 'pull_request' &&
-       github.event.pull_request.head.repo.full_name == github.repository) ||
+      github.event_name == 'pull_request' ||
       (github.event_name != 'pull_request' &&
        (github.ref == 'refs/heads/main' ||
         (github.event_name == 'push' && github.ref_type == 'tag')))
@@ -204,22 +170,10 @@ jobs:
         with:
           apm-version: ${{ env.APM_VERSION }}
           setup-only: true
-      - name: Require private dependency credential
-        env:
-          APM_READ_TOKEN: ${{ secrets.APM_READ_TOKEN }}
-        run: |
-          if [ -z "$APM_READ_TOKEN" ]; then
-            echo "::error title=Missing APM credential::Configure APM_READ_TOKEN with Contents: read access to Atlas, OKF, and discuss-atlas. Fork changes must be reproduced on a trusted internal branch."
-            exit 1
-          fi
       - name: Register APM marketplace
-        env:
-          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
         run: apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
       - name: Install, freeze, audit, mount, compile, and lint
         env:
-          ATLAS_PAT: ${{ secrets.APM_READ_TOKEN }}
-          GITHUB_APM_PAT_SERGIO_SISTERNES_EPAM: ${{ secrets.APM_READ_TOKEN }}
           SKILL_BASE: ${{ matrix.skill_base }}
           TARGET: ${{ matrix.target }}
         run: |
