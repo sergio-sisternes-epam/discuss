@@ -168,9 +168,10 @@ If references are absent, unreadable, irrelevant, or only partial:
 2. If resolve fails, or no registered checkout exists: limited help. Say
    that fuller knowledge lives in that store and why it was not queried
    (unmounted, denied, timeout, unknown). Baseline remains usable.
-3. If resolve succeeds, query read-only (path **query** search discipline:
-   1–3 pages, no index build, no write). Prefer published, applicable
-   evidence. Do not treat unapproved proposals as installed capability.
+3. If resolve succeeds, search read-only with `atlas search` (1–3 pages,
+   no index build, no write). Prefer published, applicable evidence. Do
+   not treat unapproved proposals as installed capability. Do not load a
+   Discuss path named **query**.
 4. Refresh the card before the explanation. `atlas_used` lists only
    evidence that contributed. `help_status` is `complete` or `limited`.
    - `atlas_status: consulted` only after a successful resolve; then set

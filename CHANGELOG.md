@@ -32,6 +32,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Changed
 
+- Refreshed `apm.lock.yaml` to marketplace Atlas `v0.12.0` (`40e11c65`)
+  so a normal install no longer rewrites the frozen dependency graph.
+  Catalog Atlas in the 0.3.10 notes remains the previous pin.
 - Restructured the root README to the family outline (why, install, use,
   modules, related, contributing, license). Extra depth stays in
   `SKILL.md` and `CONTRIBUTING.md`. README Install documents only

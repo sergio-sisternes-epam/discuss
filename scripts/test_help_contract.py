@@ -89,6 +89,12 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("read-only query times out, is denied, or", help_text)
         self.assertIn("successful no-hit search", help_text)
         self.assertIn("add `atlas_reason`", help_text)
+        self.assertIn("`atlas search`", help_text)
+        self.assertNotIn("path **query**", help_text)
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        unreleased = changelog.split("## [0.3.10]", 1)[0]
+        self.assertIn("v0.12.0", unreleased)
+        self.assertIn("40e11c65", unreleased)
 
     def test_unknown_target_lists_valid_choices(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
