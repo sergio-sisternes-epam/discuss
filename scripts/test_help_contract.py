@@ -135,9 +135,15 @@ class HelpContractTests(unittest.TestCase):
         enter = skill.index("## Enter")
         mount_if_missing = skill.index("mount if missing")
         create_hub = skill.index("create a hub page")
+        mount_cmd = skill.index(
+            "atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main"
+        )
         self.assertLess(gate, enter)
         self.assertLess(gate, mount_if_missing)
         self.assertLess(gate, create_hub)
+        self.assertLess(gate, mount_cmd)
+        self.assertLess(enter, mount_cmd)
+        self.assertIn("Live discussion only (not help or getting-started):", skill)
         self.assertIn("Do not activate Atlas path **mount**.", skill)
         self.assertIn("Do not create a hub or set `discussion_root`.", skill)
         self.assertIn("This bullet is live discussion only", skill)

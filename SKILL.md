@@ -11,12 +11,7 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately.
-
-```text
-atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
-atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
-```
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately. Do not run `atlas mount` or `atlas resolve` for help or getting-started.
 
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
 
@@ -39,6 +34,13 @@ Stop after explaining. Mount-if-missing, hub creation, and the live-loop card ap
 ## Enter
 
 For live discussion work only. Before this card, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
+
+Live discussion only (not help or getting-started):
+
+```text
+atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
+atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
+```
 
 Emit before live discuss work:
 
