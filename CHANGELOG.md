@@ -10,6 +10,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 
 - Package description now matches the README lede.
+- Source and consumer CI register the marketplace and install without a
+  GitHub PAT. Public github.com consumers need no credential.
 
 ## [0.4.0] - 2026-09-13
 
