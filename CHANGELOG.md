@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Added the 2026 Sergio Sisternes copyright notice to the README license
   section.
 
+### Fixed
+
+- Aligned **from-conversation** persist KVA with the package enum
+  (`forming` | `alive`, with exit ramps via **terminate**). Help no longer
+  repeats the stale `keep | expand | terminate` symbols.
+
 ### Changed
 
 - Restructured the root README to the family outline (why, install, use,

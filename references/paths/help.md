@@ -117,8 +117,10 @@ ask which to list.
 2. If it does not match, say it is unknown and list the valid module names
    from the registry table. Do not invent flags, CLI verbs, or extra modules.
 3. Load **only** that module file (`references/paths/<path_id>.md`), plus
-   `references/human-turn.md` when the topic is **speak**. Do not load every
-   module.
+   files it explicitly names as required contract (for example
+   `references/human-turn.md` when the topic is **speak**, and
+   `references/paths/consolidate.md` when the topic is **constellation**).
+   Do not load every module.
 4. Explain from that source:
    - intent (what it is for)
    - inputs (Enter card fields)
@@ -127,6 +129,10 @@ ask which to list.
    - outputs
    - side effects
    - boundaries / non-goals
+   KVA values and live-loop rules in `SKILL.md` override stale wording in a
+   module file. The current enum is `forming | alive | deprecated |
+   superseded | terminated`. Do not present `keep`, `expand`, or any other
+   extra `kva` symbol as current capability.
 5. Stop if that file answers the actual question. Set
    `atlas_status: baseline-only`, `atlas_used: []`, `help_status: complete`.
 
@@ -165,9 +171,12 @@ If references are absent, unreadable, irrelevant, or only partial:
 3. If resolve succeeds, query read-only (path **query** search discipline:
    1–3 pages, no index build, no write). Prefer published, applicable
    evidence. Do not treat unapproved proposals as installed capability.
-4. Refresh the card before the explanation: real `atlas_root`,
-   `atlas_status: consulted` or `unavailable`, `atlas_used` only for
-   evidence that contributed, `help_status: complete` or `limited`.
+4. Refresh the card before the explanation. `atlas_used` lists only
+   evidence that contributed. `help_status` is `complete` or `limited`.
+   - `atlas_status: consulted` only after a successful resolve; then set
+     `atlas_root` to the real resolved path.
+   - `atlas_status: unavailable` when resolve fails or no checkout exists;
+     keep `atlas_root: none`. Never fabricate a path.
 
 Suggested limited-help wording when retrieval fails:
 

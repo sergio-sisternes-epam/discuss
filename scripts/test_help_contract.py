@@ -151,12 +151,26 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("how does Discuss work", desc)
         self.assertIn("said they are new to Discuss", skill)
         self.assertIn("asked how Discuss works", skill)
+        self.assertIn("`references/paths/getting-started.md` only", skill)
+        self.assertIn("`references/paths/help.md` only", skill)
+        self.assertNotIn(
+            "`references/paths/help.md` or `references/paths/getting-started.md`",
+            skill,
+        )
 
     def test_named_help_card_is_complete_on_baseline(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
         self.assertNotIn("help_status: pending", help_text)
         self.assertIn("help_status: complete", help_text)
         self.assertIn("No `pending` on", help_text)
+        self.assertIn("keep `atlas_root: none`", help_text)
+        self.assertIn("references/paths/consolidate.md", help_text)
+        self.assertIn("Do not present `keep`, `expand`", help_text)
+        from_conv = (ROOT / "references/paths/from-conversation.md").read_text(
+            encoding="utf-8"
+        )
+        self.assertNotIn("kva: keep | expand | terminate", from_conv)
+        self.assertIn("kva: forming | alive", from_conv)
 
     def test_changelog_records_unreleased_modules(self) -> None:
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

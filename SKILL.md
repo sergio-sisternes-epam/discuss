@@ -22,7 +22,11 @@ atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 
 ## Explain-only gate (overrides live-loop init)
 
-If the user asked how to get started with Discuss, said they are new to Discuss, asked how Discuss works, asked how to start a durable discussion graph, or asked Discuss help with no target (`help`, list modules, what Discuss modules do), a known named module, or an unknown name (`help frobnicate`), load **speak**, then `references/paths/help.md` or `references/paths/getting-started.md`. Those modules **override** every live-loop initialisation rule in this file:
+If the user asked how to get started with Discuss, said they are new to Discuss, asked how Discuss works, or asked how to start a durable discussion graph, load **speak**, then `references/paths/getting-started.md` only.
+
+If the user asked Discuss help with no target (`help`, list modules, what Discuss modules do), a known named module, or an unknown name (`help frobnicate`), load **speak**, then `references/paths/help.md` only.
+
+Those modules **override** every live-loop initialisation rule in this file:
 
 - Do not activate Atlas path **mount**. Do not mount-if-missing.
 - Do not emit the live-loop Enter card below.
