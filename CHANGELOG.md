@@ -16,7 +16,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   explains one named module from bundled package references. Help never
   mutates the discussion graph, mounts Atlas, or runs terminate / sprout /
   from-conversation. Optional read-only query of `discuss-atlas` only when
-  that store is already resolvable; otherwise limited help plus the reason.
+  that store is already resolvable **and** bundled references are
+  insufficient. If that retrieval fails, limited help plus the reason.
+  Baseline-only help stays complete when the bundled references answer.
   Activation cards carry user intent and `atlas_used`.
 - Added GitHub issue and pull request templates.
 - Added the 2026 Sergio Sisternes copyright notice to the README license

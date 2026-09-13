@@ -108,8 +108,9 @@ writes outside the companion store, no discussion-to-implement short-circuit.
    ```
 
 3. **Start discussing.** Ask to discuss the subject with that objective. Discuss
-   emits its live card, loads **speak**, and talks in plain British English.
-   Chat is the shared picture; the Atlas is usually invisible.
+   loads **speak** and `human-turn.md` first, then emits its live card, and
+   talks in plain British English. Chat is the shared picture; the Atlas is
+   usually invisible.
 4. **Let the agent file.** Query first, stay on one conversation orbit, batch
    questions, persist engaged items, sprout leftovers as protostars, compile
    green. You do not file nodes by hand.

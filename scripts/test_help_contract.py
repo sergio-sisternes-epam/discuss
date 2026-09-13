@@ -128,6 +128,20 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("Refresh the card **before** the explanation.", text)
         self.assertIn("atlas_reason", text)
         self.assertIn("help_status: limited", text)
+        journey = text[text.index("### Shortest useful first journey") :]
+        self.assertLess(
+            journey.index("loads **speak**"),
+            journey.index("emits its live card"),
+        )
+        changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
+        self.assertIn(
+            "Baseline-only help stays complete when the bundled references answer.",
+            changelog,
+        )
+        self.assertNotIn(
+            "that store is already resolvable; otherwise limited help plus the reason.",
+            changelog,
+        )
 
     def test_live_loop_does_not_create_hub_for_help(self) -> None:
         skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
