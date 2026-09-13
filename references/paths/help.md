@@ -175,6 +175,10 @@ If references are absent, unreadable, irrelevant, or only partial:
    evidence that contributed. `help_status` is `complete` or `limited`.
    - `atlas_status: consulted` only after a successful resolve; then set
      `atlas_root` to the real resolved path.
+   - If resolve succeeds but the read-only query times out, is denied, or
+     errors: keep `atlas_status: consulted` and the real `atlas_root`, set
+     `help_status: limited`, and add `atlas_reason`. That is not a
+     successful no-hit search.
    - `atlas_status: unavailable` when resolve fails or no checkout exists;
      keep `atlas_root: none` and add `atlas_reason`. Never fabricate a path.
 

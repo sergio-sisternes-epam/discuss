@@ -14,6 +14,7 @@ graph, mount a store, or run another module.
 
 - “I am new to Discuss”
 - “How does Discuss work?”
+- “What does Discuss do?”
 - “How do I start a durable discussion graph?”
 - First-use intent clearly about Discuss
 
