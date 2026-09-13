@@ -10,7 +10,7 @@ Mandatory prefix. Discuss has not entered until this file and `references/human-
 
 ## When
 
-Every discuss activation. Live loop, from-conversation, sprout, terminate, lint, consolidate, and constellation all go through speak first when the next output is for a human.
+Every discuss activation. Live loop, getting-started, help, from-conversation, sprout, terminate, lint, consolidate, and constellation all go through speak first when the next output is for a human.
 
 ## Enter
 

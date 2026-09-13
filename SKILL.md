@@ -1,6 +1,6 @@
 ---
 name: discuss
-description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
+description: Use this skill to run a durable discussion about a clear subject as an agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, I am new to Discuss, how does Discuss work, what does Discuss do, how to get started with Discuss, how do I start a durable discussion graph, useful first step with Discuss, first-use intent clearly about Discuss, what Discuss modules do, what can Discuss do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence). Not for implement. Persist, prune, and test forming ideas.
 metadata:
   version: "0.3.10"
   status: mvp
@@ -11,19 +11,38 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately.
+Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately. Do not run `atlas mount` for help or getting-started. Optional read-only `atlas resolve` of an already-registered checkout is allowed only when bundled references are insufficient.
+
+**Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
+
+## Explain-only gate (overrides live-loop init)
+
+If the user asked how to get started with Discuss, said they are new to Discuss, asked how Discuss works, asked what Discuss does, asked how to start a durable discussion graph, asked for a useful first step with Discuss, or showed first-use intent clearly about Discuss, load **speak**, then enter path **getting-started** (`references/paths/getting-started.md`). Do not enter path **help**. “What can Discuss do?” stays on path **help**.
+
+If the user asked Discuss help with no target (`help`, list modules, what Discuss modules do, what can Discuss do?), asked to explain a named module (`explain terminate`, `what does sprout need?`, `help terminate`), or asked about an unknown name (`help frobnicate`), load **speak**, then enter path **help** (`references/paths/help.md`). Do not enter path **getting-started**. Path **help** then loads the selected module source when explaining a named topic; that is not live-loop init. Direct module commands (`terminate this branch`, `sprout this pending`, `lint this graph`) stay on their own paths and must not enter this gate.
+
+Those modules **override** every live-loop initialisation rule in this file:
+
+- Do not activate Atlas path **mount**. Do not mount-if-missing.
+- Do not emit the live-loop Enter card below.
+- Do not ask for a discussion subject or objective.
+- Do not create a hub or set `discussion_root`.
+- Optional Atlas enrichment may read-only `atlas resolve` an already-registered checkout, then `atlas search` as the selected path describes. Do not mount, write, compile, or auto-mount.
+
+Stop after explaining. Mount-if-missing, hub creation, and the live-loop card apply only to live discussion work that passed this gate.
+
+## Enter
+
+For live discussion work only. Before this card, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
+
+Live discussion only (not help or getting-started):
 
 ```text
 atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
 atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
 ```
 
-Before Enter, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
-**Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
-
-## Enter
-
-Emit before discuss work:
+Emit before live discuss work:
 
 ```text
 skill: discuss
@@ -43,7 +62,7 @@ speak_loaded: yes
 - `discussion_root` is the origin. It does not move.
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
-- If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it.
+- If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it. This bullet is live discussion only; the explain-only gate above forbids it for help and getting-started.
 - Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
 
 Use the resolved Atlas root through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
@@ -52,6 +71,8 @@ Use the resolved Atlas root through the multi-harness substrate contract (query 
 
 | path_id | When | Module |
 |---------|------|--------|
+| **getting-started** | First-use orientation. Purpose, prerequisites, first journey | `references/paths/getting-started.md` |
+| **help** | Explain modules without executing them. List or named topic | `references/paths/help.md` |
 | **speak** | Always-on prefix. Load before any human-facing reply | `references/paths/speak.md` |
 | **from-conversation** | Turn a live or past conversation into graph fabric | `references/paths/from-conversation.md` |
 | **sprout** | Park a surviving pending as a protostar linked to its origin | `references/paths/sprout.md` |
@@ -60,7 +81,7 @@ Use the resolved Atlas root through the multi-harness substrate contract (query 
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back | `references/paths/consolidate.md` |
 | **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint | `references/paths/constellation.md` |
 
-Default live loop is this SKILL body after **speak**. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
+Default live loop is this SKILL body after **speak**. New to Discuss / how it works → read **getting-started** first. What Discuss can do / list modules / explain a named module → read **help** first (no clarification required to list). Help explains; it does not run the named module. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
 
 ## Human narration (required)
 
@@ -143,6 +164,8 @@ Research nodes that ground a counter must carry the external source, then link w
 - Auto-pruning without a recorded KVA decision.
 - Wiring discuss into Autogenesis automatically (separate wire path).
 - A sixth `kva` value named expand. Alive nodes grow; forming children carry the unfinished work.
+- Auto-mounting `discuss-atlas` to answer help or getting-started.
+- Executing a module because the user asked how it works.
 
 ## Progressive disclosure
 
