@@ -153,8 +153,11 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("how does Discuss work", desc)
         self.assertIn("said they are new to Discuss", skill)
         self.assertIn("asked how Discuss works", skill)
-        self.assertIn("`references/paths/getting-started.md` only", skill)
-        self.assertIn("`references/paths/help.md` only", skill)
+        self.assertIn("enter path **getting-started**", skill)
+        self.assertIn("enter path **help**", skill)
+        self.assertIn("Do not enter path **help**.", skill)
+        self.assertIn("Do not enter path **getting-started**.", skill)
+        self.assertIn("loads the selected module source", skill)
         self.assertIn("what can Discuss do?", skill)
         self.assertNotIn(
             "`references/paths/help.md` or `references/paths/getting-started.md`",
