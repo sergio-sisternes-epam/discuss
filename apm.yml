@@ -1,6 +1,6 @@
 name: discuss
 version: 0.4.0
-description: Run a durable discussion about a clear subject as an agent-maintained Atlas graph. Persist, prune, and test forming ideas. Not for implement.
+description: "Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps in your thinking with this companion skill that explores the graph for you, finds where they are, and proposes solutions."
 author: Sergio Sisternes
 license: Apache-2.0
 type: skill
