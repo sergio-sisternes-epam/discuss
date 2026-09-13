@@ -27,7 +27,7 @@ Those modules **override** every live-loop initialisation rule in this file:
 - Do not emit the live-loop Enter card below.
 - Do not ask for a discussion subject or objective.
 - Do not create a hub or set `discussion_root`.
-- Optional Atlas enrichment is read-only resolve of an already-registered checkout only.
+- Optional Atlas enrichment may read-only `atlas resolve` an already-registered checkout, then `atlas search` as the selected path describes. Do not mount, write, compile, or auto-mount.
 
 Stop after explaining. Mount-if-missing, hub creation, and the live-loop card apply only to live discussion work that passed this gate.
 

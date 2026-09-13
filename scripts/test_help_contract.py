@@ -177,6 +177,11 @@ class HelpContractTests(unittest.TestCase):
             "Optional read-only `atlas resolve` of an already-registered checkout",
             skill,
         )
+        self.assertIn("then `atlas search` as the selected path describes", skill)
+        self.assertNotIn(
+            "Optional Atlas enrichment is read-only resolve of an already-registered checkout only.",
+            skill,
+        )
         self.assertIn("Do not activate Atlas path **mount**.", skill)
         self.assertIn("Do not create a hub or set `discussion_root`.", skill)
         self.assertIn("This bullet is live discussion only", skill)
