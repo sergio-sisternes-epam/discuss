@@ -134,6 +134,17 @@ class HelpContractTests(unittest.TestCase):
             skill,
         )
         self.assertIn("Unqualified help outside Discuss must not activate this skill.", skill)
+        self.assertIn("help frobnicate", skill)
+        desc = skill.split("---", 2)[1]
+        self.assertIn("help <module>", desc)
+        self.assertIn("In Discuss context also trigger on help", desc)
+        self.assertIn("unknown names such as help frobnicate", desc)
+
+    def test_named_help_card_is_complete_on_baseline(self) -> None:
+        help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
+        self.assertNotIn("help_status: pending", help_text)
+        self.assertIn("help_status: complete", help_text)
+        self.assertIn("No `pending` on", help_text)
 
     def test_changelog_records_unreleased_modules(self) -> None:
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")

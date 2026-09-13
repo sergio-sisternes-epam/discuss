@@ -62,9 +62,9 @@ intent: Understand how terminate works without terminating a branch
 atlas_id: github.com/sergio-sisternes-epam/discuss-atlas
 ref: main
 atlas_root: none
-atlas_status: not-queried
+atlas_status: baseline-only
 atlas_used: []
-help_status: pending
+help_status: complete
 ```
 
 Do not emit `path: terminate` (or sprout, or from-conversation) for an
