@@ -133,7 +133,11 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("discuss-atlas", text)
         self.assertIn("path **speak**", text)
         self.assertIn("apm install discuss@atlas", text)
-        self.assertIn("This path must not run", text)
+        self.assertIn("must not run them as live setup", text)
+        self.assertIn(
+            "Optional enrichment below may `atlas resolve` an",
+            text,
+        )
         self.assertIn("Point the user at path **help**", text)
         self.assertIn("Refresh the card **before** the explanation.", text)
         self.assertIn("atlas_reason", text)

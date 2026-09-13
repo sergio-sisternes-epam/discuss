@@ -100,13 +100,16 @@ writes outside the companion store, no discussion-to-implement short-circuit.
    ask for these when you actually start a discussion, not during this
    orientation.
 2. **Companion store, when you will persist.** In the project git repo, mount
-   and resolve if the store is not already resolvable. This path must not run
-   those commands:
+   and resolve if the store is not already resolvable. Show these commands;
+   this path must not run them as live setup on the user's behalf:
 
    ```text
    atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
    atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
    ```
+
+   Do not `atlas mount`. Optional enrichment below may `atlas resolve` an
+   already-registered checkout when the bundled answer is incomplete.
 
 3. **Start discussing.** Ask to discuss the subject with that objective. Discuss
    loads **speak** and `human-turn.md` first, then emits its live card, and
