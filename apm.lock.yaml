@@ -5,7 +5,7 @@ dependencies:
   name: atlas
   host: github.com
   resolved_commit: 40e11c65e243236850c26fc6cd5a04acdd483eb4
-  resolved_ref: 40e11c65e243236850c26fc6cd5a04acdd483eb4
+  resolved_ref: v0.12.0
   version: 0.12.0
   package_type: hybrid
   deployed_files:
@@ -415,7 +415,7 @@ dependencies:
   name: okf
   host: github.com
   resolved_commit: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
-  resolved_ref: 5246f7b193b58a32ac8a15fc76aedf37c42b042c
+  resolved_ref: v0.2.1
   version: 0.2.1
   depth: 2
   resolved_by: sergio-sisternes-epam/atlas

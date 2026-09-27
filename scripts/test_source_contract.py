@@ -8,8 +8,8 @@ from pathlib import Path
 
 
 ROOT = Path(__file__).resolve().parents[1]
-ATLAS_ID = "github.com/sergio-sisternes-epam/discuss-atlas"
-MOUNT = f".atlas/{ATLAS_ID}"
+SKILL_STORE = "github.com/sergio-sisternes-epam/discuss-atlas"
+MOUNT = f".atlas/{SKILL_STORE}"
 STORE_COMMIT = "6318b0add9596187b716954c93f2409d5a190fde"
 
 
@@ -100,29 +100,46 @@ class SourceContractTests(unittest.TestCase):
         )
         self.assertNotIn("sergio-sisternes-epam/atlas", manifest)
 
-    def test_mount_contract_has_no_deprecated_operational_path(self) -> None:
-        for relative in ("SKILL.md", "README.md", ".gitmodules", "atlas-mesh.json"):
-            content = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertNotIn("references/atlas", content, relative)
+    def test_discuss_atlas_is_only_this_projects_atlas(self) -> None:
+        skill = (ROOT / "SKILL.md").read_text(encoding="utf-8")
+        readme = (ROOT / "README.md").read_text(encoding="utf-8")
+        ci = (ROOT / ".github/workflows/ci.yml").read_text(encoding="utf-8")
         for relative in ("SKILL.md", "README.md"):
             content = (ROOT / relative).read_text(encoding="utf-8")
-            self.assertIn(
-                f"atlas mount {ATLAS_ID} --ref main", content, relative
-            )
-            self.assertIn(f"atlas resolve {ATLAS_ID}", content, relative)
-            mount_lines = [
-                line for line in content.splitlines() if line.startswith("atlas mount ")
-            ]
-            self.assertTrue(mount_lines, relative)
-            self.assertTrue(
-                all("--target" not in line for line in mount_lines), relative
-            )
+            self.assertNotIn("references/atlas", content, relative)
+            self.assertNotIn(f"atlas mount {SKILL_STORE}", content, relative)
+        self.assertIn("own Atlas of this repository only", skill)
+        self.assertIn("No other project uses it", skill)
+        self.assertIn("github.com/sergio-sisternes-epam/discuss-atlas", skill)
+        self.assertIn("atlas_target: confirmed", skill)
+        self.assertIn("atlas_target: unknown", skill)
+        self.assertIn("atlas_target: none", skill)
+        self.assertIn("Its strategy is `dedicated`", skill)
+        self.assertIn("otherwise use `dedicated`", skill)
+        self.assertIn("Canonicalise the active git origin", skill)
+        self.assertIn("git@host:owner/name.git", skill)
+        self.assertIn("Do not compare a raw remote URL to a store id.", skill)
+        self.assertIn(
+            "Do not mount, write, commit, push, or open a pull request",
+            skill,
+        )
+        self.assertIn("own Atlas of this repository", readme)
+        self.assertIn("must not mount it", readme)
+        self.assertNotIn(SKILL_STORE, ci)
+        self.assertTrue((ROOT / ".gitmodules").is_file())
 
-    def test_mesh_and_submodule_use_default_mount(self) -> None:
+    def test_mesh_and_gitlink_pin_this_projects_atlas(self) -> None:
         mesh = json.loads((ROOT / "atlas-mesh.json").read_text(encoding="utf-8"))
         self.assertEqual(
             mesh["stores"],
-            [{"id": ATLAS_ID, "ref": "main", "path": MOUNT}],
+            [
+                {
+                    "id": SKILL_STORE,
+                    "ref": "main",
+                    "path": MOUNT,
+                    "strategy": "dedicated",
+                }
+            ],
         )
         modules = subprocess.run(
             ["git", "config", "-f", ".gitmodules", "--get-regexp", r"^submodule\..*"],
@@ -137,8 +154,6 @@ class SourceContractTests(unittest.TestCase):
             "https://github.com/sergio-sisternes-epam/discuss-atlas.git",
             modules,
         )
-
-    def test_store_gitlink_is_exact(self) -> None:
         output = subprocess.run(
             ["git", "ls-files", "--stage", "--", MOUNT],
             cwd=ROOT,

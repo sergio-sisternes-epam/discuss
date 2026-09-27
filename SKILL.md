@@ -11,9 +11,11 @@ metadata:
 
 Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high-fidelity record and navigation aid. New ideas come from the human–AI conversation. The graph persists that work, amortises discarded-session cost, and accelerates human connections.
 
-Process memory is **not** authored in this skill package. Canonical store: `github.com/sergio-sisternes-epam/discuss-atlas`. That store's git root **is** the OKF root (`SCHEMA.json` is at the store root). A source checkout pins it at `.atlas/github.com/sergio-sisternes-epam/discuss-atlas`; an APM consumer mounts it separately. Do not run `atlas mount` for help or getting-started. Optional read-only `atlas resolve` of an already-registered checkout is allowed only when bundled references are insufficient.
+Process memory is **not** authored in this skill package. Live discussion memory goes to the default Atlas of the active project or session. That Atlas is whatever the project already registered: a shared branch `atlas` on the project repo, or a dedicated separate repo.
 
-**Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit.
+`github.com/sergio-sisternes-epam/discuss-atlas` is the own Atlas of this repository only (`github.com/sergio-sisternes-epam/discuss`). No other project uses it. Do not mount, write, commit, push, or open a pull request to that store unless the canonical active git origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`.
+
+**Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit. This Atlas is the confirmed project Atlas. For every project except this one, that is not `discuss-atlas`.
 
 ## Explain-only gate (overrides live-loop init)
 
@@ -24,25 +26,57 @@ If the user asked Discuss help with no target (`help`, list modules, what Discus
 Those modules **override** every live-loop initialisation rule in this file:
 
 - Do not activate Atlas path **mount**. Do not mount-if-missing.
+- Do not run `atlas mount` for help or getting-started. Do not `atlas resolve` or `atlas search` on those paths.
 - Do not emit the live-loop Enter card below.
 - Do not ask for a discussion subject or objective.
 - Do not create a hub or set `discussion_root`.
-- Optional Atlas enrichment may read-only `atlas resolve` an already-registered checkout, then `atlas search` as the selected path describes. Do not mount, write, compile, or auto-mount.
+- Emit the explain-only card from the selected path. Its target is known: `atlas_target: none`. Do not name the skill store on that card.
 
 Stop after explaining. Mount-if-missing, hub creation, and the live-loop card apply only to live discussion work that passed this gate.
 
 ## Enter
 
-For live discussion work only. Before this card, activate Atlas path **mount** with this `atlas_id` and `ref`, mount if missing, and set `atlas_root` to the resolved path. Never infer the root from the skill installation directory.
+Every turn emits an activation card before any human-facing reply. Load path **speak** first (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The card must include `speak_loaded: yes`.
 
-Live discussion only (not help or getting-started):
+The card always names the Atlas target. A guessed store id or a skill-install path is an incomplete card. `unknown` and `none` are target states, not store ids. `github.com/sergio-sisternes-epam/discuss-atlas` is a valid confirmed target only for this repository. Do not query, write, or compile against an unconfirmed target.
+
+### Known project Atlas
+
+Live discussion only (not help or getting-started). Read `<git-root>/atlas-mesh.json` only. Ignore any mesh inside the installed skill package. The mesh in this package records this repository's own Atlas. It is not an instruction for other projects. No git repo: stop. Do not persist. Do not mount a store.
+
+Rank a suggestion. A rank is not confirmation.
+
+Canonicalise the active git origin to `host/owner/name` before every comparison below, including the allow-list and the strategy equality check. `https://host/owner/name.git`, `http://host/owner/name`, `ssh://git@host/owner/name.git`, and `git@host:owner/name.git` are the same origin. Drop the scheme, user, port, and a trailing `.git`. Do not compare a raw remote URL to a store id.
+
+- If that canonical origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`, the suggestion is `github.com/sergio-sisternes-epam/discuss-atlas`. That store is this project's own Atlas. Its strategy is `dedicated`.
+- Otherwise drop `github.com/sergio-sisternes-epam/discuss-atlas` from the candidates, even if a mesh lists it. Do not mount, write, commit, push, or open a pull request to it. Then suggest the remaining store whose id matches the canonical origin, using its recorded `ref`. If none matches and exactly one store remains, suggest that store. If several remain, or none remain, list them or say there is none. Do not guess.
+
+Strategy on a confirmed card is required and deterministic. Use the mesh `strategy` when it is `shared` or `dedicated`. If it is missing, use `shared` when the store id equals the canonical origin; otherwise use `dedicated`. Do not leave `strategy` unknown once the id is confirmed.
+
+Ask the human to confirm the suggestion, pick from the list, or say there is no Atlas yet. Do not mount yet. Do not init silently. Do not invent a remote. Do not fall back to `discuss-atlas` from any other project.
+
+The discovery turn still emits a card. If the target is not yet confirmed, the card says `atlas_target: unknown` and does not invent an id. Writes wait.
 
 ```text
-atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
-atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
+skill: discuss
+skill_path: <this skill root>
+mode: discussion
+subject: <clear subject, or unknown>
+intent: <one line>
+atlas_id: unknown
+ref: unknown
+strategy: unknown
+atlas_root: unknown
+atlas_target: unknown
+objective: <original objective, or unknown>
+discussion_root: unknown
+current_branch: unknown
+speak_loaded: yes
 ```
 
-Emit before live discuss work:
+After the human confirms one known id, mount if missing that id and ref only, with no `--target`. Set `atlas_root` from `atlas resolve` of that id. Never infer the root from the skill installation directory. If resolve fails, the target is not known: say so, do not emit `atlas_target: confirmed`, and do not write.
+
+Then emit this card. Later turns repeat the same confirmed target. Do not ask again unless the human changes project or target. A new target needs a new confirmation.
 
 ```text
 skill: discuss
@@ -50,22 +84,26 @@ skill_path: <this skill root>
 mode: discussion
 subject: <clear subject>
 intent: <one line>
-atlas_id: github.com/sergio-sisternes-epam/discuss-atlas
-ref: main
-atlas_root: <set from atlas resolve>
+atlas_id: <confirmed project atlas id>
+ref: <recorded ref>
+strategy: shared | dedicated
+atlas_root: <resolved path>
+atlas_target: confirmed
 objective: <original objective>
 discussion_root: <atlas-relative path of the starting node>
 current_branch: <atlas-relative path of the node we are on>
 speak_loaded: yes
 ```
 
+- `atlas_id`, `ref`, `strategy`, and `atlas_root` are required when `atlas_target: confirmed`. `atlas_root` is the resolved path. Never `none`.
+- `atlas_target: confirmed` is allowed only after the human has confirmed that exact id in this session and resolve succeeded.
 - `discussion_root` is the origin. It does not move.
 - `current_branch` moves as the graph expands.
 - `objective` stays on the card. KVA always evaluates against it.
 - If subject or objective is missing, ask. If `discussion_root` is missing, create a hub page and set both `discussion_root` and `current_branch` to it. This bullet is live discussion only; the explain-only gate above forbids it for help and getting-started.
-- Before any human-facing reply, load path **speak** (`references/paths/speak.md`). Missing speak ⇒ `incomplete: missing speak`. The activation card must include `speak_loaded: yes`.
+- Persisting a discussion does not commit, push, or open a pull request. Publishing is a separate human request, and the target must be the confirmed project Atlas only.
 
-Use the resolved Atlas root through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store.
+Use the resolved project Atlas through the multi-harness substrate contract (query before write; remember to persist). Do not invent a parallel store. Do not treat this skill package, or a mesh copied inside the installed skill, as the write target.
 
 ## Path registry (load before execute)
 
@@ -165,15 +203,17 @@ Research nodes that ground a counter must carry the external source, then link w
 - Wiring discuss into Autogenesis automatically (separate wire path).
 - A sixth `kva` value named expand. Alive nodes grow; forming children carry the unfinished work.
 - Auto-mounting `discuss-atlas` to answer help or getting-started.
+- Mounting, writing, committing, pushing, or opening a pull request to `discuss-atlas` from any project other than this repository.
+- Using `discuss-atlas` when the project Atlas is unknown.
 - Executing a module because the user asked how it works.
 
 ## Progressive disclosure
 
-Load via Atlas query or direct read. Do not paste into this file.
+Bundled references in this package are the procedure. Do not mount an Atlas to load them. Do not paste them into this file.
 
-- Settled thesis: `thesis/current-reality.md`
-- Forming ideas: atlas search `kva: forming` (no concept hub)
 - Human chat register: `references/human-turn.md`
-- Founding conversation: `founding/hub.md`
-- KVA inception: `autogenesis/decisions/kva-inception.md`
-- Work hub: `autogenesis/work/2026-08-26-kva-protostar-tighten.md`
+- Path modules: `references/paths/`
+
+Forming ideas in the confirmed project Atlas: atlas search `kva: forming` on that `atlas_root` only.
+
+This repository's own Atlas is the private store `github.com/sergio-sisternes-epam/discuss-atlas`. Query it only after it is the confirmed target for a session whose git origin is this repository or that store. No other project mounts, queries, or writes it.

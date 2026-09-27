@@ -38,9 +38,13 @@ python3 scripts/release_readiness.py --commit "$(git rev-parse HEAD)"
 apm audit --no-policy --no-fail-fast
 ```
 
-Resolve the store root and run both graph gates:
+`github.com/sergio-sisternes-epam/discuss-atlas` is this repository's own
+Atlas. It is private. Other projects must not mount it. Public CI does not
+clone it, so a pull request needs no credential. Maintainers who already
+have access can compile this project's pin locally:
 
 ```bash
+git submodule update --init --recursive
 atlas_root="$(atlas resolve github.com/sergio-sisternes-epam/discuss-atlas)"
 atlas compile --root "$atlas_root"
 python3 scripts/lint.py --root "$atlas_root"
@@ -51,10 +55,12 @@ Install the checked-out package into disposable consumers for
 normal install without changing its lockfile and then pass
 `apm audit --no-policy --no-fail-fast`.
 
-When `dependencies.apm` changes, run
-`apm install --target agent-skills --no-policy` to regenerate
-`apm.lock.yaml`; never edit the lockfile by hand. Inspect the resolved refs and
-commits before committing it.
+When `dependencies.apm` changes, or when
+`apm install --target agent-skills --no-policy` rewrites `apm.lock.yaml`,
+commit that regeneration. Never edit the lockfile by hand. Inspect the
+resolved refs and commits before committing it. A rewrite of `resolved_ref`
+from a commit SHA to the recorded version tag is a regeneration, not a
+hand edit.
 
 ## Release handoff
 

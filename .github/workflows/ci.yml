@@ -18,8 +18,6 @@ permissions:
 
 env:
   APM_VERSION: "0.30.0"
-  ATLAS_ID: github.com/sergio-sisternes-epam/discuss-atlas
-  STORE_PATH: .atlas/github.com/sergio-sisternes-epam/discuss-atlas
 
 jobs:
   metadata:
@@ -97,46 +95,6 @@ jobs:
           apm install --target agent-skills --no-policy
           after="$(sha256sum apm.lock.yaml | cut -d ' ' -f 1)"
           test "$before" = "$after"
-      - name: Identify pinned store revision
-        id: store
-        run: |
-          set -euo pipefail
-          store_sha="$(git ls-tree HEAD -- "$STORE_PATH" | awk '{print $3}')"
-          test "${#store_sha}" -eq 40
-          echo "sha=$store_sha" >> "$GITHUB_OUTPUT"
-      - name: Checkout pinned discussion store
-        uses: actions/checkout@fbc6f3992d24b796d5a048ff273f7fcc4a7b6c09 # v5
-        with:
-          repository: sergio-sisternes-epam/discuss-atlas
-          ref: ${{ steps.store.outputs.sha }}
-          path: ${{ env.STORE_PATH }}
-          persist-credentials: false
-      - name: Install Atlas runtime requirements
-        run: python3 -m pip install -r .agents/skills/atlas/scripts/requirements-ci.txt
-      - name: Compile and lint the pinned store
-        id: atlas
-        run: |
-          set -euo pipefail
-          atlas_cli=".agents/skills/atlas/scripts/atlas.py"
-          root="$(python3 "$atlas_cli" resolve "$ATLAS_ID")"
-          test "$root" = "$GITHUB_WORKSPACE/$STORE_PATH"
-          test "$(git -C "$root" rev-parse HEAD)" = "${{ steps.store.outputs.sha }}"
-          set +e
-          python3 "$atlas_cli" compile --root "$root" --json > atlas-compile.json
-          status=$?
-          set -e
-          cat atlas-compile.json
-          python3 -m json.tool atlas-compile.json >/dev/null
-          test "$status" -eq 0
-          python3 scripts/lint.py --root "$root"
-      - name: Upload source compile evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: source-atlas-compile
-          path: atlas-compile.json
-          if-no-files-found: warn
-
   consumer:
     name: Consumer install (${{ matrix.name }})
     needs: source
@@ -172,7 +130,7 @@ jobs:
           setup-only: true
       - name: Register APM marketplace
         run: apm marketplace add sergio-sisternes-epam/atlas-marketplace --name atlas
-      - name: Install, freeze, audit, mount, compile, and lint
+      - name: Install, freeze, and audit
         env:
           SKILL_BASE: ${{ matrix.skill_base }}
           TARGET: ${{ matrix.target }}
@@ -205,28 +163,6 @@ jobs:
           after="$(sha256sum apm.lock.yaml | cut -d ' ' -f 1)"
           test "$before" = "$after"
           apm audit --no-policy --no-fail-fast
-          atlas_cli="$SKILL_BASE/atlas/scripts/atlas.py"
-          python3 -m pip install -r "$SKILL_BASE/atlas/scripts/requirements-ci.txt"
-          python3 "$atlas_cli" mount "$ATLAS_ID" --ref main
-          root="$(python3 "$atlas_cli" resolve "$ATLAS_ID")"
-          git -C "$root" rev-parse HEAD
-          set +e
-          python3 "$atlas_cli" compile --root "$root" --json \
-            > "$GITHUB_WORKSPACE/atlas-compile-$TARGET.json"
-          status=$?
-          set -e
-          cat "$GITHUB_WORKSPACE/atlas-compile-$TARGET.json"
-          python3 -m json.tool "$GITHUB_WORKSPACE/atlas-compile-$TARGET.json" \
-            >/dev/null
-          test "$status" -eq 0
-          python3 "$discuss_root/scripts/lint.py" --root "$root"
-      - name: Upload consumer compile evidence
-        if: always()
-        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
-        with:
-          name: consumer-atlas-compile-${{ matrix.name }}
-          path: atlas-compile-${{ matrix.target }}.json
-          if-no-files-found: warn
 
   readiness:
     name: Release readiness decision
