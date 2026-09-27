@@ -2,7 +2,7 @@
 name: discuss
 description: Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps in your thinking with this companion skill that explores the graph for you, finds where they are, and proposes solutions. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, I am new to Discuss, how does Discuss work, what does Discuss do, how to get started with Discuss, how do I start a durable discussion graph, useful first step with Discuss, first-use intent clearly about Discuss, what Discuss modules do, what can Discuss do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence).
 metadata:
-  version: "0.4.0"
+  version: "0.5.0"
   status: mvp
   work_id: 2026-08-31-discuss-constellation-path
 ---
