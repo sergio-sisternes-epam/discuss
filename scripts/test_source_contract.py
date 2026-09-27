@@ -138,9 +138,16 @@ class SourceContractTests(unittest.TestCase):
                 }
             ],
         )
-        modules = (ROOT / ".gitmodules").read_text(encoding="utf-8")
-        self.assertIn(f"path = {MOUNT}", modules)
+        modules = subprocess.run(
+            ["git", "config", "-f", ".gitmodules", "--get-regexp", r"^submodule\..*"],
+            cwd=ROOT,
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
+        self.assertIn(f"submodule.{MOUNT}.path {MOUNT}", modules)
         self.assertIn(
+            f"submodule.{MOUNT}.url "
             "https://github.com/sergio-sisternes-epam/discuss-atlas.git",
             modules,
         )
