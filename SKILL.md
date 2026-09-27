@@ -13,7 +13,7 @@ Run a discussion as a durable, agent-maintained Atlas graph. The graph is a high
 
 Process memory is **not** authored in this skill package. Live discussion memory goes to the default Atlas of the active project or session. That Atlas is whatever the project already registered: a shared branch `atlas` on the project repo, or a dedicated separate repo.
 
-`github.com/sergio-sisternes-epam/discuss-atlas` is the own Atlas of this repository only (`github.com/sergio-sisternes-epam/discuss`). No other project uses it. Do not mount, write, commit, push, or open a pull request to that store unless the active git origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`.
+`github.com/sergio-sisternes-epam/discuss-atlas` is the own Atlas of this repository only (`github.com/sergio-sisternes-epam/discuss`). No other project uses it. Do not mount, write, commit, push, or open a pull request to that store unless the canonical active git origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`.
 
 **Authority fence:** Autogenesis Discussion mode still applies when called from Autogenesis — zero implement authority, no product writes outside this Atlas, no discussion-to-implement short-circuit. This Atlas is the confirmed project Atlas. For every project except this one, that is not `discuss-atlas`.
 
@@ -46,10 +46,12 @@ Live discussion only (not help or getting-started). Read `<git-root>/atlas-mesh.
 
 Rank a suggestion. A rank is not confirmation.
 
-- If the active git origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`, the suggestion is `github.com/sergio-sisternes-epam/discuss-atlas`. That store is this project's own Atlas. Its strategy is `dedicated`.
-- Otherwise drop `github.com/sergio-sisternes-epam/discuss-atlas` from the candidates, even if a mesh lists it. Do not mount, write, commit, push, or open a pull request to it. Then suggest the remaining store whose id matches the active repo origin (`host/owner/name`), using its recorded `ref`. If none matches and exactly one store remains, suggest that store. If several remain, or none remain, list them or say there is none. Do not guess.
+Canonicalise the active git origin to `host/owner/name` before every comparison below, including the allow-list and the strategy equality check. `https://host/owner/name.git`, `http://host/owner/name`, `ssh://git@host/owner/name.git`, and `git@host:owner/name.git` are the same origin. Drop the scheme, user, port, and a trailing `.git`. Do not compare a raw remote URL to a store id.
 
-Strategy on a confirmed card is required and deterministic. Use the mesh `strategy` when it is `shared` or `dedicated`. If it is missing, use `shared` when the store id equals the active git origin (`host/owner/name`); otherwise use `dedicated`. Do not leave `strategy` unknown once the id is confirmed.
+- If that canonical origin is `github.com/sergio-sisternes-epam/discuss` or `github.com/sergio-sisternes-epam/discuss-atlas`, the suggestion is `github.com/sergio-sisternes-epam/discuss-atlas`. That store is this project's own Atlas. Its strategy is `dedicated`.
+- Otherwise drop `github.com/sergio-sisternes-epam/discuss-atlas` from the candidates, even if a mesh lists it. Do not mount, write, commit, push, or open a pull request to it. Then suggest the remaining store whose id matches the canonical origin, using its recorded `ref`. If none matches and exactly one store remains, suggest that store. If several remain, or none remain, list them or say there is none. Do not guess.
+
+Strategy on a confirmed card is required and deterministic. Use the mesh `strategy` when it is `shared` or `dedicated`. If it is missing, use `shared` when the store id equals the canonical origin; otherwise use `dedicated`. Do not leave `strategy` unknown once the id is confirmed.
 
 Ask the human to confirm the suggestion, pick from the list, or say there is no Atlas yet. Do not mount yet. Do not init silently. Do not invent a remote. Do not fall back to `discuss-atlas` from any other project.
 

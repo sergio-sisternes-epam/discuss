@@ -20,7 +20,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   or open a pull request to it. Public CI does not clone that private store.
   Its mesh entry records `strategy: dedicated`. A missing mesh strategy is
   derived: `shared` when the store id is the active origin, otherwise
-  `dedicated`.
+  `dedicated`. Origin checks use canonical `host/owner/name`, not a raw
+  remote URL.
 - Getting-started cards stay `atlas_status: baseline-only` and do not add
   `atlas_reason`.
 - Package description now matches the README lede.

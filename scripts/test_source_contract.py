@@ -116,6 +116,9 @@ class SourceContractTests(unittest.TestCase):
         self.assertIn("atlas_target: none", skill)
         self.assertIn("Its strategy is `dedicated`", skill)
         self.assertIn("otherwise use `dedicated`", skill)
+        self.assertIn("Canonicalise the active git origin", skill)
+        self.assertIn("git@host:owner/name.git", skill)
+        self.assertIn("Do not compare a raw remote URL to a store id.", skill)
         self.assertIn(
             "Do not mount, write, commit, push, or open a pull request",
             skill,
