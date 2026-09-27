@@ -112,11 +112,11 @@ class HelpContractTests(unittest.TestCase):
         self.assertNotIn("path **query**", help_text)
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         unreleased = _changelog_section(changelog, "Unreleased")
-        current = _changelog_section(changelog, _current_version())
+        released = _changelog_section(changelog, "0.4.0")
         self.assertNotIn("v0.12.0", unreleased)
         self.assertNotIn("40e11c65", unreleased)
-        self.assertIn("v0.12.0", current)
-        self.assertIn("40e11c65", current)
+        self.assertIn("v0.12.0", released)
+        self.assertIn("40e11c65", released)
 
     def test_unknown_target_lists_valid_choices(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
@@ -266,10 +266,13 @@ class HelpContractTests(unittest.TestCase):
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         unreleased = _changelog_section(changelog, "Unreleased")
         current = _changelog_section(changelog, _current_version())
+        modules = _changelog_section(changelog, "0.4.0")
         self.assertNotIn("getting-started", unreleased)
         self.assertNotIn("**help**", unreleased)
-        self.assertIn("getting-started", current)
-        self.assertIn("help", current)
+        self.assertNotIn("confirmed Atlas", unreleased)
+        self.assertIn("getting-started", modules)
+        self.assertIn("help", modules)
+        self.assertIn("confirmed Atlas", current)
         self.assertNotIn("activation path", current.lower())
 
 
