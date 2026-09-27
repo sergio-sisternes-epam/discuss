@@ -23,11 +23,11 @@ smokes:
     source: "User fail-fast addition"
     expect: "SKILL.md requires a cheap probe or explicit deferral when asked to prove or fail-fast a stable claim"
   - id: deprecated-store-target
-    source: "Atlas v0.8.15 mount contract"
-    expect: "SKILL.md mounts discuss-atlas without a custom target and resolves the root dynamically"
+    source: "Skill store must not receive consumer discussions"
+    expect: "SKILL.md allows discuss-atlas only as this repository's own atlas, refuses it for every other project, and confirms the project atlas on the activation card before writing"
   - id: package-install-implies-store
     source: "APM consumer boundary"
-    expect: "README and SKILL distinguish APM package installation from the separate discuss-atlas mount"
+    expect: "README and SKILL distinguish APM package installation from the project atlas write target, and do not mount discuss-atlas"
   - id: help-executes-named-module
     source: "Atlas help-pilot H3 / explain-do-not-execute"
     expect: "help explains terminate, sprout, and from-conversation without mutating the graph or mounting Atlas"

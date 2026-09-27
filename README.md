@@ -45,12 +45,15 @@ See `SKILL.md` for the runtime contract.
 
 - [atlas](https://github.com/sergio-sisternes-epam/atlas) — knowledge substrate this skill depends on.
 - [autogenesis](https://github.com/sergio-sisternes-epam/autogenesis) — design process; durable discussion lives here.
-- [discuss-atlas](https://github.com/sergio-sisternes-epam/discuss-atlas) — companion discussion store. All Rights Reserved knowledge, not a GitHub dependency of this package.
 
-```bash
-atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
-atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
-```
+A live discussion is stored in the default Atlas of the active project or
+session. That may be branch `atlas` on the project repo, or a dedicated
+repo the project already registered. Discuss asks you to confirm that
+target and names it on the activation card before writing.
+
+[discuss-atlas](https://github.com/sergio-sisternes-epam/discuss-atlas)
+is the own Atlas of this repository. It is private. It is not a GitHub
+dependency of the installed skill. Agents outside this repository must not mount it, write to it, or open a pull request against it.
 
 ## Contributing
 

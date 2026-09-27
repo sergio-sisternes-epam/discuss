@@ -34,9 +34,11 @@ subject: discuss
 path: getting-started
 path_module: references/paths/getting-started.md
 intent: Learn what Discuss does and take a first useful step
-atlas_id: github.com/sergio-sisternes-epam/discuss-atlas
-ref: main
+atlas_id: none
+ref: none
+strategy: none
 atlas_root: none
+atlas_target: none
 atlas_status: baseline-only
 atlas_used: []
 help_status: complete
@@ -49,7 +51,8 @@ objective just to orient. If speak is missing ⇒ `incomplete: missing speak`.
 Field contract (same as path **help**):
 
 - `intent` is the learning goal.
-- `atlas_id` / `atlas_root` name the retrieval context, not proof it was used.
+- `atlas_id` / `atlas_root` name the write target. This path has none.
+  The card says `atlas_target: none`.
 - `atlas_status`: `not-queried` | `baseline-only` | `consulted` | `unavailable`.
   If `unavailable`, add short `atlas_reason`.
 - `atlas_used` lists only store IDs whose evidence actually contributed.
@@ -73,7 +76,8 @@ discarded-session cost, and accelerates human connections.
 
 This package is not for implementation. Autogenesis Discussion mode still
 applies when called from Autogenesis: zero implement authority, no product
-writes outside the companion store, no discussion-to-implement short-circuit.
+writes outside the confirmed project Atlas, no discussion-to-implement
+short-circuit.
 
 ### Prerequisites
 
@@ -87,10 +91,12 @@ writes outside the companion store, no discussion-to-implement short-circuit.
 
 3. Atlas is the knowledge substrate. Discuss depends on it; do not invent a
    parallel store.
-4. Persistence uses the companion store
-   `github.com/sergio-sisternes-epam/discuss-atlas`. That store is All Rights
-   Reserved knowledge, not an APM dependency of this package. Installing
-   Discuss does not mount it.
+4. Persistence uses the default Atlas of the active project or session.
+   That may be branch `atlas` on the project repo, or a dedicated repo
+   already registered in the project mesh. Installing Discuss does not
+   mount a store. `github.com/sergio-sisternes-epam/discuss-atlas` is the
+   own Atlas of the discuss repository only. It is not the write target
+   for any other project.
 5. A git repository is required before Atlas will persist. Getting-started
    does not create one.
 
@@ -99,21 +105,15 @@ writes outside the companion store, no discussion-to-implement short-circuit.
 1. **Name the work.** A clear subject and a one-line objective. Discuss will
    ask for these when you actually start a discussion, not during this
    orientation.
-2. **Companion store, when you will persist.** In the project git repo, mount
-   and resolve if the store is not already resolvable. Show these commands;
-   this path must not run them as live setup on the user's behalf:
-
-   ```text
-   atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main
-   atlas resolve github.com/sergio-sisternes-epam/discuss-atlas
-   ```
-
-   Do not `atlas mount`. Optional enrichment below may `atlas resolve` an
-   already-registered checkout when the bundled answer is incomplete.
+2. **Project Atlas, when you will persist.** Discuss names the target on
+   the activation card. The first live turn asks you to confirm the project
+   Atlas. It does not mount the skill store. This path must not run mount
+   or resolve as live setup on the user's behalf.
 
 3. **Start discussing.** Ask to discuss the subject with that objective. Discuss
    loads **speak** and `human-turn.md` first, then emits its live card, and
-   talks in plain British English. Chat is the shared picture; the Atlas is
+   talks in plain British English. The card names a confirmed known target
+   before anything is written. Chat is the shared picture; the Atlas is
    usually invisible.
 4. **Let the agent file.** Query first, stay on one conversation orbit, batch
    questions, persist engaged items, sprout leftovers as protostars, compile
@@ -128,23 +128,14 @@ Every live turn must make visible: where we are after the last pin, what the
 live distinction is, what was set aside when that still matters, then the ask.
 Activation cards do not replace that prose. Path **speak** owns the register.
 
-## Optional Atlas enrichment
+## No skill-store enrichment
 
-If this file does not answer the actual question, follow path **help**’s
-read-only retrieval rule against
-`github.com/sergio-sisternes-epam/discuss-atlas`. Attempt resolve only when
-already registered. Never mount, init, remember, compile, or write to answer
-getting-started. Baseline above remains usable.
+If this file does not answer the actual question, load path **help**. Do
+not `atlas mount`. Do not `atlas resolve`. Do not consult
+`github.com/sergio-sisternes-epam/discuss-atlas`. Keep `atlas_target: none`.
 
-Refresh the card **before** the explanation. Do not leave the Enter
-`baseline-only` / `help_status: complete` card in place after enrichment.
-
-- Successful resolve and contributing evidence: `atlas_status: consulted`,
-  real `atlas_root`, `atlas_used` listing those store IDs,
-  `help_status: complete` or `limited`.
-- Resolve fails or no checkout exists: `atlas_status: unavailable`,
-  `atlas_root: none`, `atlas_used: []`, `help_status: limited`, and
-  `atlas_reason` with the known cause. Limited help plus that reason.
+Refresh the card **before** the explanation only if the learning goal
+changed. Do not replace `atlas_target: none` with a store id.
 
 ## Next modules
 
@@ -159,7 +150,7 @@ module if they already know which one they need. Typical next reads:
 ## Non-goals
 
 - Starting a discussion or creating a hub
-- Mounting or repairing `discuss-atlas`
+- Mounting, resolving, or repairing `discuss-atlas`
 - Running sprout, terminate, lint, consolidate, or constellation
 - Teaching Atlas CLI as if it were Discuss
 - Hijacking a getting-started request that is not about Discuss

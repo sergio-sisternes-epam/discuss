@@ -38,9 +38,13 @@ python3 scripts/release_readiness.py --commit "$(git rev-parse HEAD)"
 apm audit --no-policy --no-fail-fast
 ```
 
-Resolve the store root and run both graph gates:
+`github.com/sergio-sisternes-epam/discuss-atlas` is this repository's own
+Atlas. It is private. Other projects must not mount it. Public CI does not
+clone it, so a pull request needs no credential. Maintainers who already
+have access can compile this project's pin locally:
 
 ```bash
+git submodule update --init --recursive
 atlas_root="$(atlas resolve github.com/sergio-sisternes-epam/discuss-atlas)"
 atlas compile --root "$atlas_root"
 python3 scripts/lint.py --root "$atlas_root"

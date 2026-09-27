@@ -96,22 +96,19 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("Do not emit `path: terminate`", help_text)
         self.assertIn("Do not `atlas mount`. Do not auto-mount.", help_text)
 
-    def test_help_baseline_then_optional_readonly_atlas(self) -> None:
+    def test_help_baseline_does_not_consult_the_skill_store(self) -> None:
         help_text = (ROOT / "references/paths/help.md").read_text(encoding="utf-8")
         self.assertIn("## Bundled baseline first", help_text)
         self.assertIn("Help must work with no Atlas mounted.", _flat(help_text))
-        self.assertIn("## Optional Atlas enrichment", help_text)
-        self.assertIn("when it is already resolvable", _flat(help_text))
+        self.assertIn("## No skill-store enrichment", help_text)
+        self.assertIn("atlas_target: none", help_text)
         self.assertIn("atlas_used", help_text)
         self.assertIn("intent", help_text)
         self.assertIn("help_status", help_text)
         self.assertIn("atlas_status", help_text)
-        self.assertIn("read-only query times out, is denied, or", help_text)
-        self.assertIn("successful no-hit search", help_text)
         self.assertIn("`help_status: limited`", help_text)
-        self.assertIn("no eligible hit is a knowledge gap", help_text)
-        self.assertIn("add `atlas_reason`", help_text)
-        self.assertIn("`atlas search`", help_text)
+        self.assertNotIn("atlas mount github.com/sergio-sisternes-epam/discuss-atlas", help_text)
+        self.assertIn("Do not `atlas search`.", help_text)
         self.assertNotIn("path **query**", help_text)
         changelog = (ROOT / "CHANGELOG.md").read_text(encoding="utf-8")
         unreleased = _changelog_section(changelog, "Unreleased")
@@ -160,17 +157,14 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("### Shortest useful first journey", text)
         self.assertIn("“What does Discuss do?”", text)
         self.assertIn("discuss-atlas", text)
+        self.assertIn("is not the write target", text)
+        self.assertIn("atlas_target: none", text)
         self.assertIn("path **speak**", text)
         self.assertIn("apm install discuss@atlas", text)
-        self.assertIn("must not run them as live setup", text)
-        self.assertIn(
-            "Optional enrichment below may `atlas resolve` an",
-            text,
-        )
+        self.assertIn("must not run mount", text)
         self.assertIn("Point the user at path **help**", text)
-        self.assertIn("Refresh the card **before** the explanation.", text)
-        self.assertIn("atlas_reason", text)
-        self.assertIn("help_status: limited", text)
+        self.assertIn("Refresh the card **before** the explanation", text)
+        self.assertNotIn("atlas mount github.com/sergio-sisternes-epam/discuss-atlas", text)
         journey = text[text.index("### Shortest useful first journey") :]
         self.assertLess(
             journey.index("loads **speak**"),
@@ -192,29 +186,18 @@ class HelpContractTests(unittest.TestCase):
         enter = skill.index("## Enter")
         mount_if_missing = skill.index("mount if missing")
         create_hub = skill.index("create a hub page")
-        mount_cmd = skill.index(
-            "atlas mount github.com/sergio-sisternes-epam/discuss-atlas --ref main"
-        )
         self.assertLess(gate, enter)
         self.assertLess(gate, mount_if_missing)
         self.assertLess(gate, create_hub)
-        self.assertLess(gate, mount_cmd)
-        self.assertLess(enter, mount_cmd)
-        self.assertIn("Live discussion only (not help or getting-started):", skill)
+        self.assertIn("Live discussion only (not help or getting-started).", skill)
         self.assertIn("Do not run `atlas mount` for help or getting-started.", skill)
         self.assertNotIn(
-            "Do not run `atlas mount` or `atlas resolve` for help or getting-started.",
+            "atlas mount github.com/sergio-sisternes-epam/discuss-atlas",
             skill,
         )
-        self.assertIn(
-            "Optional read-only `atlas resolve` of an already-registered checkout",
-            skill,
-        )
-        self.assertIn("then `atlas search` as the selected path describes", skill)
-        self.assertNotIn(
-            "Optional Atlas enrichment is read-only resolve of an already-registered checkout only.",
-            skill,
-        )
+        self.assertIn("atlas_target: confirmed", skill)
+        self.assertIn("atlas_target: unknown", skill)
+        self.assertIn("atlas_target: none", skill)
         self.assertIn("Do not activate Atlas path **mount**.", skill)
         self.assertIn("Do not create a hub or set `discussion_root`.", skill)
         self.assertIn("This bullet is live discussion only", skill)
@@ -262,7 +245,7 @@ class HelpContractTests(unittest.TestCase):
         self.assertNotIn("help_status: pending", help_text)
         self.assertIn("help_status: complete", help_text)
         self.assertIn("No `pending` on", help_text)
-        self.assertIn("keep `atlas_root: none`", help_text)
+        self.assertIn("Keep `atlas_root: none`", help_text)
         self.assertIn("references/paths/consolidate.md", help_text)
         self.assertIn("Do not present `keep`, `expand`", help_text)
         from_conv = (ROOT / "references/paths/from-conversation.md").read_text(
