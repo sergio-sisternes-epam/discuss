@@ -114,6 +114,8 @@ class SourceContractTests(unittest.TestCase):
         self.assertIn("atlas_target: confirmed", skill)
         self.assertIn("atlas_target: unknown", skill)
         self.assertIn("atlas_target: none", skill)
+        self.assertIn("Its strategy is `dedicated`", skill)
+        self.assertIn("otherwise use `dedicated`", skill)
         self.assertIn(
             "Do not mount, write, commit, push, or open a pull request",
             skill,
@@ -127,7 +129,14 @@ class SourceContractTests(unittest.TestCase):
         mesh = json.loads((ROOT / "atlas-mesh.json").read_text(encoding="utf-8"))
         self.assertEqual(
             mesh["stores"],
-            [{"id": SKILL_STORE, "ref": "main", "path": MOUNT}],
+            [
+                {
+                    "id": SKILL_STORE,
+                    "ref": "main",
+                    "path": MOUNT,
+                    "strategy": "dedicated",
+                }
+            ],
         )
         modules = (ROOT / ".gitmodules").read_text(encoding="utf-8")
         self.assertIn(f"path = {MOUNT}", modules)

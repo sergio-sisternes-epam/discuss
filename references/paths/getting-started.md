@@ -51,11 +51,11 @@ objective just to orient. If speak is missing ⇒ `incomplete: missing speak`.
 Field contract (same as path **help**):
 
 - `intent` is the learning goal.
-- `atlas_id` / `atlas_root` name the write target. This path has none.
+- `atlas_id`, `ref`, `strategy`, and `atlas_root` are `none`.
   The card says `atlas_target: none`.
-- `atlas_status`: `not-queried` | `baseline-only` | `consulted` | `unavailable`.
-  If `unavailable`, add short `atlas_reason`.
-- `atlas_used` lists only store IDs whose evidence actually contributed.
+- `atlas_status` stays `baseline-only`. Do not add `atlas_reason`.
+  Getting-started does not resolve or consult an Atlas.
+- `atlas_used` stays empty. This path does not retrieve from an Atlas.
 - `help_status`: `complete` or `limited`.
 - Final cards contain no `pending` placeholders.
 

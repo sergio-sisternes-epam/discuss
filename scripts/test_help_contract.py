@@ -147,6 +147,8 @@ class HelpContractTests(unittest.TestCase):
                 self.assertIn("help_status:", card, relative)
                 self.assertIn("speak_loaded: yes", card, relative)
                 self.assertNotIn("help_status: pending", card, relative)
+                for field in ("atlas_id", "ref", "strategy", "atlas_root", "atlas_target"):
+                    self.assertIn(f"{field}: none", card, relative)
 
     def test_getting_started_covers_first_journey(self) -> None:
         text = (ROOT / "references/paths/getting-started.md").read_text(
@@ -159,6 +161,10 @@ class HelpContractTests(unittest.TestCase):
         self.assertIn("discuss-atlas", text)
         self.assertIn("is not the write target", text)
         self.assertIn("atlas_target: none", text)
+        self.assertIn("`atlas_status` stays `baseline-only`", text)
+        self.assertIn("Do not add `atlas_reason`", text)
+        self.assertNotIn("`consulted`", text)
+        self.assertNotIn("`unavailable`", text)
         self.assertIn("path **speak**", text)
         self.assertIn("apm install discuss@atlas", text)
         self.assertIn("must not run mount", text)

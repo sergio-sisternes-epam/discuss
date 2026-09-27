@@ -4,7 +4,8 @@
     {
       "id": "github.com/sergio-sisternes-epam/discuss-atlas",
       "ref": "main",
-      "path": ".atlas/github.com/sergio-sisternes-epam/discuss-atlas"
+      "path": ".atlas/github.com/sergio-sisternes-epam/discuss-atlas",
+      "strategy": "dedicated"
     }
   ]
 }

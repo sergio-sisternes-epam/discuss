@@ -18,6 +18,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - `github.com/sergio-sisternes-epam/discuss-atlas` remains this
   repository's own Atlas. No other project may mount, write, commit, push,
   or open a pull request to it. Public CI does not clone that private store.
+  Its mesh entry records `strategy: dedicated`. A missing mesh strategy is
+  derived: `shared` when the store id is the active origin, otherwise
+  `dedicated`.
+- Getting-started cards stay `atlas_status: baseline-only` and do not add
+  `atlas_reason`.
 - Package description now matches the README lede.
 - Source and consumer CI register the marketplace and install without a
   GitHub PAT. Public github.com consumers need no credential.
