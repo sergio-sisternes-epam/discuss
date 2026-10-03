@@ -26,6 +26,7 @@ If `origin_node` is missing, use `current_branch`, then `discussion_root`. Never
 
 1. **Still pending?** If the item died in this turn (answered, dropped, typo), leave it as a batch line on the parent. No page.
 2. **Not every utterance.** One protostar per surviving pending. Flood is forbidden.
+   Do not write a second protostar for an item already filed this turn as an offered option (`star_kind: option`).
 3. **Write the protostar** beside the origin node (same folder as that page, or the work-hub folder). Never create a `residuals/` bucket.
    - `type: protostar`
    - `status: open`

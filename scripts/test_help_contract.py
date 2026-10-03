@@ -16,6 +16,7 @@ REGISTRY_IDS = (
     "lint",
     "consolidate",
     "constellation",
+    "checkpoint",
 )
 PATH_ID_RE = re.compile(r"\|\s*\*\*([a-z0-9-]+)\*\*\s*\|")
 TEXT_FENCE_RE = re.compile(r"```text\n(.*?)```", re.S)
@@ -272,7 +273,7 @@ class HelpContractTests(unittest.TestCase):
         self.assertNotIn("confirmed Atlas", unreleased)
         self.assertIn("getting-started", modules)
         self.assertIn("help", modules)
-        self.assertIn("confirmed Atlas", current)
+        self.assertIn("checkpoint", current)
         self.assertNotIn("activation path", current.lower())
 
 

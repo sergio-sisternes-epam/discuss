@@ -7,6 +7,22 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.6.0] - 2026-10-03
+
+### Added
+
+- Added the **checkpoint** path for a dated, exhaustive point-in-time index
+  of every node in the current discussion.
+- Added live-loop options-as-protostars: closed sets actually offered in a
+  turn are filed as forming options, with the chosen branch developed and
+  unchosen options retained as potential.
+
+### Changed
+
+- Split checkpoint from constellation: checkpoint now routes to its own
+  index path, while constellation remains the selective picture of what
+  stands.
+
 ## [0.5.0] - 2026-09-27
 
 ### Changed
@@ -137,7 +153,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - Required the human-facing speak path and `speak_loaded` activation receipt.
 - Clarified that the discussion store git root is the OKF root.
 
-[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.5.0...HEAD
+[Unreleased]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.6.0...HEAD
+[0.6.0]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.5.0...v0.6.0
 [0.5.0]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.4.0...v0.5.0
 [0.4.0]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.10...v0.4.0
 [0.3.10]: https://github.com/sergio-sisternes-epam/discuss/compare/v0.3.9...v0.3.10

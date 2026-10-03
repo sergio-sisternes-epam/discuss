@@ -107,9 +107,13 @@ module file just to list.
 | **terminate** | KVA-terminate a wrong frame; write exit-reason; link living thesis |
 | **lint** | Check fabric discipline. L1 hubs; L2–L6 KVA contract |
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back |
-| **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint |
+| **constellation** | Join cadence. Official picture of what stands |
+| **checkpoint** | Dated point-in-time index of every node |
 
-Aliases for lookup only: walk-back, walk back, picture of the pieces, gaps and contradictions → **consolidate**; checkpoint, join what stands → **constellation**.
+Aliases for lookup only: walk-back, walk back, picture of the pieces, gaps and contradictions → **consolidate**; join what stands → **constellation**.
+
+Checkpoint explains path **checkpoint** without executing it. “Join what
+stands” stays **constellation**.
 
 After the list, say the user can ask for any one module by name. Do not
 ask which to list.
