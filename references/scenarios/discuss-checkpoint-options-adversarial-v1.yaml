@@ -1,0 +1,26 @@
+id: discuss-checkpoint-options-adversarial-v1
+packages: [discuss]
+adversarial: true
+work_id: 2026-10-03-discuss-checkpoint-options
+smokes:
+  - id: checkpoint-indexes-every-kva
+    source: "grounded: TypeGraph asOf versus current, https://typegraph.dev/queries/temporal/"
+    expect: "checkpoint page indexes forming, alive, deprecated, superseded, and terminated nodes and does not use standing, set aside, or still open as its contract"
+  - id: checkpoint-does-not-copy-bodies
+    source: "grounded: Temporal RDF versioning versus labeling, https://www.dcc.uchile.cl/TR/2005/TR_DCC-2005-002.pdf"
+    expect: "checkpoint body is one line per node and source page bodies are unchanged"
+  - id: checkpoint-noun-not-constellation
+    source: "grounded: NN/g command names, https://www.nngroup.com/articles/ui-copy/; crewship checkpoint versus status, https://docs.crewship.ai/cli/checkpoint"
+    expect: "the word checkpoint loads path checkpoint and does not load path constellation"
+  - id: options-only-when-offered
+    source: "grounded: decision logs abandon padded alternatives, https://usethinkr.com/templates/decision-log"
+    expect: "a turn that offers no closed option set creates no star_kind option protostar"
+  - id: unchosen-stay-forming
+    source: "grounded: set-based design keeps parallel options, https://demo.pyrite.wiki/site/poppendiecks/decide-as-late-as-possible"
+    expect: "after one option is chosen, that page is alive and the other option pages remain forming"
+  - id: no-option-hub
+    source: "named-theory: discuss lint L1 hub rule in references/paths/lint.md"
+    expect: "option protostars derive from the offering conversation node and do not share a new catalog page"
+  - id: no-options-path
+    source: "named-theory: human pin that options-as-protostars is not an activation path"
+    expect: "references/paths has no options path module and the registry has no path_id options"

@@ -1,8 +1,8 @@
 ---
 name: discuss
-description: Run a discussion as a durable, agent-maintained Atlas graph. Fill the gaps in your thinking with this companion skill that explores the graph for you, finds where they are, and proposes solutions. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, picture of the pieces, gaps and contradictions. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, I am new to Discuss, how does Discuss work, what does Discuss do, how to get started with Discuss, how do I start a durable discussion graph, useful first step with Discuss, first-use intent clearly about Discuss, what Discuss modules do, what can Discuss do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence).
+description: Run a discussion as a durable, agent-maintained Atlas graph. Trigger on discuss, discussion graph, one idea at a time, grow the graph, KVA this branch, persist this discussion, fail-fast this thesis, terminate this branch, wrong comparison, KVA terminate, walk back, consolidate view, constellation, checkpoint, point in time, or summarise every node. A checkpoint request routes to the checkpoint path, not constellation. In Discuss context also trigger on help, list modules, help <module> including unknown names such as help frobnicate, I am new to Discuss, how does Discuss work, what does Discuss do, how to get started with Discuss, how do I start a durable discussion graph, useful first step with Discuss, first-use intent clearly about Discuss, what Discuss modules do, what can Discuss do, or how a named Discuss module works; explain those without running them. Unqualified help outside Discuss must not activate this skill. Complements Autogenesis Discussion mode (authority fence).
 metadata:
-  version: "0.5.0"
+  version: "0.6.0"
   status: mvp
   work_id: 2026-08-31-discuss-constellation-path
 ---
@@ -117,9 +117,10 @@ Use the resolved project Atlas through the multi-harness substrate contract (que
 | **terminate** | KVA-terminate a wrong frame; write exit-reason; link living thesis | `references/paths/terminate.md` |
 | **lint** | Check fabric discipline. L1 hubs; L2–L6 KVA contract | `references/paths/lint.md` |
 | **consolidate** | Partial dated view; stance edges. Informal: walk-back | `references/paths/consolidate.md` |
-| **constellation** | Join cadence. Official picture of what stands. Synonym: checkpoint | `references/paths/constellation.md` |
+| **constellation** | Join cadence. Official picture of what stands | `references/paths/constellation.md` |
+| **checkpoint** | Dated index of every node at a point in time | `references/paths/checkpoint.md` |
 
-Default live loop is this SKILL body after **speak**. New to Discuss / how it works → read **getting-started** first. What Discuss can do / list modules / explain a named module → read **help** first (no clarification required to list). Help explains; it does not run the named module. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Constellation / checkpoint / join what stands → read **constellation** first.
+Default live loop is this SKILL body after **speak**. New to Discuss / how it works → read **getting-started** first. What Discuss can do / list modules / explain a named module → read **help** first (no clarification required to list). Help explains; it does not run the named module. Ingest / retrofit / fabric a conversation → read from-conversation first. Park refine / todo / later → read sprout first. User kills a frame → read **terminate** first. from-conversation parks through sprout. After a sprout, terminate, or fabric pass, or on request → read lint first. Consolidate / walk back / picture of the pieces / gaps and contradictions → read **consolidate** first. Checkpoint / point in time / summarise every node → read **checkpoint** first. Constellation / join what stands → read **constellation** first.
 
 ## Human narration (required)
 
@@ -138,8 +139,9 @@ Load path **speak**, which loads `references/human-turn.md`. The human usually c
    - Batch stay listed on the current node.
    - If the user engages 1-by-1, persist only that item as a new page with edges, then set `current_branch` to it.
 4. **Agent maintains the graph.** You write pages, edges, and compile. Do not ask the human to file.
-5. **Multiverse.** Branches may co-exist. Mark current reality vs alternative branches in the page body. Contradictions are branches, not defects.
-6. **KVA evaluate.** Knowledge Variance Authority. Against the original objective, set `kva` on the branch when its state changes, and on `current_branch` at end of turn — not on every typo persist.
+5. **Offered options.** When this turn offers the human a closed set of options, immediately write each option as a protostar beside the offering conversation node: `type: protostar`, `kva: forming`, `status: open`, `growth: true`, `star_kind: option`. Its body has **Pros**, **Cons**, **Growth path**, and **Open question** sections, with real pros and cons; name the sibling option slugs in the body. Relate each protostar to the offering node with `kind: derived_from`. Do not create a shared option-set hub or file every utterance; this rule applies only to a closed set actually offered. When the human chooses one, it leaves forming: set it `kva: alive`, `growth: false`, `status: in-discussion`, and move `current_branch` to it. Keep its pros and cons. This grants no implement authority. Unchosen options stay `kva: forming` as potential later paths, not rejected.
+6. **Multiverse.** Branches may co-exist. Mark current reality vs alternative branches in the page body. Contradictions are branches, not defects.
+7. **KVA evaluate.** Knowledge Variance Authority. Against the original objective, set `kva` on the branch when its state changes, and on `current_branch` at end of turn — not on every typo persist.
    - Values: `forming` | `alive` | `deprecated` | `superseded` | `terminated`.
    - **forming** — not yet fit for use (typical protostar).
    - **alive** — fit for use; may grow forming children off an origin.
@@ -150,13 +152,13 @@ Load path **speak**, which loads `references/human-turn.md`. The human usually c
    - Exit ramps require a final node: `type: document`, `kva_role: exit-reason`, `kva: alive`. Subject points at it with `kva_deprecate` | `kva_supersede` | `kva_terminate`. Never embed a reason string field on the subject. **Load path terminate** before executing a terminate ramp (do not improvise the artefacts).
    - Value test: a branch has value iff it moves the locked objective toward a usable distinction (stay alive, grow forming children, or record an exit with a final node). Idle decoration is terminate.
    - Name origin: Marvel Loki TVA (Time Variance Authority). Operational name is KVA. Inception note: `autogenesis/decisions/kva-inception.md`.
-7. **Optional consult.** Other Atlases or another view only when lost or when a different point of view would help. Not default. Bound the consult.
-8. **Fail fast / prove.** Ideation is not enough. When a claim is stable enough, run a cheap probe (think-challenge, a concrete counter-example, compile/smoke, or a user-named test). Record the result.
+8. **Optional consult.** Other Atlases or another view only when lost or when a different point of view would help. Not default. Bound the consult.
+9. **Fail fast / prove.** Ideation is not enough. When a claim is stable enough, run a cheap probe (think-challenge, a concrete counter-example, compile/smoke, or a user-named test). Record the result.
    - Failure is information — keep as alive, reshape, or take an exit ramp.
    - No failure yet means direction may be right, not that the thesis is proven.
-9. **Lineage.** If the discussion produces a conclusion or action, persist a node that records or is derived_from the originating branches. That is not implement authority.
-10. **Sprout pendings.** Anything still pending at the end of the turn (refine, question, counter, probe, tension, action) becomes a `protostar` via path sprout (`kva: forming`). Required origin edge to the conversation node that birthed it. Batch-only bullets are not enough once the item survives the turn.
-11. **Compile green.** Every persist ends with atlas compile on `atlas_root` exit 0.
+10. **Lineage.** If the discussion produces a conclusion or action, persist a node that records or is derived_from the originating branches. That is not implement authority.
+11. **Sprout pendings.** Anything still pending at the end of the turn (refine, question, counter, probe, tension, action) becomes a `protostar` via path sprout (`kva: forming`). Required origin edge to the conversation node that birthed it. Batch-only bullets are not enough once the item survives the turn.
+12. **Compile green.** Every persist ends with atlas compile on `atlas_root` exit 0.
 
 ## Graph conventions
 

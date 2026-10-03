@@ -39,7 +39,8 @@ See `SKILL.md` for the runtime contract.
 | Terminate | Close a wrong frame with an exit reason and a living thesis. |
 | Lint | Check fabric discipline against the KVA contract. |
 | Consolidate | Write a partial dated view of the pieces (walk-back). |
-| Constellation | Join what stands into one official picture (checkpoint). |
+| Constellation | Join what stands into one official picture. |
+| Checkpoint | Index every node at a point in time. |
 
 ## Related
 
